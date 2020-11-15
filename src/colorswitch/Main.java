@@ -52,7 +52,7 @@ public class Main extends Application {
         gc.drawImage(logo, 10, 10);
         gc.drawImage(logo2, 75, 160);
 
-        primaryStage.setScene(new Scene(root, 600, 650));
+        primaryStage.setScene(new Scene(root, 600, 800));
         primaryStage.show();
     }
 
