@@ -2,6 +2,7 @@ package colorswitch;
 
 
 import javafx.application.Application;
+import javafx.fxml.FXMLLoader;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.canvas.Canvas;
@@ -15,59 +16,20 @@ import javafx.scene.text.Font;
 import javafx.scene.text.FontWeight;
 import javafx.stage.Stage;
 
+import java.io.IOException;
+
 public class Main extends Application {
 
     public static Scene sceneN,sceneL,sceneE,scene1;
     public static Canvas canvas;
+    public static Player pl;
     @Override
-    public void start(Stage primaryStage) {
+    public void start(Stage primaryStage) throws IOException {
+        FXMLLoader loader = new FXMLLoader();
+        loader.setLocation(Main.class.getResource("MainPage.fxml"));
+        AnchorPane root = loader.load();
+        scene1 = new Scene(root);
         primaryStage.setTitle("Color Switch");
-
-        //Main Page
-        Button newPlayerButton = new Button("NEW PLAYER");
-        newPlayerButton.setMinSize(300, 50);
-        newPlayerButton.setOnAction(e->primaryStage.setScene(sceneN));
-        newPlayerButton.setBackground(new Background(new BackgroundFill(Color.ALICEBLUE, null, null)));
-        newPlayerButton.setFont(Font.font("Denver", 20));
-
-        Button existingPlayerButton = new Button("EXISTING PLAYER");
-        existingPlayerButton.setMinSize(300, 50);
-        existingPlayerButton.setOnAction(e->primaryStage.setScene(sceneE));
-        existingPlayerButton.setBackground(new Background(new BackgroundFill(Color.CADETBLUE, null, null)));
-        existingPlayerButton.setFont(Font.font("Denver", 20));
-
-        Button viewLeaderboardButton = new Button("VIEW LEADERBOARD");
-        viewLeaderboardButton.setMinSize(300, 50);
-        viewLeaderboardButton.setOnAction(e->primaryStage.setScene(sceneL));
-        viewLeaderboardButton.setBackground(new Background(new BackgroundFill(Color.CORNFLOWERBLUE, null, null)));
-        viewLeaderboardButton.setFont(Font.font("Denver", 20));
-
-        Button quitGameButton = new Button("QUIT GAME");
-        quitGameButton.setMinSize(300, 50);
-        quitGameButton.setOnAction(e->primaryStage.close());
-        quitGameButton.setBackground(new Background(new BackgroundFill(Color.CORAL, null, null)));
-        quitGameButton.setFont(Font.font("Denver", 20));
-
-        canvas = new Canvas(300, 315);
-        VBox root = new VBox(20, canvas, newPlayerButton, existingPlayerButton, viewLeaderboardButton, quitGameButton);
-        root.setAlignment(Pos.BASELINE_CENTER);
-        root.setBackground(new Background(new BackgroundFill(Color.BLACK, null, null)));
-        GraphicsContext gc = canvas.getGraphicsContext2D();
-
-        Image logo = new Image("assets/logo.png");
-        Image logo2 = new Image("assets/logo2.png");
-        gc.drawImage(logo, 10, 10);
-        gc.drawImage(logo2, 75, 160);
-        scene1= new Scene(root, 600, 800);
-
-        //sceneN New player scene
-        sceneN = newPlayerscene(primaryStage);
-
-        //sceneE Existing Player scene
-        sceneE = exPlayerScene(primaryStage);
-
-        //sceneL Leaderboard scene
-        sceneL = leader(primaryStage);
         primaryStage.setScene(scene1);
         primaryStage.show();
     }
@@ -81,6 +43,7 @@ public class Main extends Application {
 
         Button newPl = new Button("Confirm");
         newPl.setMinSize(300, 50);
+        newPl.setOnAction(e->pl.main(null));
         newPl.setBackground(new Background(new BackgroundFill(Color.CADETBLUE, null, null)));
         newPl.setFont(Font.font("Denver", 20));
 
@@ -107,6 +70,7 @@ public class Main extends Application {
 
         Button newPl = new Button("Confirm");
         newPl.setMinSize(300, 50);
+        newPl.setOnAction(e -> pl.launch(Player.class));
         newPl.setBackground(new Background(new BackgroundFill(Color.CADETBLUE, null, null)));
         newPl.setFont(Font.font("Denver", 20));
 
