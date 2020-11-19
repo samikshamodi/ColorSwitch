@@ -5,26 +5,26 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.text.*?>
 
-<AnchorPane prefHeight="800.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="colorswitch.MainControl">
+<AnchorPane prefHeight="800.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.MainControl">
    <children>
       <Pane prefHeight="800.0" prefWidth="600.0" style="-fx-background-color: black;">
          <children>
-            <Button layoutX="152.0" layoutY="400.0" mnemonicParsing="false" prefHeight="50.0" prefWidth="300.0" style="-fx-background-color: cyan;" text="New Player">
+            <Button layoutX="152.0" layoutY="400.0" mnemonicParsing="false" onAction="#newPlayerS" prefHeight="50.0" prefWidth="300.0" style="-fx-background-color: cyan;" text="New Player">
                <font>
                   <Font name="Comic Sans MS" size="16.0" />
                </font>
             </Button>
-            <Button layoutX="152.0" layoutY="482.0" mnemonicParsing="false" prefHeight="50.0" prefWidth="300.0" style="-fx-background-color: lime;" text="Existing Player" textAlignment="CENTER">
+            <Button layoutX="152.0" layoutY="482.0" mnemonicParsing="false" onAction="#exPlayerS" prefHeight="50.0" prefWidth="300.0" style="-fx-background-color: lime;" text="Existing Player" textAlignment="CENTER">
                <font>
                   <Font name="Comic Sans MS" size="16.0" />
                </font>
             </Button>
-            <Button layoutX="152.0" layoutY="569.0" mnemonicParsing="false" prefHeight="50.0" prefWidth="300.0" style="-fx-background-color: Yellow;" text="View LeaderBoard" textAlignment="CENTER">
+            <Button layoutX="152.0" layoutY="569.0" mnemonicParsing="false" onAction="#viewLeaderboardS" prefHeight="50.0" prefWidth="300.0" style="-fx-background-color: Yellow;" text="View LeaderBoard" textAlignment="CENTER">
                <font>
                   <Font name="Comic Sans MS" size="16.0" />
                </font>
             </Button>
-            <Button layoutX="150.0" layoutY="659.0" mnemonicParsing="false" prefHeight="50.0" prefWidth="300.0" style="-fx-background-color: coral;" text="Quit" textAlignment="CENTER">
+            <Button layoutX="150.0" layoutY="659.0" mnemonicParsing="false" onAction="#quitS" prefHeight="50.0" prefWidth="300.0" style="-fx-background-color: coral;" text="Quit" textAlignment="CENTER">
                <font>
                   <Font name="Comic Sans MS" size="16.0" />
                </font>
