@@ -10,16 +10,14 @@ import java.io.IOException;
 
 public class Main extends Application {
 
-    public static Scene scene1;
-
     @Override
     public void start(Stage primaryStage) throws IOException {
         FXMLLoader loader = new FXMLLoader();
         loader.setLocation(Main.class.getResource("/gui/MainMenu.fxml"));
         AnchorPane root = loader.load();
-        scene1 = new Scene(root);
+        Scene scene = new Scene(root);
         primaryStage.setTitle("Color Switch");
-        primaryStage.setScene(scene1);
+        primaryStage.setScene(scene);
         primaryStage.show();
     }
 
