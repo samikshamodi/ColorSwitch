@@ -9,17 +9,17 @@
     <children>
         <Pane prefHeight="800.0" prefWidth="600.0" style="-fx-background-color: black;">
             <children>
-                <Button layoutX="152.0" layoutY="400.0" mnemonicParsing="false" onAction="#startGameS" prefHeight="50.0" prefWidth="300.0" style="-fx-background-color: aquamarine;" text="New Game">
+                <Button layoutX="152.0" layoutY="400.0" mnemonicParsing="false" onAction="#startGameS" prefHeight="50.0" prefWidth="300.0" style="-fx-background-color: aqua;" text="New Game">
                     <font>
                         <Font name="Comic Sans MS" size="16.0" />
                     </font>
                 </Button>
-                <Button layoutX="152.0" layoutY="482.0" mnemonicParsing="false" onAction="#selectGameS" prefHeight="50.0" prefWidth="300.0" style="-fx-background-color: lightblue;" text="Resume Game" textAlignment="CENTER">
+                <Button layoutX="152.0" layoutY="482.0" mnemonicParsing="false" onAction="#selectGameS" prefHeight="50.0" prefWidth="300.0" style="-fx-background-color: greenyellow;" text="Resume Game" textAlignment="CENTER">
                     <font>
                         <Font name="Comic Sans MS" size="16.0" />
                     </font>
                 </Button>
-                <Button layoutX="152.0" layoutY="569.0" mnemonicParsing="false" onAction="#mainMenuS" prefHeight="50.0" prefWidth="300.0" style="-fx-background-color: coral;" text="Exit to Main Menu" textAlignment="CENTER">
+                <Button layoutX="152.0" layoutY="569.0" mnemonicParsing="false" onAction="#mainMenuS" prefHeight="50.0" prefWidth="300.0" style="-fx-background-color: orange;" text="Exit to Main Menu" textAlignment="CENTER">
                     <font>
                         <Font name="Comic Sans MS" size="16.0" />
                     </font>

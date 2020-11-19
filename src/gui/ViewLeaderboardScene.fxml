@@ -8,7 +8,7 @@
     <children>
         <Pane prefHeight="800.0" prefWidth="600.0" style="-fx-background-color: black;">
             <children>
-                <Button layoutX="152.0" layoutY="656.0" mnemonicParsing="false" onAction="#mainMenuS" prefHeight="50.0" prefWidth="300.0" style="-fx-background-color: coral;" text="Exit to Main Menu" textAlignment="CENTER">
+                <Button layoutX="152.0" layoutY="656.0" mnemonicParsing="false" onAction="#mainMenuS" prefHeight="50.0" prefWidth="300.0" style="-fx-background-color: orange;" text="Exit to Main Menu" textAlignment="CENTER">
                     <font>
                         <Font name="Comic Sans MS" size="16.0" />
                     </font>
