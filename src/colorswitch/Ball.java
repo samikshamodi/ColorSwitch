@@ -1,12 +1,14 @@
 package colorswitch;
 
 import javafx.animation.KeyFrame;
+import javafx.animation.RotateTransition;
 import javafx.animation.Timeline;
 import javafx.application.Application;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.geometry.Bounds;
 import javafx.scene.Scene;
+import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Pane;
 import javafx.scene.paint.Color;
@@ -25,10 +27,18 @@ public class Ball extends Application {
 
         Pane canvas = new Pane();
         Scene scene = new Scene(canvas, 600, 800, Color.BLACK);
-        Circle ball = new Circle(10, Color.RED);
+        Circle ball = new Circle(10, Color.AQUA);
         ball.relocate(295, 600);
-
-        canvas.getChildren().add(ball);
+        ImageView img = new ImageView("/assets/c1.png");
+        img.setFitHeight(150);
+        img.setFitWidth(150);
+        img.setX(225.5);
+        img.setY(200);
+        img.setPreserveRatio(true);
+        RotateTransition rotateTransition = new RotateTransition(Duration.seconds(4),img);
+        rotateTransition.setByAngle(360);
+        rotateTransition.setCycleCount(1500);
+        canvas.getChildren().addAll(ball,img);
 
         scene.addEventFilter(MouseEvent.MOUSE_PRESSED, new EventHandler<MouseEvent>() {
             int flag = 0;
@@ -36,10 +46,10 @@ public class Ball extends Application {
             @Override
             public void handle(MouseEvent mouseEvent) {
                 if (flag == 1) {
-                    ball.setLayoutY(ball.getLayoutY() - 40);
+                    ball.setLayoutY(ball.getLayoutY() - 55);
                 } else {
                     if (flag == 0) {
-                        ball.setLayoutY(ball.getLayoutY() - 40);
+                        ball.setLayoutY(ball.getLayoutY() - 55);
                         flag = 1;
                     }
                     Timeline timeline = new Timeline(new KeyFrame(Duration.millis(20), new EventHandler<ActionEvent>() {
@@ -68,6 +78,7 @@ public class Ball extends Application {
             }
         });
         stage.setTitle("Animated Ball");
+        rotateTransition.play();
         stage.setScene(scene);
         stage.show();
     }
