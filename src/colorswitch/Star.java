@@ -1,5 +1,7 @@
 package colorswitch;
 
+import javafx.scene.layout.AnchorPane;
+
 public class Star extends GameElements{
     String color;
     int value;
@@ -19,4 +21,15 @@ public class Star extends GameElements{
     public String getColor() {
         return color;
     }
+
+    @Override
+    void appear(AnchorPane root) {
+
+    }
+
+    @Override
+    void disappear() {
+
+    }
+
 }

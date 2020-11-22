@@ -1,5 +1,7 @@
 package colorswitch;
 
+import javafx.scene.layout.AnchorPane;
+
 import java.util.Random;
 
 public class ColorSwitcher extends GameElements{
@@ -12,4 +14,13 @@ public class ColorSwitcher extends GameElements{
         return " ";
     }
 
+    @Override
+    void appear(AnchorPane root) {
+
+    }
+
+    @Override
+    void disappear() {
+
+    }
 }

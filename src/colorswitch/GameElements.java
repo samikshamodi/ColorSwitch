@@ -1,5 +1,7 @@
 package colorswitch;
 
+import javafx.scene.layout.AnchorPane;
+
 public abstract class GameElements {
     int position[];
     GameElements(int x, int y){
@@ -15,10 +17,6 @@ public abstract class GameElements {
     public void setPosition(int[] position) {
         this.position = position;
     }
-    void disappear(){
-
-    }
-    void appear(){
-
-    }
+    abstract void disappear();
+    abstract void appear(AnchorPane root);
 }

@@ -9,7 +9,7 @@ public class Player {
         name=n;
         currentScore=0;
         highestScore=0;
-        ball = new Ball();
+        ball = new Ball(0,0);
         totalStars=0;
     }
 
