@@ -5,6 +5,7 @@ import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.*;
 import javafx.stage.Stage;
@@ -18,6 +19,24 @@ public class Main extends Application {
     @Override
     public void start(Stage primaryStage) throws IOException {
         AnchorPane root = FXMLLoader.load(getClass().getResource("/gui/MainMenu.fxml"));
+
+        BackgroundImage myBI1= new BackgroundImage(new Image("/assets/newGameButton.png",120,123,true,true), BackgroundRepeat.NO_REPEAT, BackgroundRepeat.NO_REPEAT, BackgroundPosition.DEFAULT, BackgroundSize.DEFAULT);
+        Button play = new Button("");
+        play.setBackground(new Background(myBI1));
+        play.setPrefHeight(120);
+        play.setPrefWidth(123);
+        play.setTranslateX(240);
+        play.setTranslateY(253);
+        play.setOnAction(e->{
+            //  System.out.println("new game");
+            Game g = new Game();
+            try {
+                g.startGame(primaryStage);
+            } catch (IOException ioException) {
+                ioException.printStackTrace();
+            }
+        });
+
         ImageView img1 = new ImageView("/assets/c1.png");
         img1.setFitHeight(150);
         img1.setFitWidth(150);
@@ -51,7 +70,30 @@ public class Main extends Application {
         rotateTransition3.setCycleCount(1500);
         rotateTransition3.play();
 
-        root.getChildren().addAll(img1,img2,img3);
+        BackgroundImage myBI= new BackgroundImage(new Image("/assets/leaderboard.png",108,111,true,true), BackgroundRepeat.NO_REPEAT, BackgroundRepeat.NO_REPEAT, BackgroundPosition.DEFAULT, BackgroundSize.DEFAULT);
+        Button leaderboard = new Button("");
+        leaderboard.setBackground(new Background(myBI));
+        leaderboard.setPrefHeight(108);
+        leaderboard.setPrefWidth(111);
+        leaderboard.setTranslateX(33);
+        leaderboard.setTranslateY(667);
+        leaderboard.setTranslateX(250);
+        leaderboard.setTranslateY(590);
+        RotateTransition rotateTransition4 = new RotateTransition(Duration.seconds(4),leaderboard);
+        rotateTransition4.setByAngle(360);
+        rotateTransition4.setCycleCount(1500);
+        rotateTransition4.play();
+
+        leaderboard.setOnAction(e->{
+            AnchorPane r = null;
+            try {
+                r = FXMLLoader.load(getClass().getResource("/gui/ViewLeaderboardScene.fxml"));
+            } catch (IOException ioException) {
+                ioException.printStackTrace();
+            }
+            Scene scene = new Scene(r);primaryStage.setScene(scene);});
+
+        root.getChildren().addAll(img1,img2,img3,leaderboard,play);
         Scene scene = new Scene(root);
 
         primaryStage.setTitle("Color Switch");
@@ -62,7 +104,5 @@ public class Main extends Application {
 
     public static void main(String[] args) {
         launch(args);
-        //Game g=new Game();
-        //g.startGame();
     }
 }

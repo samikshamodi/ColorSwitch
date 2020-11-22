@@ -9,32 +9,26 @@
    <children>
       <Pane prefHeight="800.0" prefWidth="600.0" style="-fx-background-color: black;">
          <children>
-            <Button layoutX="152.0" layoutY="525.0" mnemonicParsing="false" onAction="#selectGameS" prefHeight="50.0" prefWidth="300.0" style="-fx-background-color: hotpink;" text="Resume Game" textAlignment="CENTER">
+            <Button layoutX="141.0" layoutY="472.0" mnemonicParsing="false" onAction="#selectGameS" prefHeight="88.0" prefWidth="342.0" style="-fx-background-color: btransparentlue;" text="Resume Game" textAlignment="CENTER" textFill="WHITE">
                <font>
-                  <Font name="Comic Sans MS" size="16.0" />
+                  <Font name="Courier New Bold" size="40.0" />
                </font>
             </Button>
-            <Button layoutX="152.0" layoutY="612.0" mnemonicParsing="false" onAction="#viewLeaderboardS" prefHeight="50.0" prefWidth="300.0" style="-fx-background-color: greenyellow;" text="View LeaderBoard" textAlignment="CENTER">
+            <Button layoutX="223.0" layoutY="712.0" mnemonicParsing="false" onAction="#quitS" prefHeight="50.0" prefWidth="154.0" style="-fx-background-color: transparent;" text="Quit" textAlignment="CENTER" textFill="#cfcfcf">
                <font>
-                  <Font name="Comic Sans MS" size="16.0" />
+                  <Font name="Courier New Bold" size="40.0" />
                </font>
             </Button>
-            <Button layoutX="150.0" layoutY="702.0" mnemonicParsing="false" onAction="#quitS" prefHeight="50.0" prefWidth="300.0" style="-fx-background-color: orange;" text="Quit" textAlignment="CENTER">
-               <font>
-                  <Font name="Comic Sans MS" size="16.0" />
-               </font>
-            </Button>
-            <ImageView fitHeight="120.0" fitWidth="123.0" layoutX="242.0" layoutY="255.0" pickOnBounds="true" preserveRatio="true">
-               <image>
-                  <Image url="@../assets/newGameButton.png" />
-               </image>
-            </ImageView>
             <ImageView fitHeight="150.0" fitWidth="282.0" layoutX="152.0" layoutY="14.0" pickOnBounds="true" preserveRatio="true">
                <image>
                   <Image url="@../assets/logo.png" />
                </image>
             </ImageView>
-            <Button layoutX="223.0" layoutY="246.0" mnemonicParsing="false" onAction="#startGameS" prefHeight="141.0" prefWidth="154.0" style="-fx-background-color: transparent;" />
+            <Button layoutX="526.0" mnemonicParsing="false" onAction="#instructionS" prefHeight="74.0" prefWidth="59.0" style="-fx-background-color: transparent;" text="?" textAlignment="CENTER" textFill="#cfcfcf">
+               <font>
+                  <Font name="Cooper Black" size="40.0" />
+               </font>
+            </Button>
          </children>
       </Pane>
    </children>

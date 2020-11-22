@@ -24,11 +24,11 @@ public class MainControl {
         window.show();
     }
 
-    public void viewLeaderboardS(ActionEvent actionEvent) throws IOException {
-        String s = "/gui/viewLeaderboardScene.fxml";
-        show(actionEvent, s);
-    }
-
+    /*  public void viewLeaderboardS(ActionEvent actionEvent) throws IOException {
+          String s = "/gui/viewLeaderboardScene.fxml";
+          show(actionEvent, s);
+      }
+  */
     public void quitS(ActionEvent actionEvent) {
         Stage window = (Stage) ((Node) actionEvent.getSource()).getScene().getWindow();
         window.close();
@@ -41,16 +41,21 @@ public class MainControl {
         m.start(window);
     }
 
-    public void startGameS(ActionEvent actionEvent) throws IOException {
+   /* public void startGameS(ActionEvent actionEvent) throws IOException {
 
         Stage window = (Stage) ((Node) actionEvent.getSource()).getScene().getWindow();
 
-        Game g = new Game();
-        g.startGame(window);
-    }
+        //Game g = new Game();
+        //g.startGame(window);
+    }*/
 
     public void selectGameS(ActionEvent actionEvent) throws IOException {
         String s = "/gui/SelectGameScene.fxml";
+        show(actionEvent, s);
+    }
+
+    public void instructionS(ActionEvent actionEvent) throws IOException {
+        String s = "/gui/InstructionScene.fxml";
         show(actionEvent, s);
     }
 }

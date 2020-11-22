@@ -8,19 +8,19 @@
     <children>
         <Pane prefHeight="800.0" prefWidth="600.0" style="-fx-background-color: black;">
             <children>
-                <Button layoutX="152.0" layoutY="656.0" mnemonicParsing="false" onAction="#mainMenuS" prefHeight="50.0" prefWidth="300.0" style="-fx-background-color: orange;" text="Go Back" textAlignment="CENTER">
+                <Button layoutX="152.0" layoutY="656.0" mnemonicParsing="false" onAction="#mainMenuS" prefHeight="50.0" prefWidth="300.0" style="-fx-background-color: transparent;" text="Go Back" textAlignment="CENTER" textFill="WHITE">
                     <font>
-                        <Font name="Comic Sans MS" size="16.0" />
+                        <Font name="Courier New Bold" size="40.0" />
                     </font>
                 </Button>
                 <Label alignment="CENTER" contentDisplay="CENTER" layoutX="142.0" layoutY="72.0" prefHeight="43.0" prefWidth="307.0" text="Saved Games" textFill="#f2efef">
                     <font>
-                        <Font name="Comic Sans MS" size="26.0" />
+                        <Font name="Courier New" size="40.0" />
                     </font>
                 </Label>
-                <Label alignment="CENTER" contentDisplay="CENTER" layoutX="142.0" layoutY="126.0" prefHeight="23.0" prefWidth="300.0" text="No saved games" textFill="#f8f8f8">
+                <Label alignment="CENTER" contentDisplay="CENTER" layoutX="150.0" layoutY="202.0" prefHeight="23.0" prefWidth="300.0" text="No saved games" textFill="#f8f8f8">
                     <font>
-                        <Font name="Comic Sans MS" size="16.0" />
+                        <Font name="Courier New" size="18.0" />
                     </font>
                 </Label>
             </children>

@@ -8,19 +8,19 @@
     <children>
         <Pane prefHeight="800.0" prefWidth="600.0" style="-fx-background-color: black;">
             <children>
-                <Button layoutX="152.0" layoutY="656.0" mnemonicParsing="false" onAction="#mainMenuS" prefHeight="50.0" prefWidth="300.0" style="-fx-background-color: orange;" text="Go Back" textAlignment="CENTER">
+                <Button layoutX="152.0" layoutY="656.0" mnemonicParsing="false" onAction="#mainMenuS" prefHeight="50.0" prefWidth="300.0" style="-fx-background-color: transparent;" text="Go Back" textAlignment="CENTER" textFill="WHITE">
                     <font>
-                        <Font name="Comic Sans MS" size="16.0" />
+                        <Font name="Courier New Bold" size="40.0" />
                     </font>
                 </Button>
-                <Label alignment="CENTER" contentDisplay="CENTER" layoutX="182.0" layoutY="57.0" prefHeight="43.0" prefWidth="240.0" text="Leaderboard" textAlignment="CENTER" textFill="#f2efef">
+                <Label alignment="CENTER" contentDisplay="CENTER" layoutX="157.0" layoutY="54.0" prefHeight="48.0" prefWidth="291.0" text="Leaderboard" textAlignment="CENTER" textFill="#f2efef">
                     <font>
-                        <Font name="Comic Sans MS" size="26.0" />
+                        <Font name="Courier New Bold" size="40.0" />
                     </font>
                 </Label>
                 <Label layoutX="245.0" layoutY="114.0" text="List of Scores" textFill="#f8f8f8">
                     <font>
-                        <Font name="Comic Sans MS" size="16.0" />
+                        <Font name="Courier New" size="18.0" />
                     </font>
                 </Label>
             </children>
