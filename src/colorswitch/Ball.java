@@ -21,7 +21,7 @@ public class Ball extends GameElements{
 
     @Override
     void appear(AnchorPane root) {
-        javafx.scene.shape.Circle ball = new javafx.scene.shape.Circle(10, Color.AQUA);
+        javafx.scene.shape.Circle ball = new javafx.scene.shape.Circle(10, Color.YELLOW);
         ball.relocate(295, 600);
         root.getChildren().add(ball);
         root.addEventFilter(MouseEvent.MOUSE_PRESSED, new EventHandler<MouseEvent>() {
