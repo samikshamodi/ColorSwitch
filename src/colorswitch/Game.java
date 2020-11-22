@@ -65,7 +65,7 @@ public class Game extends Application {
         o1.appear(root);
         Ball b = new Ball(10,0);
         b.appear(root);
-        BackgroundImage myBI= new BackgroundImage(new Image("/assets/cs-06.png",100,100,true,true), BackgroundRepeat.NO_REPEAT, BackgroundRepeat.NO_REPEAT, BackgroundPosition.DEFAULT, BackgroundSize.DEFAULT);
+        BackgroundImage myBI= new BackgroundImage(new Image("/assets/pauseButton.png",100,100,true,true), BackgroundRepeat.NO_REPEAT, BackgroundRepeat.NO_REPEAT, BackgroundPosition.DEFAULT, BackgroundSize.DEFAULT);
         Button pause = new Button("");
         pause.setBackground(new Background(myBI));
         pause.setPrefHeight(100);
