@@ -20,14 +20,14 @@ public class Main extends Application {
     public void start(Stage primaryStage) throws IOException {
         AnchorPane root = FXMLLoader.load(getClass().getResource("/gui/MainMenu.fxml"));
 
-        BackgroundImage myBI1= new BackgroundImage(new Image("/assets/newGameButton.png",120,123,true,true), BackgroundRepeat.NO_REPEAT, BackgroundRepeat.NO_REPEAT, BackgroundPosition.DEFAULT, BackgroundSize.DEFAULT);
+        BackgroundImage myBI1 = new BackgroundImage(new Image("/assets/newGameButton.png", 120, 123, true, true), BackgroundRepeat.NO_REPEAT, BackgroundRepeat.NO_REPEAT, BackgroundPosition.DEFAULT, BackgroundSize.DEFAULT);
         Button play = new Button("");
         play.setBackground(new Background(myBI1));
         play.setPrefHeight(120);
         play.setPrefWidth(123);
         play.setTranslateX(240);
         play.setTranslateY(253);
-        play.setOnAction(e->{
+        play.setOnAction(e -> {
             //  System.out.println("new game");
             Game g = new Game();
             try {
@@ -43,7 +43,7 @@ public class Main extends Application {
         img1.setX(225.5);
         img1.setY(240);
         img1.setPreserveRatio(true);
-        RotateTransition rotateTransition = new RotateTransition(Duration.seconds(4),img1);
+        RotateTransition rotateTransition = new RotateTransition(Duration.seconds(4), img1);
         rotateTransition.setByAngle(360);
         rotateTransition.setCycleCount(1500);
         rotateTransition.play();
@@ -54,7 +54,7 @@ public class Main extends Application {
         img2.setX(205);
         img2.setY(220);
         img2.setPreserveRatio(true);
-        RotateTransition rotateTransition2 = new RotateTransition(Duration.seconds(4),img2);
+        RotateTransition rotateTransition2 = new RotateTransition(Duration.seconds(4), img2);
         rotateTransition2.setByAngle(-360);
         rotateTransition2.setCycleCount(1500);
         rotateTransition2.play();
@@ -65,12 +65,12 @@ public class Main extends Application {
         img3.setX(180);
         img3.setY(195);
         img3.setPreserveRatio(true);
-        RotateTransition rotateTransition3 = new RotateTransition(Duration.seconds(4),img3);
+        RotateTransition rotateTransition3 = new RotateTransition(Duration.seconds(4), img3);
         rotateTransition3.setByAngle(360);
         rotateTransition3.setCycleCount(1500);
         rotateTransition3.play();
 
-        BackgroundImage myBI= new BackgroundImage(new Image("/assets/leaderboard.png",108,111,true,true), BackgroundRepeat.NO_REPEAT, BackgroundRepeat.NO_REPEAT, BackgroundPosition.DEFAULT, BackgroundSize.DEFAULT);
+        BackgroundImage myBI = new BackgroundImage(new Image("/assets/leaderboard.png", 108, 111, true, true), BackgroundRepeat.NO_REPEAT, BackgroundRepeat.NO_REPEAT, BackgroundPosition.DEFAULT, BackgroundSize.DEFAULT);
         Button leaderboard = new Button("");
         leaderboard.setBackground(new Background(myBI));
         leaderboard.setPrefHeight(108);
@@ -79,21 +79,23 @@ public class Main extends Application {
         leaderboard.setTranslateY(667);
         leaderboard.setTranslateX(250);
         leaderboard.setTranslateY(590);
-        RotateTransition rotateTransition4 = new RotateTransition(Duration.seconds(4),leaderboard);
+        RotateTransition rotateTransition4 = new RotateTransition(Duration.seconds(4), leaderboard);
         rotateTransition4.setByAngle(360);
         rotateTransition4.setCycleCount(1500);
         rotateTransition4.play();
 
-        leaderboard.setOnAction(e->{
+        leaderboard.setOnAction(e -> {
             AnchorPane r = null;
             try {
                 r = FXMLLoader.load(getClass().getResource("/gui/ViewLeaderboardScene.fxml"));
             } catch (IOException ioException) {
                 ioException.printStackTrace();
             }
-            Scene scene = new Scene(r);primaryStage.setScene(scene);});
+            Scene scene = new Scene(r);
+            primaryStage.setScene(scene);
+        });
 
-        root.getChildren().addAll(img1,img2,img3,leaderboard,play);
+        root.getChildren().addAll(img1, img2, img3, leaderboard, play);
         Scene scene = new Scene(root);
 
         primaryStage.setTitle("Color Switch");

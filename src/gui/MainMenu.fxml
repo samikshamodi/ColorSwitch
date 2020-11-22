@@ -26,7 +26,7 @@
             </ImageView>
             <Button layoutX="526.0" mnemonicParsing="false" onAction="#instructionS" prefHeight="74.0" prefWidth="59.0" style="-fx-background-color: transparent;" text="?" textAlignment="CENTER" textFill="#cfcfcf">
                <font>
-                  <Font name="Cooper Black" size="40.0" />
+                  <Font name="Courier New Bold" size="40.0" />
                </font>
             </Button>
          </children>
