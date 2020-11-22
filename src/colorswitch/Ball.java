@@ -11,7 +11,7 @@ import javafx.scene.paint.Color;
 import javafx.util.Duration;
 
 public class Ball extends GameElements{
-    Ball(int x, int y){
+    public Ball(int x, int y){
         super(x,y);
     }
     public int jump() {
@@ -20,7 +20,7 @@ public class Ball extends GameElements{
     }
 
     @Override
-    void appear(AnchorPane root) {
+    public void appear(AnchorPane root) {
         javafx.scene.shape.Circle ball = new javafx.scene.shape.Circle(10, Color.YELLOW);
         ball.relocate(295, 600);
         root.getChildren().add(ball);
@@ -64,7 +64,7 @@ public class Ball extends GameElements{
     }
 
     @Override
-    void disappear() {
+    public void disappear() {
 
     }
 

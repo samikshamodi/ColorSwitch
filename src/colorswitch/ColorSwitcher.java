@@ -15,12 +15,12 @@ public class ColorSwitcher extends GameElements{
     }
 
     @Override
-    void appear(AnchorPane root) {
+    public void appear(AnchorPane root) {
 
     }
 
     @Override
-    void disappear() {
+    public void disappear() {
 
     }
 }

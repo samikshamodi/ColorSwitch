@@ -32,11 +32,11 @@ public abstract class Obstacle extends GameElements{
     }
 
     @Override
-    void appear(AnchorPane root) {
+    public void appear(AnchorPane root) {
         ImageView img = new ImageView("/assets/c1.png");
-        img.setFitHeight(150);
-        img.setFitWidth(150);
-        img.setX(225.5);
+        img.setFitHeight(200);
+        img.setFitWidth(200);
+        img.setX(200);
         img.setY(200);
         img.setPreserveRatio(true);
         RotateTransition rotateTransition = new RotateTransition(Duration.seconds(4),img);
@@ -47,7 +47,7 @@ public abstract class Obstacle extends GameElements{
     }
 
     @Override
-    void disappear() {
+    public void disappear() {
 
     }
 }
