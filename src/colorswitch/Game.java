@@ -55,15 +55,36 @@ public class Game {
         pause.setPrefWidth(85);
         pause.setTranslateX(500);
         pause.setTranslateY(20);
-        pause.setOnAction(e-> pause());
+        pause.setOnAction(e-> {
+            try {
+                pause(stage);
+            } catch (IOException ioException) {
+                ioException.printStackTrace();
+            }
+        });
         root.getChildren().add(pause);
-        stage.setTitle("Animated Ball");
+        stage.setTitle("Color Switch");
         stage.setScene(scene);
         stage.show();
         return 0;
     }
-    int pause(){
-        return -1;
+    int pause(Stage stage) throws IOException{
+        FXMLLoader loader = new FXMLLoader();
+        loader.setLocation(Main.class.getResource("/gui/PauseGame.fxml"));
+        AnchorPane root = loader.load();
+        Scene scene = new Scene(root);
+        BackgroundImage myBI= new BackgroundImage(new Image("/assets/resumeButton.png",200,200,true,true), BackgroundRepeat.NO_REPEAT, BackgroundRepeat.NO_REPEAT, BackgroundPosition.DEFAULT, BackgroundSize.DEFAULT);
+        Button resume = new Button("");
+        resume.setBackground(new Background(myBI));
+        resume.setPrefHeight(200);
+        resume.setPrefWidth(200);
+        resume.setTranslateX(225);
+        resume.setTranslateY(150);
+        root.getChildren().add(resume);
+        stage.setTitle("Color Switch");
+        stage.setScene(scene);
+        stage.show();
+        return 0;
     }
     int hitObstacle(){
         return 3;
