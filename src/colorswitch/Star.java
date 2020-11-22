@@ -1,5 +1,6 @@
 package colorswitch;
 
+import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
 
 public class Star extends GameElements{
@@ -23,12 +24,18 @@ public class Star extends GameElements{
     }
 
     @Override
-    void appear(AnchorPane root) {
-
+    public void appear(AnchorPane root) {
+        ImageView img = new ImageView("/assets/star.png");
+        img.setFitHeight(50);
+        img.setFitWidth(50);
+        img.setX(275);
+        img.setY(275);
+        img.setPreserveRatio(true);
+        root.getChildren().add(img);
     }
 
     @Override
-    void disappear() {
+    public void disappear() {
 
     }
 

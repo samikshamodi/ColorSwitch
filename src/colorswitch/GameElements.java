@@ -17,6 +17,6 @@ public abstract class GameElements {
     public void setPosition(int[] position) {
         this.position = position;
     }
-    abstract void disappear();
-    abstract void appear(AnchorPane root);
+    public abstract void disappear();
+    public abstract void appear(AnchorPane root);
 }
