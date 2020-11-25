@@ -9,7 +9,7 @@
    <children>
       <Pane prefHeight="800.0" prefWidth="600.0" style="-fx-background-color: black;">
          <children>
-            <Button layoutX="141.0" layoutY="472.0" mnemonicParsing="false" onAction="#selectGameS" prefHeight="88.0" prefWidth="342.0" style="-fx-background-color: btransparentlue;" text="Resume Game" textAlignment="CENTER" textFill="WHITE">
+            <Button layoutX="141.0" layoutY="472.0" mnemonicParsing="false" onAction="#selectGameS" prefHeight="88.0" prefWidth="342.0" style="-fx-background-color: transparent;" text="Resume Game" textAlignment="CENTER" textFill="WHITE">
                <font>
                   <Font name="Courier New Bold" size="40.0" />
                </font>
