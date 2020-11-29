@@ -1,6 +1,7 @@
 package colorswitch;
 
 import javafx.scene.layout.AnchorPane;
+import javafx.scene.shape.Shape;
 
 public abstract class GameElements {
     int position[];
@@ -19,4 +20,6 @@ public abstract class GameElements {
     }
     public abstract void disappear();
     public abstract void appear(AnchorPane root);
+
+    public abstract int checkCollision(Shape ball);
 }
