@@ -39,13 +39,17 @@ public class Star extends GameElements{
 
     @Override
     public int checkCollision(Shape ball) {
-
+        //if ball collides with star return 1 else return 0;
+        if((img.getBoundsInParent().intersects(ball.getBoundsInParent())))
+        {
+            return 1;
+        }
         return 0;
     }
 
     @Override
-    public void disappear() {
-
+    public void disappear(AnchorPane root) {
+        root.getChildren().remove(img);
     }
 
 }

@@ -18,7 +18,7 @@ public abstract class GameElements {
     public void setPosition(int[] position) {
         this.position = position;
     }
-    public abstract void disappear();
+    public abstract void disappear(AnchorPane root);
     public abstract void appear(AnchorPane root);
 
     public abstract int checkCollision(Shape ball);

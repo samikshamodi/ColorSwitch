@@ -1,8 +1,10 @@
 package colorswitch;
 
+import javafx.animation.RotateTransition;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Shape;
+import javafx.util.Duration;
 
 public class Ball extends GameElements{
     javafx.scene.shape.Circle ball;
@@ -17,6 +19,12 @@ public class Ball extends GameElements{
     public void moveUp()
     {
         ball.setLayoutY(ball.getLayoutY() - 55);
+
+        //For smooth animation
+        RotateTransition rotater1 = new RotateTransition(Duration.seconds(3), ball);
+        rotater1.setByAngle(360);
+        rotater1.setCycleCount(3);
+        rotater1.play();
     }
 
     public void moveDown()
@@ -63,7 +71,7 @@ public class Ball extends GameElements{
     }
 
     @Override
-    public void disappear() {
+    public void disappear(AnchorPane root) {
 
     }
 

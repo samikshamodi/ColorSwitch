@@ -94,7 +94,7 @@ public class Square extends Obstacle {
     }
 
     @Override
-    public void disappear() {
+    public void disappear(AnchorPane root) {
 
     }
 }
