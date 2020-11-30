@@ -2,7 +2,6 @@ package colorswitch;
 
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
-import javafx.application.Application;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXMLLoader;
@@ -15,23 +14,33 @@ import javafx.scene.layout.*;
 import javafx.stage.Stage;
 import javafx.util.Duration;
 
-import java.awt.*;
 import java.io.IOException;
-import java.util.HashMap;
+import java.util.*;
 
 public class Game {
     HashMap<Integer, Obstacle> obstacles;
     HashMap<Integer, ColorSwitcher> colorswitchers;
     HashMap<Integer, Star> stars;
+    ArrayList<Obstacle> list = new ArrayList<>();
     Star st;    //TODO remove??
     ColorSwitcher cs; //TODO remove??
-    Obstacle o1;
     Ball ball;
 
-    void addObstacles(AnchorPane root) {
-        o1 = new Square("jk", 10, 10, 10);
-        o1.appear(root);
+
+    void createObstacles() {
+        for(int i=0;i<100;i++)
+        list.add(new Square("ty", 1, 1, 1));
+        Collections.shuffle(list);
     }
+
+    void addObstacles(AnchorPane root) {
+        list.get(0).appear(root);
+        list.get(1).appear(root);
+        list.get(2).appear(root);
+        list.get(0).setLayoutY(0);
+        list.get(2).setLayoutY(-800);
+    }
+
 
     Obstacle removeObstacles() {
         return new colorswitch.Circle("Solid", 0, 0, 10.5);
@@ -40,10 +49,6 @@ public class Game {
     void addBall(AnchorPane root) {
         ball = new Ball(10, 0);
         ball.appear(root);
-    }
-
-    void addColorSwitcher() {
-
     }
 
     ColorSwitcher removeColorSwitcher() {
@@ -91,10 +96,13 @@ public class Game {
         stage.show();
 
         //changing objects in scene
-        addBall(root);
+        createObstacles();
         addObstacles(root);
+        addBall(root);
         addStar(root);
         addColorSwitcher(root);
+
+
         //TODO figure out how and when to add colorswitcher and stars
 
         root.addEventFilter(MouseEvent.MOUSE_PRESSED, new EventHandler<MouseEvent>() {
@@ -110,7 +118,7 @@ public class Game {
                         flag = 1;
                     }
                     Timeline timeline = new Timeline(new KeyFrame(Duration.millis(17), new EventHandler<ActionEvent>() {
-
+                        int i=0;
                         @Override
                         public void handle(ActionEvent t) {
                             //move the ball
@@ -134,7 +142,28 @@ public class Game {
                             if (ball.getLayoutY() <= 300) {
                                 ball.stay();
                                 System.out.println("reached middle of screen");
+
+
                                 //now move the obstacle down to give the illusion of screen moving down
+                                st.moveDown();
+                                cs.moveDown();
+
+                                list.get(i).moveDown();
+                                list.get(i+1).moveDown();
+                                list.get(i+2).moveDown();
+
+                                if(list.get(i).getLayoutY()>=800)
+                                {
+                                    i++;
+                                    list.get(i+2).appear(root);
+                                }
+
+                            }
+
+                            //ensures obstacles are infinite
+                            if(list.size()<10)
+                            {
+                                createObstacles();
                             }
 
                             //if return value is 1 that means the star was collected.
@@ -144,7 +173,7 @@ public class Game {
                             if (starCollected == 1) {
                                 //TODO add sound and multiple stars and +1
                                 //TODO update player score
-                                System.out.println("collected star");
+                                 System.out.println("collected star");
                                 st.disappear(root);
                             }
 
@@ -154,7 +183,7 @@ public class Game {
                             int colorSwitcherCollected = cs.checkCollision(ball.getShape());
                             if (colorSwitcherCollected == 1) {
                                 //TODO add code for changing color of the ball and sound effect
-                                System.out.println("collected color switcher");
+                                 System.out.println("collected color switcher");
                                 cs.disappear(root);
                             }
 
@@ -162,13 +191,15 @@ public class Game {
                             //collisionDetected has value 1 if ball collides with the obstacle which is not of the
                             //same colour as ball
                             //else it returns 0
-                            int collisionDetected = o1.checkCollision(ball.getShape());
-                            if (collisionDetected == 1) {
-                                System.out.println("Collision detected");
-                                System.out.println("Game Over");
-                                //stage.close();  //TODO remove
-                                //TODO add the game over menu
-                            }
+                            int collisionDetected1 = list.get(i).checkCollision(ball.getShape());
+                            int collisionDetected2 = list.get(i+1).checkCollision(ball.getShape());
+                            int collisionDetected3 = list.get(i+2).checkCollision(ball.getShape());
+                            if (collisionDetected1 == 1 || collisionDetected2 == 1 ||collisionDetected3 == 1) {
+                            System.out.println("Collision detected");
+                            System.out.println("Game Over");
+                            stage.close();  //TODO remove
+                            //TODO add the game over menu
+                              }
                         }
                     }));
                     timeline.setCycleCount(Timeline.INDEFINITE);

@@ -48,6 +48,22 @@ public class Star extends GameElements{
     }
 
     @Override
+    public void moveDown() {
+
+    }
+
+    @Override
+    public double getLayoutY() {
+        return 0;
+    }
+
+    @Override
+    public void setLayoutY(double dy) {
+
+    }
+
+
+    @Override
     public void disappear(AnchorPane root) {
         root.getChildren().remove(img);
     }

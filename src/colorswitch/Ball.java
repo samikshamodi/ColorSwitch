@@ -21,12 +21,13 @@ public class Ball extends GameElements{
         ball.setLayoutY(ball.getLayoutY() - 55);
 
         //For smooth animation
-        RotateTransition rotater1 = new RotateTransition(Duration.seconds(3), ball);
+        RotateTransition rotater1 = new RotateTransition(Duration.seconds(4), ball);
         rotater1.setByAngle(360);
-        rotater1.setCycleCount(3);
+        rotater1.setCycleCount(1);
         rotater1.play();
     }
 
+    @Override
     public void moveDown()
     {
         ball.setLayoutY(ball.getLayoutY() + 3); //3 is step or velocity
@@ -42,16 +43,19 @@ public class Ball extends GameElements{
         return ball.getRadius();
     }
 
+    @Override
     public double getLayoutY()
     {
         //System.out.println("hi");
         return ball.getLayoutY();
     }
 
-    public void setLayoutY(double x)
-    {
-        ball.setLayoutY(x);
+    @Override
+    public void setLayoutY(double dy) {
+        ball.setLayoutY(dy);
+
     }
+
 
     public Shape getShape()
     {

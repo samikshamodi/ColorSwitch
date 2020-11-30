@@ -22,4 +22,10 @@ public abstract class GameElements {
     public abstract void appear(AnchorPane root);
 
     public abstract int checkCollision(Shape ball);
+
+    public abstract void moveDown();
+
+    public abstract double getLayoutY();
+
+    public abstract void setLayoutY(double dy);
 }

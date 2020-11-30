@@ -24,4 +24,19 @@ public class Triangle extends Obstacle{
     public int checkCollision(Shape ball) {
         return 0;
     }
+
+    @Override
+    public void moveDown() {
+
+    }
+
+    @Override
+    public double getLayoutY() {
+        return 0;
+    }
+
+    @Override
+    public void setLayoutY(double dy) {
+
+    }
 }

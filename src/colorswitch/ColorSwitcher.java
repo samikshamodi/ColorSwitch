@@ -6,14 +6,16 @@ import javafx.scene.shape.Shape;
 
 import java.util.Random;
 
-public class ColorSwitcher extends GameElements{
+public class ColorSwitcher extends GameElements {
     Random rand;
     ImageView img;
-    ColorSwitcher(int x, int y){
-        super(x,y);
+
+    ColorSwitcher(int x, int y) {
+        super(x, y);
         rand = new Random();
     }
-    String generateColor(){
+
+    String generateColor() {
         return " ";
     }
 
@@ -31,11 +33,25 @@ public class ColorSwitcher extends GameElements{
     @Override
     public int checkCollision(Shape ball) {
         //if ball collides with color switcher return 1 else return 0;
-        if((img.getBoundsInParent().intersects(ball.getBoundsInParent())))
-        {
+        if ((img.getBoundsInParent().intersects(ball.getBoundsInParent()))) {
             return 1;
         }
         return 0;
+    }
+
+    @Override
+    public void moveDown() {
+        img.setLayoutY(img.getLayoutY() + 55); //3 is step or velocity
+    }
+
+    @Override
+    public double getLayoutY() {
+        return 0;
+    }
+
+    @Override
+    public void setLayoutY(double dy) {
+
     }
 
     @Override

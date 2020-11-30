@@ -11,6 +11,7 @@ import javafx.util.Duration;
 public class Square extends Obstacle {
     double side;
     Rectangle yellow, pink, cyan, purple;
+    Group g;
 
     Square(String ty, int x, int y, double s) {
         super(ty, x, y);
@@ -29,8 +30,9 @@ public class Square extends Obstacle {
         purple.relocate(385, 200);
 
 
-        Group g = new Group();
+        g = new Group();
         g.getChildren().addAll(yellow, pink, cyan, purple);
+        g.setLayoutY(-400);
         RotateTransition rotater1 = new RotateTransition(Duration.seconds(4), g);
         rotater1.setByAngle(360);
         rotater1.setCycleCount(1500);
@@ -94,7 +96,24 @@ public class Square extends Obstacle {
     }
 
     @Override
+    public void moveDown() {
+       g.setLayoutY(g.getLayoutY() + 55); //3 is step or velocity
+    }
+
+
+    @Override
     public void disappear(AnchorPane root) {
+
+    }
+
+    public double getLayoutY()
+    {
+        return g.getLayoutY();
+    }
+
+    @Override
+    public void setLayoutY(double dy) {
+        g.setLayoutY(dy);
 
     }
 }
