@@ -27,6 +27,7 @@ public class ColorSwitcher extends GameElements {
         img.setX(290);
         img.setY(50);
         img.setPreserveRatio(true);
+        //img.setLayoutY(-400);
         root.getChildren().add(img);
     }
 
@@ -46,16 +47,18 @@ public class ColorSwitcher extends GameElements {
 
     @Override
     public double getLayoutY() {
-        return 0;
+        return img.getLayoutY();
     }
 
     @Override
     public void setLayoutY(double dy) {
-
+        img.setLayoutY(dy);
     }
 
     @Override
     public void disappear(AnchorPane root) {
-        root.getChildren().remove(img);
+        //root.getChildren().remove(img);
+        //img.setImage(null);
+        img.setLayoutY(1000);
     }
 }

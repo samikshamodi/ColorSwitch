@@ -18,6 +18,12 @@ public class Square extends Obstacle {
         side = s;
     }
 
+
+    @Override
+    public void disappear(AnchorPane root) {
+
+    }
+
     @Override
     public void appear(AnchorPane root) {
         yellow = new Rectangle(200, 15, Color.YELLOW);
@@ -60,7 +66,7 @@ public class Square extends Obstacle {
         }
 
         if (pinkIntersect.getBoundsInLocal().getWidth() != -1) {
-            if (pinkIntersect.getFill().equals(ball.getFill())) {
+            if (pink.getFill().equals(ball.getFill())) {
                 return 0;
             }
             else
@@ -71,7 +77,7 @@ public class Square extends Obstacle {
         }
 
         if (cyanIntersect.getBoundsInLocal().getWidth() != -1) {
-            if (cyanIntersect.getFill().equals(ball.getFill())) {
+            if (cyan.getFill().equals(ball.getFill())) {
                 return 0;
             }
             else
@@ -82,7 +88,7 @@ public class Square extends Obstacle {
         }
 
         if (purpleIntersect.getBoundsInLocal().getWidth() != -1) {
-            if (purpleIntersect.getFill().equals(ball.getFill())) {
+            if (purple.getFill().equals(ball.getFill())) {
                 return 0;
             }
             else
@@ -101,10 +107,6 @@ public class Square extends Obstacle {
     }
 
 
-    @Override
-    public void disappear(AnchorPane root) {
-
-    }
 
     public double getLayoutY()
     {

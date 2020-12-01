@@ -79,8 +79,8 @@ public class Circle extends Obstacle {
         purple.setFill(Color.TRANSPARENT);
 
         yellow.relocate(290, 200);
-        pink.relocate(180, 200);
-        cyan.relocate(180, 300);
+        pink.relocate(190, 200);
+        cyan.relocate(190, 300);
         purple.relocate(290, 300);
 
         g = new Group();
@@ -102,7 +102,7 @@ public class Circle extends Obstacle {
 
         //Collision with r1 Yellow
         if (yellowIntersect.getBoundsInLocal().getWidth() != -1) {
-            if (yellow.getFill().equals(ball.getFill())) {
+            if (yellow.getStroke().equals(ball.getFill())) {
                 return 0;
             } else {
                 System.out.println("Collision detected Yellow");
@@ -111,7 +111,7 @@ public class Circle extends Obstacle {
         }
 
         if (pinkIntersect.getBoundsInLocal().getWidth() != -1) {
-            if (pinkIntersect.getFill().equals(ball.getFill())) {
+            if (pink.getStroke().equals(ball.getFill())) {
                 return 0;
             } else {
                 System.out.println("Collision detected Pink");
@@ -120,7 +120,7 @@ public class Circle extends Obstacle {
         }
 
         if (cyanIntersect.getBoundsInLocal().getWidth() != -1) {
-            if (cyanIntersect.getFill().equals(ball.getFill())) {
+            if (cyan.getStroke().equals(ball.getFill())) {
                 return 0;
             } else {
                 System.out.println("Collision detected Cyan");
@@ -129,7 +129,7 @@ public class Circle extends Obstacle {
         }
 
         if (purpleIntersect.getBoundsInLocal().getWidth() != -1) {
-            if (purpleIntersect.getFill().equals(ball.getFill())) {
+            if (purple.getStroke().equals(ball.getFill())) {
                 return 0;
             } else {
                 System.out.println("Collision detected Purple");
@@ -152,7 +152,7 @@ public class Circle extends Obstacle {
 
     @Override
     public void setLayoutY(double dy) {
-        g.setLayoutY(-400);
+        g.setLayoutY(dy);
     }
 
 

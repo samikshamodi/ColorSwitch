@@ -34,6 +34,7 @@ public class Star extends GameElements{
         img.setX(275);
         img.setY(275);
         img.setPreserveRatio(true);
+        img.setLayoutY(-400);
         root.getChildren().add(img);
     }
 
@@ -49,23 +50,24 @@ public class Star extends GameElements{
 
     @Override
     public void moveDown() {
-
+        img.setLayoutY(img.getLayoutY() + 55); //3 is step or velocity
     }
 
     @Override
     public double getLayoutY() {
-        return 0;
+        return img.getLayoutY();
     }
 
     @Override
     public void setLayoutY(double dy) {
-
+        img.setLayoutY(dy);
     }
-
 
     @Override
     public void disappear(AnchorPane root) {
-        root.getChildren().remove(img);
+        //root.getChildren().remove(img);
+        //img.setImage(null);
+        img.setLayoutY(1000);
     }
-
 }
+
