@@ -28,9 +28,14 @@ public class Game {
 
 
     void createObstacles() {
-        for(int i=0;i<100;i++)
         list.add(new Square("ty", 1, 1, 1));
-        Collections.shuffle(list);
+        list.add(new Circle("ty", 1, 1, 1));
+        list.add(new Square("ty", 1, 1, 1));
+        for(int i=0;i<100;i++){
+        list.add(new Circle("ty", 1, 1, 1));
+        //list.add(new Square("ty", 1, 1, 1));
+        }
+        //Collections.shuffle(list);//TODO remove comments
     }
 
     void addObstacles(AnchorPane root) {
@@ -141,7 +146,7 @@ public class Game {
                             //to not allow the ball to go above a certain height on screen.
                             if (ball.getLayoutY() <= 300) {
                                 ball.stay();
-                                System.out.println("reached middle of screen");
+                                //System.out.println("reached middle of screen");
 
 
                                 //now move the obstacle down to give the illusion of screen moving down
@@ -161,7 +166,7 @@ public class Game {
                             }
 
                             //ensures obstacles are infinite
-                            if(list.size()<10)
+                            if(i==90)
                             {
                                 createObstacles();
                             }
@@ -197,7 +202,7 @@ public class Game {
                             if (collisionDetected1 == 1 || collisionDetected2 == 1 ||collisionDetected3 == 1) {
                             System.out.println("Collision detected");
                             System.out.println("Game Over");
-                            stage.close();  //TODO remove
+                            //stage.close();  //TODO remove
                             //TODO add the game over menu
                               }
                         }
