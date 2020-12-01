@@ -24,11 +24,11 @@ public class Square extends Obstacle {
         pink = new Rectangle(15, 200, Color.DEEPPINK);
         cyan = new Rectangle(200, 15, Color.CYAN);
         purple = new Rectangle(15, 200, Color.PURPLE);
+
         yellow.relocate(200, 200);
         pink.relocate(200, 215);
         cyan.relocate(200, 400);
         purple.relocate(385, 200);
-
 
         g = new Group();
         g.getChildren().addAll(yellow, pink, cyan, purple);

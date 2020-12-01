@@ -29,11 +29,14 @@ public class Game {
 
     void createObstacles() {
         list.add(new Square("ty", 1, 1, 1));
+        //list.add(new Triangle("ty", 1, 1, 1));
         list.add(new Circle("ty", 1, 1, 1));
         list.add(new Square("ty", 1, 1, 1));
+
         for(int i=0;i<100;i++){
         list.add(new Circle("ty", 1, 1, 1));
-        //list.add(new Square("ty", 1, 1, 1));
+        list.add(new Square("ty", 1, 1, 1));
+        list.add(new Triangle("ty", 1, 1, 1));
         }
         //Collections.shuffle(list);//TODO remove comments
     }
@@ -159,6 +162,7 @@ public class Game {
 
                                 if(list.get(i).getLayoutY()>=800)
                                 {
+                                    System.out.println(i+"-------");
                                     i++;
                                     list.get(i+2).appear(root);
                                 }
@@ -178,7 +182,7 @@ public class Game {
                             if (starCollected == 1) {
                                 //TODO add sound and multiple stars and +1
                                 //TODO update player score
-                                 System.out.println("collected star");
+                                // System.out.println("collected star");
                                 st.disappear(root);
                             }
 
@@ -188,7 +192,7 @@ public class Game {
                             int colorSwitcherCollected = cs.checkCollision(ball.getShape());
                             if (colorSwitcherCollected == 1) {
                                 //TODO add code for changing color of the ball and sound effect
-                                 System.out.println("collected color switcher");
+                               //  System.out.println("collected color switcher");
                                 cs.disappear(root);
                             }
 
@@ -196,7 +200,7 @@ public class Game {
                             //collisionDetected has value 1 if ball collides with the obstacle which is not of the
                             //same colour as ball
                             //else it returns 0
-                            int collisionDetected1 = list.get(i).checkCollision(ball.getShape());
+                           /* int collisionDetected1 = list.get(i).checkCollision(ball.getShape());
                             int collisionDetected2 = list.get(i+1).checkCollision(ball.getShape());
                             int collisionDetected3 = list.get(i+2).checkCollision(ball.getShape());
                             if (collisionDetected1 == 1 || collisionDetected2 == 1 ||collisionDetected3 == 1) {
@@ -204,7 +208,7 @@ public class Game {
                             System.out.println("Game Over");
                             //stage.close();  //TODO remove
                             //TODO add the game over menu
-                              }
+                              }*/
                         }
                     }));
                     timeline.setCycleCount(Timeline.INDEFINITE);

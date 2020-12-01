@@ -10,6 +10,8 @@ import javafx.scene.shape.Rectangle;
 import javafx.scene.shape.Shape;
 import javafx.util.Duration;
 
+import java.util.Collection;
+
 public class Circle extends Obstacle {
     double radius;
     Arc yellow, pink, cyan, purple;
@@ -37,6 +39,7 @@ public class Circle extends Obstacle {
         yellow.setStroke(Color.YELLOW);
         yellow.setType(ArcType.OPEN);
         yellow.setStrokeWidth(15);
+        yellow.setFill(Color.TRANSPARENT);
 
 
         pink = new Arc();
@@ -49,6 +52,7 @@ public class Circle extends Obstacle {
         pink.setStroke(Color.DEEPPINK);
         pink.setType(ArcType.OPEN);
         pink.setStrokeWidth(15);
+        pink.setFill(Color.TRANSPARENT);
 
         cyan = new Arc();
         cyan.setCenterX(0);
@@ -60,6 +64,7 @@ public class Circle extends Obstacle {
         cyan.setStroke(Color.CYAN);
         cyan.setType(ArcType.OPEN);
         cyan.setStrokeWidth(15);
+        cyan.setFill(Color.TRANSPARENT);
 
         purple = new Arc();
         purple.setCenterX(0);
@@ -71,7 +76,7 @@ public class Circle extends Obstacle {
         purple.setStroke(Color.PURPLE);
         purple.setType(ArcType.OPEN);
         purple.setStrokeWidth(15);
-
+        purple.setFill(Color.TRANSPARENT);
 
         yellow.relocate(290, 200);
         pink.relocate(180, 200);
