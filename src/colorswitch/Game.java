@@ -40,7 +40,7 @@ public class Game {
             list.add(new Square("ty", 1, 1, 1));
             list.add(new Triangle("ty", 1, 1, 1));
         }
-        //Collections.shuffle(list);//TODO remove comments
+       // Collections.shuffle(list);//TODO remove comments
     }
 
     void addObstacles(AnchorPane root) {
@@ -253,6 +253,7 @@ public class Game {
                                     csList.get(i + 1).disappear(root);
                                 else if (csCollected1 == 3)
                                     csList.get(i + 2).disappear(root);
+                                ball.setColor();
                             }
 
                             //check if collision

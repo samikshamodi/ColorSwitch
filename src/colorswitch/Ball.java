@@ -3,8 +3,14 @@ package colorswitch;
 import javafx.animation.RotateTransition;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.paint.Color;
+import javafx.scene.paint.Paint;
 import javafx.scene.shape.Shape;
 import javafx.util.Duration;
+
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.Collections;
+import java.util.Random;
 
 public class Ball extends GameElements{
     javafx.scene.shape.Circle ball;
@@ -14,6 +20,21 @@ public class Ball extends GameElements{
     public int jump() {
         //launch();
         return 0;
+    }
+
+    public void setColor()
+    {
+        ArrayList<Paint> list=new ArrayList<>();
+        list.add(Color.YELLOW);
+        list.add(Color.DEEPPINK);
+        list.add(Color.CYAN);
+        list.add(Color.PURPLE);
+
+        Paint toRemove=ball.getFill();
+        list.remove(toRemove);
+        Collections.shuffle(list);
+        ball.setFill(list.get(0));
+        list.add(toRemove);
     }
 
     public void moveUp()
