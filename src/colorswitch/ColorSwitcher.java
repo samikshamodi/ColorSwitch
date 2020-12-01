@@ -27,7 +27,7 @@ public class ColorSwitcher extends GameElements {
         img.setX(290);
         img.setY(50);
         img.setPreserveRatio(true);
-        //img.setLayoutY(-400);
+        img.setLayoutY(-350);
         root.getChildren().add(img);
     }
 

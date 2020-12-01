@@ -23,6 +23,7 @@ public class Game {
     HashMap<Integer, Star> stars;
     ArrayList<Obstacle> list = new ArrayList<>();
     ArrayList<Star> starList = new ArrayList<>();
+    ArrayList<ColorSwitcher> csList = new ArrayList<>();
     Star st;    //TODO remove??
     ColorSwitcher cs; //TODO remove??
     Ball ball;
@@ -78,9 +79,18 @@ public class Game {
         starList.get(2).setLayoutY(-800);
     }
 
+    void createColorSwitcher() {
+        for (int i = 0; i < 100; i++) {
+            csList.add(new ColorSwitcher(1, 1));
+        }
+    }
+
     void addColorSwitcher(AnchorPane root) {
-        cs = new ColorSwitcher(0, 0);
-        cs.appear(root);
+        csList.get(0).appear(root);
+        csList.get(1).appear(root);
+        csList.get(2).appear(root);
+        csList.get(0).setLayoutY(50);
+        csList.get(2).setLayoutY(-700);
     }
 
     Star removeStar() {
@@ -119,6 +129,7 @@ public class Game {
         addBall(root);
         createStar();
         addStar(root);
+        createColorSwitcher();
         addColorSwitcher(root);
 
 
@@ -166,7 +177,10 @@ public class Game {
 
                                 //now move the obstacle down to give the illusion of screen moving down
                                 //st.moveDown();
-                                cs.moveDown();
+                               // cs.moveDown();
+                                csList.get(i).moveDown();
+                                csList.get(i+1).moveDown();
+                                csList.get(i+2).moveDown();
 
                                 starList.get(i).moveDown();
                                 starList.get(i + 1).moveDown();
@@ -181,6 +195,7 @@ public class Game {
                                     i++;
                                     list.get(i + 2).appear(root);
                                     starList.get(i + 2).appear(root);
+                                    csList.get(i + 2).appear(root);
 
                                 }
 
@@ -190,6 +205,7 @@ public class Game {
                             if (i == 90) {
                                 createObstacles();
                                 createStar();
+                                createColorSwitcher();
                             }
 
                             //if return value is 1 that means the star was collected.
@@ -220,11 +236,23 @@ public class Game {
                             //if return value is 1 that means the color switcher was collected.
                             //if the return value is 0 that means the color switcher was not collected
                             //check if color switcher collected
-                            int colorSwitcherCollected = cs.checkCollision(ball.getShape());
+                          /*  int colorSwitcherCollected = cs.checkCollision(ball.getShape());
                             if (colorSwitcherCollected == 1) {
                                 //TODO add code for changing color of the ball and sound effect
                                 System.out.println("collected color switcher");
                                 cs.disappear(root);
+                            }*/
+                            int csCollected1 = csList.get(i).checkCollision(ball.getShape());
+                            int csCollected2 = csList.get(i + 1).checkCollision(ball.getShape());
+                            int csCollected3 = csList.get(i + 2).checkCollision(ball.getShape());
+                            if (csCollected1 == 1 || csCollected2 == 1 || csCollected3 == 1) {
+                                System.out.println("Color Switcher Collected");
+                                if (csCollected1 == 1)
+                                    csList.get(i).disappear(root);
+                                else if (csCollected2 == 1)
+                                    csList.get(i + 1).disappear(root);
+                                else if (csCollected1 == 3)
+                                    csList.get(i + 2).disappear(root);
                             }
 
                             //check if collision
