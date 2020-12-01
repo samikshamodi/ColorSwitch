@@ -78,10 +78,10 @@ public class Circle extends Obstacle {
         purple.setStrokeWidth(15);
         purple.setFill(Color.TRANSPARENT);
 
-        yellow.relocate(290, 200);
+        yellow.relocate(305, 200);
         pink.relocate(190, 200);
-        cyan.relocate(190, 300);
-        purple.relocate(290, 300);
+        cyan.relocate(190, 315);
+        purple.relocate(305, 315);
 
         g = new Group();
         g.getChildren().addAll(yellow, pink, cyan, purple);

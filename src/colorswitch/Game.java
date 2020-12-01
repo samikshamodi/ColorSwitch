@@ -24,8 +24,6 @@ public class Game {
     ArrayList<Obstacle> list = new ArrayList<>();
     ArrayList<Star> starList = new ArrayList<>();
     ArrayList<ColorSwitcher> csList = new ArrayList<>();
-    Star st;    //TODO remove??
-    ColorSwitcher cs; //TODO remove??
     Ball ball;
 
 
@@ -33,14 +31,16 @@ public class Game {
         list.add(new Square("ty", 1, 1, 1));
         //list.add(new Triangle("ty", 1, 1, 1));
         list.add(new Circle("ty", 1, 1, 1));
+       // list.add(new Special("ty",1, 1));
         list.add(new Square("ty", 1, 1, 1));
 
         for (int i = 0; i < 100; i++) {
             list.add(new Circle("ty", 1, 1, 1));
             list.add(new Square("ty", 1, 1, 1));
             list.add(new Triangle("ty", 1, 1, 1));
+            list.add(new Special("ty",1, 1));
         }
-       // Collections.shuffle(list);//TODO remove comments
+       Collections.shuffle(list.subList(3,list.size()));//TODO remove comments
     }
 
     void addObstacles(AnchorPane root) {
@@ -132,9 +132,6 @@ public class Game {
         createColorSwitcher();
         addColorSwitcher(root);
 
-
-        //TODO figure out how and when to add colorswitcher and stars
-
         root.addEventFilter(MouseEvent.MOUSE_PRESSED, new EventHandler<MouseEvent>() {
             int flag = 0;
 
@@ -168,7 +165,6 @@ public class Game {
                                 System.out.println("Crashed :(");
                             }
 
-                            //TODO add code to move the obstacle down
                             //to not allow the ball to go above a certain height on screen.
                             if (ball.getLayoutY() <= 300) {
                                 ball.stay();
@@ -238,7 +234,7 @@ public class Game {
                             //check if color switcher collected
                           /*  int colorSwitcherCollected = cs.checkCollision(ball.getShape());
                             if (colorSwitcherCollected == 1) {
-                                //TODO add code for changing color of the ball and sound effect
+                                //TODO add code for sound effect
                                 System.out.println("collected color switcher");
                                 cs.disappear(root);
                             }*/
@@ -266,7 +262,6 @@ public class Game {
                             if (collisionDetected1 == 1 || collisionDetected2 == 1 || collisionDetected3 == 1) {
                                 System.out.println("Collision detected");
                                 System.out.println("Game Over");
-                                //stage.close();  //TODO remove
                                 //TODO add the game over menu
                             }
                         }
