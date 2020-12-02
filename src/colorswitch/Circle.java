@@ -35,7 +35,7 @@ public class Circle extends Obstacle {
         yellow.setCenterY(0);
         yellow.setRadiusX(100);
         yellow.setRadiusY(100);
-        yellow.setStartAngle(0);
+        yellow.setStartAngle(0+45);
         yellow.setLength(90);
         yellow.setStroke(Color.YELLOW);
         yellow.setType(ArcType.OPEN);
@@ -48,7 +48,7 @@ public class Circle extends Obstacle {
         pink.setCenterY(0);
         pink.setRadiusX(100);
         pink.setRadiusY(100);
-        pink.setStartAngle(90);
+        pink.setStartAngle(90+45);
         pink.setLength(90);
         pink.setStroke(Color.DEEPPINK);
         pink.setType(ArcType.OPEN);
@@ -60,7 +60,7 @@ public class Circle extends Obstacle {
         cyan.setCenterY(0);
         cyan.setRadiusX(100);
         cyan.setRadiusY(100);
-        cyan.setStartAngle(180);
+        cyan.setStartAngle(180+45);
         cyan.setLength(90);
         cyan.setStroke(Color.CYAN);
         cyan.setType(ArcType.OPEN);
@@ -72,17 +72,17 @@ public class Circle extends Obstacle {
         purple.setCenterY(0);
         purple.setRadiusX(100);
         purple.setRadiusY(100);
-        purple.setStartAngle(270);
+        purple.setStartAngle(270+45);
         purple.setLength(90);
         purple.setStroke(Color.PURPLE);
         purple.setType(ArcType.OPEN);
         purple.setStrokeWidth(15);
         purple.setFill(Color.TRANSPARENT);
 
-        yellow.relocate(305, 200);
-        pink.relocate(190, 200);
-        cyan.relocate(190, 315);
-        purple.relocate(305, 315);
+        yellow.relocate(220, 190);
+        pink.relocate(190, 220);
+        cyan.relocate(220, 365);
+        purple.relocate(365, 220);
 
         g = new Group();
         g.getChildren().addAll(yellow, pink, cyan, purple);

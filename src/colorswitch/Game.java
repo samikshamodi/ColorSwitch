@@ -21,34 +21,34 @@ public class Game {
     HashMap<Integer, Obstacle> obstacles;
     HashMap<Integer, ColorSwitcher> colorswitchers;
     HashMap<Integer, Star> stars;
-    ArrayList<Obstacle> list = new ArrayList<>();
+    ArrayList<Obstacle> obstacleList = new ArrayList<>();
     ArrayList<Star> starList = new ArrayList<>();
     ArrayList<ColorSwitcher> csList = new ArrayList<>();
     Ball ball;
 
 
     void createObstacles() {
-        list.add(new Square("ty", 1, 1, 1));
+        obstacleList.add(new Square("ty", 1, 1, 1));
         //list.add(new Triangle("ty", 1, 1, 1));
-        list.add(new Circle("ty", 1, 1, 1));
-       // list.add(new Special("ty",1, 1));
-        list.add(new Square("ty", 1, 1, 1));
+        obstacleList.add(new Circle("ty", 1, 1, 1));
+        // list.add(new Special("ty",1, 1));
+        obstacleList.add(new Square("ty", 1, 1, 1));
 
         for (int i = 0; i < 100; i++) {
-            list.add(new Circle("ty", 1, 1, 1));
-            list.add(new Square("ty", 1, 1, 1));
-            list.add(new Triangle("ty", 1, 1, 1));
-            list.add(new Special("ty",1, 1));
+            obstacleList.add(new Circle("ty", 1, 1, 1));
+            obstacleList.add(new Square("ty", 1, 1, 1));
+            obstacleList.add(new Triangle("ty", 1, 1, 1));
+            obstacleList.add(new Special("ty", 1, 1));
         }
-       Collections.shuffle(list.subList(3,list.size()));//TODO remove comments
+        Collections.shuffle(obstacleList.subList(3, obstacleList.size()));//TODO remove comments
     }
 
     void addObstacles(AnchorPane root) {
-        list.get(0).appear(root);
-        list.get(1).appear(root);
-        list.get(2).appear(root);
-        list.get(0).setLayoutY(0);
-        list.get(2).setLayoutY(-800);
+        obstacleList.get(0).appear(root);
+        obstacleList.get(1).appear(root);
+        obstacleList.get(2).appear(root);
+        obstacleList.get(0).setLayoutY(0);
+        obstacleList.get(2).setLayoutY(-800);
     }
 
 
@@ -65,13 +65,13 @@ public class Game {
         return new ColorSwitcher(0, 0);
     }
 
-    void createStar() {
+    void createStars() {
         for (int i = 0; i < 100; i++) {
             starList.add(new Star(1, 1, 1));
         }
     }
 
-    void addStar(AnchorPane root) {
+    void addStars(AnchorPane root) {
         starList.get(0).appear(root);
         starList.get(1).appear(root);
         starList.get(2).appear(root);
@@ -79,13 +79,13 @@ public class Game {
         starList.get(2).setLayoutY(-800);
     }
 
-    void createColorSwitcher() {
+    void createColorSwitchers() {
         for (int i = 0; i < 100; i++) {
             csList.add(new ColorSwitcher(1, 1));
         }
     }
 
-    void addColorSwitcher(AnchorPane root) {
+    void addColorSwitchers(AnchorPane root) {
         csList.get(0).appear(root);
         csList.get(1).appear(root);
         csList.get(2).appear(root);
@@ -127,10 +127,10 @@ public class Game {
         createObstacles();
         addObstacles(root);
         addBall(root);
-        createStar();
-        addStar(root);
-        createColorSwitcher();
-        addColorSwitcher(root);
+        createStars();
+        addStars(root);
+        createColorSwitchers();
+        addColorSwitchers(root);
 
         root.addEventFilter(MouseEvent.MOUSE_PRESSED, new EventHandler<MouseEvent>() {
             int flag = 0;
@@ -172,24 +172,22 @@ public class Game {
 
 
                                 //now move the obstacle down to give the illusion of screen moving down
-                                //st.moveDown();
-                               // cs.moveDown();
                                 csList.get(i).moveDown();
-                                csList.get(i+1).moveDown();
-                                csList.get(i+2).moveDown();
+                                csList.get(i + 1).moveDown();
+                                csList.get(i + 2).moveDown();
 
                                 starList.get(i).moveDown();
                                 starList.get(i + 1).moveDown();
                                 starList.get(i + 2).moveDown();
 
-                                list.get(i).moveDown();
-                                list.get(i + 1).moveDown();
-                                list.get(i + 2).moveDown();
+                                obstacleList.get(i).moveDown();
+                                obstacleList.get(i + 1).moveDown();
+                                obstacleList.get(i + 2).moveDown();
 
-                                if (list.get(i).getLayoutY() >= 800) {
+                                if (obstacleList.get(i).getLayoutY() >= 800) {
                                     //System.out.println(i+"-------");
                                     i++;
-                                    list.get(i + 2).appear(root);
+                                    obstacleList.get(i + 2).appear(root);
                                     starList.get(i + 2).appear(root);
                                     csList.get(i + 2).appear(root);
 
@@ -200,21 +198,13 @@ public class Game {
                             //ensures obstacles are infinite
                             if (i == 90) {
                                 createObstacles();
-                                createStar();
-                                createColorSwitcher();
+                                createStars();
+                                createColorSwitchers();
                             }
 
-                            //if return value is 1 that means the star was collected.
-                            //if the return value is 0 that means the star was not collected
-                            //check if star collected
-                            /*int starCollected = st.checkCollision(ball.getShape());
-                            if (starCollected == 1) {
-                                //TODO add sound and multiple stars and +1
-                                //TODO update player score
-                                System.out.println("collected star");
-                                st.disappear(root);
-                            }*/
-
+                            /*if return value is 1 that means the star was collected.
+                            if the return value is 0 that means the star was not collected*/
+                            // check if star collected
                             int starCollected1 = starList.get(i).checkCollision(ball.getShape());
                             int starCollected2 = starList.get(i + 1).checkCollision(ball.getShape());
                             int starCollected3 = starList.get(i + 2).checkCollision(ball.getShape());
@@ -229,15 +219,9 @@ public class Game {
                             }
 
 
-                            //if return value is 1 that means the color switcher was collected.
-                            //if the return value is 0 that means the color switcher was not collected
+                            /*if return value is 1 that means the color switcher was collected.
+                            if the return value is 0 that means the color switcher was not collected*/
                             //check if color switcher collected
-                          /*  int colorSwitcherCollected = cs.checkCollision(ball.getShape());
-                            if (colorSwitcherCollected == 1) {
-                                //TODO add code for sound effect
-                                System.out.println("collected color switcher");
-                                cs.disappear(root);
-                            }*/
                             int csCollected1 = csList.get(i).checkCollision(ball.getShape());
                             int csCollected2 = csList.get(i + 1).checkCollision(ball.getShape());
                             int csCollected3 = csList.get(i + 2).checkCollision(ball.getShape());
@@ -256,9 +240,9 @@ public class Game {
                             //collisionDetected has value 1 if ball collides with the obstacle which is not of the
                             //same colour as ball
                             //else it returns 0
-                            int collisionDetected1 = list.get(i).checkCollision(ball.getShape());
-                            int collisionDetected2 = list.get(i + 1).checkCollision(ball.getShape());
-                            int collisionDetected3 = list.get(i + 2).checkCollision(ball.getShape());
+                            int collisionDetected1 = obstacleList.get(i).checkCollision(ball.getShape());
+                            int collisionDetected2 = obstacleList.get(i + 1).checkCollision(ball.getShape());
+                            int collisionDetected3 = obstacleList.get(i + 2).checkCollision(ball.getShape());
                             if (collisionDetected1 == 1 || collisionDetected2 == 1 || collisionDetected3 == 1) {
                                 System.out.println("Collision detected");
                                 System.out.println("Game Over");
