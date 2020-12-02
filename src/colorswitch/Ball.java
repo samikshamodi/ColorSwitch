@@ -1,6 +1,10 @@
 package colorswitch;
-
+import javafx.animation.KeyFrame;
 import javafx.animation.RotateTransition;
+import javafx.animation.Timeline;
+import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
+import javafx.geometry.Bounds;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.paint.Color;
 import javafx.scene.paint.Paint;
@@ -12,74 +16,70 @@ import java.util.Collection;
 import java.util.Collections;
 import java.util.Random;
 
-public class Ball extends GameElements{
+public class Ball extends GameElements {
     javafx.scene.shape.Circle ball;
-    public Ball(int x, int y){
-        super(x,y);
-    }
-    public int jump() {
-        //launch();
-        return 0;
+
+    public Ball(int x, int y) {
+        super(x, y);
     }
 
-    public void setColor()
-    {
-        ArrayList<Paint> list=new ArrayList<>();
+
+    public void setColor() {
+        ArrayList<Paint> list = new ArrayList<>();
         list.add(Color.YELLOW);
         list.add(Color.DEEPPINK);
         list.add(Color.CYAN);
         list.add(Color.PURPLE);
 
-        Paint toRemove=ball.getFill();
+        Paint toRemove = ball.getFill();
         list.remove(toRemove);
         Collections.shuffle(list);
         ball.setFill(list.get(0));
-        list.add(toRemove);
     }
 
-    public void moveUp()
-    {
-        ball.setLayoutY(ball.getLayoutY() - 55);
+    public void jump() {
+        Timeline timeline = new Timeline(new KeyFrame(Duration.millis(17), new EventHandler<ActionEvent>() {
+            int x = 0;
 
-        //For smooth animation
-        RotateTransition rotater1 = new RotateTransition(Duration.seconds(4), ball);
-        rotater1.setByAngle(360);
-        rotater1.setCycleCount(1);
-        rotater1.play();
+            @Override
+            public void handle(ActionEvent t) {
+                if (x > 5)
+                    return;
+
+                ball.setLayoutY(ball.getLayoutY() - 10);
+                x++;
+
+            }
+        }));
+        timeline.setCycleCount(Timeline.INDEFINITE);
+        timeline.play();
     }
 
     @Override
-    public void moveDown()
-    {
+    public void moveDown() {
         ball.setLayoutY(ball.getLayoutY() + 3); //3 is step or velocity
     }
 
-    public void stay()
-    {
-        ball.setLayoutY(ball.getLayoutY()+55);
+    public void stay() {
+        ball.setLayoutY(ball.getLayoutY() + 55);
     }
 
-    public double getRadius()
-    {
+    public double getRadius() {
         return ball.getRadius();
     }
 
     @Override
-    public double getLayoutY()
-    {
-        //System.out.println("hi");
+    public double getLayoutY() {
         return ball.getLayoutY();
     }
 
     @Override
     public void setLayoutY(double dy) {
         ball.setLayoutY(dy);
-
     }
 
 
-    public Shape getShape()
-    {
+    public Shape getShape() {
         return ball;
     }
 

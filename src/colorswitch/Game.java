@@ -8,9 +8,12 @@ import javafx.fxml.FXMLLoader;
 import javafx.geometry.Bounds;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.*;
+import javafx.scene.paint.Color;
+import javafx.scene.text.Font;
 import javafx.stage.Stage;
 import javafx.util.Duration;
 
@@ -25,6 +28,10 @@ public class Game {
     ArrayList<Star> starList = new ArrayList<>();
     ArrayList<ColorSwitcher> csList = new ArrayList<>();
     Ball ball;
+    static int currentScore;
+    Game(){
+        currentScore = 0;
+    }
 
 
     void createObstacles() {
@@ -118,10 +125,15 @@ public class Game {
                 ioException.printStackTrace();
             }
         });
-        root.getChildren().add(pause);
-        stage.setTitle("Color Switch");
-        stage.setScene(scene);
-        stage.show();
+        Label score = new Label("0");
+        score.setFont(new Font("Comic Sans",74));
+        score.setTextFill(Color.WHITE);
+        score.prefWidth(140);
+        score.prefHeight(90);
+        score.setLayoutX(37);
+        score.setLayoutY(9);
+        root.getChildren().addAll(pause,score);
+
 
         //changing objects in scene
         createObstacles();
@@ -138,10 +150,10 @@ public class Game {
             @Override
             public void handle(MouseEvent mouseEvent) {
                 if (flag == 1) {
-                    ball.moveUp();
+                    ball.jump();
                 } else {
                     if (flag == 0) {
-                        ball.moveUp();
+                        ball.jump();
                         flag = 1;
                     }
                     Timeline timeline = new Timeline(new KeyFrame(Duration.millis(17), new EventHandler<ActionEvent>() {
@@ -210,7 +222,7 @@ public class Game {
                             int starCollected2 = starList.get(i + 1).checkCollision(ball.getShape());
                             int starCollected3 = starList.get(i + 2).checkCollision(ball.getShape());
                             if (starCollected1 == 1 || starCollected2 == 1 || starCollected3 == 1) {
-                                System.out.println("Star Collected");
+                                collectStars(root,score);
                                 if (starCollected1 == 1)
                                     starList.get(i).disappear(root);
                                 else if (starCollected2 == 1)
@@ -257,6 +269,11 @@ public class Game {
             }
         });
 
+        //set Scene and show stage
+        stage.setTitle("Color Switch");
+        stage.setScene(scene);
+        stage.show();
+
         return 0;
     }
 
@@ -283,8 +300,12 @@ public class Game {
         return 3;
     }
 
-    int collectStars() {
-        return -1;
+    int collectStars(AnchorPane root,Label score) {
+        root.getChildren().remove(score);
+        currentScore+=1;
+        score.setText(""+currentScore);
+        root.getChildren().add(score);
+        return 0;
     }
 
     String collectColorSwitcher() {

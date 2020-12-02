@@ -4,11 +4,13 @@ import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.shape.Shape;
 
+import java.util.HashMap;
 import java.util.Random;
 
 public class ColorSwitcher extends GameElements {
     Random rand;
     ImageView img;
+
 
     ColorSwitcher(int x, int y) {
         super(x, y);
