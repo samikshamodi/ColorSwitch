@@ -25,7 +25,7 @@ public class Circle extends Obstacle {
 
     @Override
     public void disappear(AnchorPane root) {
-
+        root.getChildren().remove(g);
     }
 
     @Override

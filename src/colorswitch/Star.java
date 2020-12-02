@@ -68,6 +68,7 @@ public class Star extends GameElements{
         //root.getChildren().remove(img);
         //img.setImage(null);
         img.setLayoutY(1000);
+        root.getChildren().remove(img);
     }
 }
 

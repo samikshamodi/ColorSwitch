@@ -20,7 +20,7 @@ public class Special extends Obstacle{
 
     @Override
     public void disappear(AnchorPane root) {
-
+        root.getChildren().remove(g);
     }
 
 

@@ -186,6 +186,7 @@ public class Game {
 
                                 if (obstacleList.get(i).getLayoutY() >= 800) {
                                     //System.out.println(i+"-------");
+                                    obstacleList.get(i).disappear(root);
                                     i++;
                                     obstacleList.get(i + 2).appear(root);
                                     starList.get(i + 2).appear(root);
