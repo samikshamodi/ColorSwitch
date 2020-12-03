@@ -31,10 +31,10 @@ public class Special extends Obstacle{
         cyan = new Rectangle(100, 15, Color.CYAN);
         purple = new Rectangle(15, 100, Color.PURPLE);
 
-        yellow.relocate(215, 300);
-        pink.relocate(200, 200);
-        cyan.relocate(100, 300);
-        purple.relocate(200, 315);
+        yellow.relocate(205, 300);
+        pink.relocate(190, 200);
+        cyan.relocate(90, 300);
+        purple.relocate(190, 315);
 
         g1 = new Group();
         g1.getChildren().addAll(yellow, pink, cyan, purple);
@@ -48,10 +48,10 @@ public class Special extends Obstacle{
         cyan2 = new Rectangle(100, 15, Color.CYAN);
         purple2 = new Rectangle(15, 100, Color.PURPLE);
 
-        yellow2.relocate(315, 300);
-        pink2.relocate(415, 200);
-        cyan2.relocate(430, 300);
-        purple2.relocate(415, 315);
+        yellow2.relocate(305, 300);
+        pink2.relocate(405, 200);
+        cyan2.relocate(420, 300);
+        purple2.relocate(405, 315);
 
         g2 = new Group();
         g2.getChildren().addAll(yellow2, pink2,cyan2, purple2);
@@ -88,7 +88,7 @@ public class Special extends Obstacle{
                 }
                 else
                 {
-                    System.out.println("Collision detected "+s.getFill());
+                   // System.out.println("Collision detected "+s.getFill());
                     return 1;
                 }
             }
