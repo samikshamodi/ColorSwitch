@@ -41,7 +41,7 @@ public class MainControl {
         m.start(window);
     }
 
-   /* public void startGameS(ActionEvent actionEvent) throws IOException {
+    /*public void startGameS(ActionEvent actionEvent) throws IOException {
 
         Stage window = (Stage) ((Node) actionEvent.getSource()).getScene().getWindow();
 
