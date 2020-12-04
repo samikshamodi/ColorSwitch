@@ -10,19 +10,21 @@ import javafx.util.Duration;
 
 import java.util.ArrayList;
 
-public class Special extends Obstacle{
+public class Plus extends Obstacle {
+    double side;
     Rectangle yellow, pink, cyan, purple;
-    Rectangle yellow2, pink2, cyan2, purple2;
-    Group g,g1,g2;
-    Special(String ty,int x,int y){
-        super(ty,x,y);
+    Group g;
+
+    Plus(String ty, int x, int y, double s) {
+        super(ty, x, y);
+        side = s;
     }
+
 
     @Override
     public void disappear(AnchorPane root) {
         root.getChildren().remove(g);
     }
-
 
     @Override
     public void appear(AnchorPane root) {
@@ -31,38 +33,18 @@ public class Special extends Obstacle{
         cyan = new Rectangle(100, 15, Color.CYAN);
         purple = new Rectangle(15, 100, Color.PURPLE);
 
-        yellow.relocate(205, 300);
-        pink.relocate(190, 200);
-        cyan.relocate(90, 300);
-        purple.relocate(190, 315);
+        yellow.relocate(215, 300);
+        pink.relocate(200, 200);
+        cyan.relocate(100, 300);
+        purple.relocate(200, 315);
 
-        g1 = new Group();
-        g1.getChildren().addAll(yellow, pink, cyan, purple);
-        RotateTransition rotater1 = new RotateTransition(Duration.seconds(5), g1);
+        g = new Group();
+        g.getChildren().addAll(yellow, pink, cyan, purple);
+        g.setLayoutY(-400);
+        RotateTransition rotater1 = new RotateTransition(Duration.seconds(4), g);
         rotater1.setByAngle(360);
         rotater1.setCycleCount(1500);
         rotater1.play();
-
-        yellow2 = new Rectangle(100, 15, Color.YELLOW);
-        pink2 = new Rectangle(15, 100, Color.DEEPPINK);
-        cyan2 = new Rectangle(100, 15, Color.CYAN);
-        purple2 = new Rectangle(15, 100, Color.PURPLE);
-
-        yellow2.relocate(305, 300);
-        pink2.relocate(405, 200);
-        cyan2.relocate(420, 300);
-        purple2.relocate(405, 315);
-
-        g2 = new Group();
-        g2.getChildren().addAll(yellow2, pink2,cyan2, purple2);
-        RotateTransition rotater2 = new RotateTransition(Duration.seconds(5), g2);
-        rotater2.setByAngle(-360);
-        rotater2.setCycleCount(1500);
-        rotater2.play();
-
-        g=new Group();
-        g.getChildren().addAll(g1,g2);
-        g.setLayoutY(-400);
         root.getChildren().add(g);
     }
 
@@ -70,13 +52,9 @@ public class Special extends Obstacle{
     public int checkCollision(Shape ball) {
         ArrayList<Shape> shapeList=new ArrayList<>();
         shapeList.add(yellow);
-        shapeList.add(yellow2);
         shapeList.add(pink);
-        shapeList.add(pink2);
         shapeList.add(cyan);
-        shapeList.add(cyan2);
         shapeList.add(purple);
-        shapeList.add(purple2);
 
         for(Shape s:shapeList)
         {
@@ -88,7 +66,7 @@ public class Special extends Obstacle{
                 }
                 else
                 {
-                   // System.out.println("Collision detected "+s.getFill());
+                    System.out.println("Collision detected "+s.getFill());
                     return 1;
                 }
             }
@@ -112,5 +90,6 @@ public class Special extends Obstacle{
     @Override
     public void setLayoutY(double dy) {
         g.setLayoutY(dy);
+
     }
 }
