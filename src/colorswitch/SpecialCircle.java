@@ -69,8 +69,14 @@ public class SpecialCircle extends Obstacle {
     @Override
     public int checkCollision(Shape ball) {
         int c1 = left.checkCollision(ball);
+        if(c1==1)
+            return 1;
+
         int c2 = left.checkCollision(ball);
-        return c1 + c2;
+        if(c2==1)
+            return 1;
+
+        return 0;
     }
 
     @Override

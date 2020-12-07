@@ -13,21 +13,22 @@ import java.util.Random;
 public class ColorSwitcher extends GameElements {
     Random rand;
     ImageView img;
+    ArrayList<Color> list;
 
 
     ColorSwitcher(int x, int y) {
         super(x, y);
         rand = new Random();
-    }
 
-    public Color generateColor(Color ballColor)
-    {
-        ArrayList<Color> list=new ArrayList<>();
+        list=new ArrayList<>();
         list.add(Color.YELLOW);
         list.add(Color.DEEPPINK);
         list.add(Color.CYAN);
         list.add(Color.PURPLE);
+    }
 
+    public Color generateColor(Color ballColor)
+    {
         list.remove(ballColor);
         Collections.shuffle(list);
         Color newColor=list.get(0);
