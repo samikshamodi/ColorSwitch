@@ -11,11 +11,35 @@ import javafx.util.Duration;
 import java.util.ArrayList;
 
 public class Special extends Obstacle{
-    Rectangle yellow, pink, cyan, purple;
-    Rectangle yellow2, pink2, cyan2, purple2;
-    Group g,g1,g2;
+    Plus left, right;
+    Group g, g1, g2;
+    RotateTransition rotater, rotaterLeft, rotaterRight;
     Special(String ty,int x,int y){
         super(ty,x,y);
+
+        left = new Plus("ty", 1, 1, 1);
+        right = new Plus("ty", 1, 1, 1);
+
+        //Exchanging cyan and yellow rectangle in the right plus to maintain sync
+        right.setCyan(Color.YELLOW);
+        right.setYellow(Color.CYAN);
+
+        //Getting the group for left and right Circle
+
+        g1 = left.getGroup();
+        g2 = right.getGroup();
+
+        //Setting position of the right Plus
+        g1.setLayoutX(-10);
+        g2.setLayoutX(205);
+
+        rotaterLeft = new RotateTransition(Duration.seconds(5), g1);
+        rotaterRight = new RotateTransition(Duration.seconds(5), g2);
+        rotaterLeft.setCycleCount(1500);
+        rotaterRight.setCycleCount(1500);
+
+        g = new Group();
+        g.getChildren().addAll(g1, g2);
     }
 
     @Override
@@ -26,75 +50,21 @@ public class Special extends Obstacle{
 
     @Override
     public void appear(AnchorPane root) {
-        yellow = new Rectangle(100, 15, Color.YELLOW);
-        pink = new Rectangle(15, 100, Color.DEEPPINK);
-        cyan = new Rectangle(100, 15, Color.CYAN);
-        purple = new Rectangle(15, 100, Color.PURPLE);
+        rotaterLeft.setByAngle(360);
+        rotaterLeft.play();
 
-        yellow.relocate(205, 300);
-        pink.relocate(190, 200);
-        cyan.relocate(90, 300);
-        purple.relocate(190, 315);
+        rotaterRight.setByAngle(-360);
+        rotaterRight.play();
 
-        g1 = new Group();
-        g1.getChildren().addAll(yellow, pink, cyan, purple);
-        RotateTransition rotater1 = new RotateTransition(Duration.seconds(5), g1);
-        rotater1.setByAngle(360);
-        rotater1.setCycleCount(1500);
-        rotater1.play();
-
-        yellow2 = new Rectangle(100, 15, Color.YELLOW);
-        pink2 = new Rectangle(15, 100, Color.DEEPPINK);
-        cyan2 = new Rectangle(100, 15, Color.CYAN);
-        purple2 = new Rectangle(15, 100, Color.PURPLE);
-
-        yellow2.relocate(305, 300);
-        pink2.relocate(405, 200);
-        cyan2.relocate(420, 300);
-        purple2.relocate(405, 315);
-
-        g2 = new Group();
-        g2.getChildren().addAll(yellow2, pink2,cyan2, purple2);
-        RotateTransition rotater2 = new RotateTransition(Duration.seconds(5), g2);
-        rotater2.setByAngle(-360);
-        rotater2.setCycleCount(1500);
-        rotater2.play();
-
-        g=new Group();
-        g.getChildren().addAll(g1,g2);
         g.setLayoutY(-400);
         root.getChildren().add(g);
     }
 
     @Override
     public int checkCollision(Shape ball) {
-        ArrayList<Shape> shapeList=new ArrayList<>();
-        shapeList.add(yellow);
-        shapeList.add(yellow2);
-        shapeList.add(pink);
-        shapeList.add(pink2);
-        shapeList.add(cyan);
-        shapeList.add(cyan2);
-        shapeList.add(purple);
-        shapeList.add(purple2);
-
-        for(Shape s:shapeList)
-        {
-            Shape shapeIntersect=Shape.intersect(ball,s);
-            //Collision happened
-            if (shapeIntersect.getBoundsInLocal().getWidth() != -1) {
-                if (s.getFill().equals(ball.getFill())) {
-                    return 0;
-                }
-                else
-                {
-                   // System.out.println("Collision detected "+s.getFill());
-                    return 1;
-                }
-            }
-
-        }
-        return 0;
+        int c1 = left.checkCollision(ball);
+        int c2 = left.checkCollision(ball);
+        return c1 + c2;
     }
 
     @Override

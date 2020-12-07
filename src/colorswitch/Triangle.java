@@ -16,18 +16,14 @@ public class Triangle extends Obstacle{
     double side;
     Polygon yellow, pink, cyan, purple;
     Group g;
+    RotateTransition rotater1;
+    ArrayList<Shape> shapeList;
+
     Triangle(String ty, int x, int y, double s){
         super(ty,x,y);
         side=s;
-    }
+        shapeList=new ArrayList<>();
 
-    @Override
-    public void disappear(AnchorPane root) {
-        root.getChildren().remove(g);
-    }
-
-    @Override
-    public void appear(AnchorPane root) {
         yellow = new Polygon();
         yellow.getPoints().addAll(new Double[]{0.0,50.0,50.0,0.0,50.0,100.0});
         yellow.setFill(Color.YELLOW);
@@ -52,22 +48,31 @@ public class Triangle extends Obstacle{
 
         g = new Group();
         g.getChildren().addAll(yellow, pink, cyan, purple);
-        g.setLayoutY(-400);
-        RotateTransition rotater1 = new RotateTransition(Duration.seconds(4), g);
-        rotater1.setByAngle(360);
+
+        rotater1 = new RotateTransition(Duration.seconds(4), g);
         rotater1.setCycleCount(1500);
+
+        shapeList.add(yellow);
+        shapeList.add(pink);
+        shapeList.add(cyan);
+        shapeList.add(purple);
+    }
+
+    @Override
+    public void disappear(AnchorPane root) {
+        root.getChildren().remove(g);
+    }
+
+    @Override
+    public void appear(AnchorPane root) {
+        g.setLayoutY(-400);
+        rotater1.setByAngle(360);
         rotater1.play();
         root.getChildren().add(g);
     }
 
     @Override
     public int checkCollision(Shape ball) {
-        ArrayList<Shape> shapeList=new ArrayList<>();
-        shapeList.add(yellow);
-        shapeList.add(pink);
-        shapeList.add(cyan);
-        shapeList.add(purple);
-
         for(Shape s:shapeList)
         {
             Shape shapeIntersect=Shape.intersect(ball,s);
