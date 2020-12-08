@@ -4,37 +4,43 @@ import javafx.animation.RotateTransition;
 import javafx.scene.Group;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.paint.Color;
+import javafx.scene.shape.Arc;
+import javafx.scene.shape.ArcType;
 import javafx.scene.shape.Rectangle;
 import javafx.scene.shape.Shape;
 import javafx.util.Duration;
 
 import java.util.ArrayList;
+import java.util.Collection;
 
-public class Special extends Obstacle{
-    Plus left, right;
+public class SpecialCircle extends Obstacle {
+    double radius;
+    Circle left, right;
     Group g, g1, g2;
     RotateTransition rotater, rotaterLeft, rotaterRight;
-    Special(String ty,int x,int y){
-        super(ty,x,y);
 
-        left = new Plus("ty", 1, 1, 1);
-        right = new Plus("ty", 1, 1, 1);
+    public SpecialCircle(String ty, int x, int y, double r) {
+        super(ty, x, y);
+        radius = r;
 
-        //Exchanging cyan and yellow rectangle in the right plus to maintain sync
-        right.setCyan(Color.YELLOW);
-        right.setYellow(Color.CYAN);
+        left = new Circle("ty", 1, 1, 1);
+        right = new Circle("ty", 1, 1, 1);
+
+        //Exchanging pink and purple arcs in the riht circle to maintain sync
+        right.setPink(Color.PURPLE);
+        right.setPurple(Color.DEEPPINK);
 
         //Getting the group for left and right Circle
 
         g1 = left.getGroup();
         g2 = right.getGroup();
 
-        //Setting position of the right Plus
-        g1.setLayoutX(-10);
-        g2.setLayoutX(205);
+        //Setting position of the 2 groups
+        g1.setLayoutX(-110);
+        g2.setLayoutX(119);
 
-        rotaterLeft = new RotateTransition(Duration.seconds(5), g1);
-        rotaterRight = new RotateTransition(Duration.seconds(5), g2);
+        rotaterLeft = new RotateTransition(Duration.seconds(10), g1);
+        rotaterRight = new RotateTransition(Duration.seconds(10), g2);
         rotaterLeft.setCycleCount(1500);
         rotaterRight.setCycleCount(1500);
 
@@ -47,9 +53,9 @@ public class Special extends Obstacle{
         root.getChildren().remove(g);
     }
 
-
     @Override
     public void appear(AnchorPane root) {
+
         rotaterLeft.setByAngle(360);
         rotaterLeft.play();
 
@@ -78,10 +84,8 @@ public class Special extends Obstacle{
         g.setLayoutY(g.getLayoutY() + 55); //3 is step or velocity
     }
 
-
-
-    public double getLayoutY()
-    {
+    @Override
+    public double getLayoutY() {
         return g.getLayoutY();
     }
 
@@ -89,4 +93,6 @@ public class Special extends Obstacle{
     public void setLayoutY(double dy) {
         g.setLayoutY(dy);
     }
+
+
 }

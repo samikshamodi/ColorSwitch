@@ -15,6 +15,8 @@ public class Star extends GameElements{
             color="White";
         else
             color="Green";
+
+        //ImageView img = new ImageView("/assets/star.png");
     }
 
     public int getValue() {
@@ -27,7 +29,6 @@ public class Star extends GameElements{
 
     @Override
     public void appear(AnchorPane root) {
-        //ImageView img = new ImageView("/assets/star.png");
         img = new ImageView("/assets/star.png");
         img.setFitHeight(50);
         img.setFitWidth(50);

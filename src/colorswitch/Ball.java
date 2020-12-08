@@ -8,6 +8,7 @@ import javafx.geometry.Bounds;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.paint.Color;
 import javafx.scene.paint.Paint;
+import javafx.scene.shape.Circle;
 import javafx.scene.shape.Shape;
 import javafx.util.Duration;
 
@@ -21,20 +22,17 @@ public class Ball extends GameElements {
 
     public Ball(int x, int y) {
         super(x, y);
+        ball = new javafx.scene.shape.Circle(10, Color.YELLOW);
+        ball.relocate(295, 600);
     }
 
+    public Color getColor()
+    {
+        return (Color) ball.getFill();
+    }
 
-    public void setColor() {
-        ArrayList<Paint> list = new ArrayList<>();
-        list.add(Color.YELLOW);
-        list.add(Color.DEEPPINK);
-        list.add(Color.CYAN);
-        list.add(Color.PURPLE);
-
-        Paint toRemove = ball.getFill();
-        list.remove(toRemove);
-        Collections.shuffle(list);
-        ball.setFill(list.get(0));
+    public void setColor(Color color) {
+        ball.setFill(color);
     }
 
     public void jump() {
@@ -85,8 +83,6 @@ public class Ball extends GameElements {
 
     @Override
     public void appear(AnchorPane root) {
-        ball = new javafx.scene.shape.Circle(10, Color.YELLOW);
-        ball.relocate(295, 600);
         root.getChildren().add(ball);
     }
 

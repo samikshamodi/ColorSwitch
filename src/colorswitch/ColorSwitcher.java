@@ -2,23 +2,38 @@ package colorswitch;
 
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
+import javafx.scene.paint.Color;
 import javafx.scene.shape.Shape;
 
+import java.util.ArrayList;
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.Random;
 
 public class ColorSwitcher extends GameElements {
     Random rand;
     ImageView img;
+    ArrayList<Color> list;
 
 
     ColorSwitcher(int x, int y) {
         super(x, y);
         rand = new Random();
+
+        list=new ArrayList<>();
+        list.add(Color.YELLOW);
+        list.add(Color.DEEPPINK);
+        list.add(Color.CYAN);
+        list.add(Color.PURPLE);
     }
 
-    String generateColor() {
-        return " ";
+    public Color generateColor(Color ballColor)
+    {
+        list.remove(ballColor);
+        Collections.shuffle(list);
+        Color newColor=list.get(0);
+        list.add(ballColor);
+        return newColor;
     }
 
     @Override
