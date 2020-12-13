@@ -2,6 +2,7 @@ package colorswitch;
 
 import javafx.animation.AnimationTimer;
 import javafx.scene.Group;
+import javafx.scene.layout.AnchorPane;
 import javafx.scene.shape.Shape;
 
 import java.util.ArrayList;
@@ -76,6 +77,10 @@ public abstract class Obstacle extends GameElements{
     public void setLayoutY(double dy) {
         group.setLayoutY(dy);
 
+    }
+
+    public void disappear(AnchorPane root) {
+        root.getChildren().remove(group);
     }
 
     @Override

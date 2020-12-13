@@ -45,12 +45,6 @@ public class Special extends Obstacle{
     }
 
     @Override
-    public void disappear(AnchorPane root) {
-        root.getChildren().remove(g);
-    }
-
-
-    @Override
     public void appear(AnchorPane root) {
         rotaterLeft.setByAngle(360);
         rotaterLeft.play();

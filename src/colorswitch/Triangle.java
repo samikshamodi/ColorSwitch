@@ -62,11 +62,6 @@ public class Triangle extends Obstacle{
     }
 
     @Override
-    public void disappear(AnchorPane root) {
-        root.getChildren().remove(g);
-    }
-
-    @Override
     public void appear(AnchorPane root) {
         g.setLayoutY(-400);
         rotater1.setByAngle(360);

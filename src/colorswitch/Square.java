@@ -47,12 +47,6 @@ public class Square extends Obstacle {
         super.setShapeList(shapeList);
     }
 
-
-    @Override
-    public void disappear(AnchorPane root) {
-        root.getChildren().remove(g);
-    }
-
     @Override
     public void appear(AnchorPane root) {
         g.setLayoutY(-400);
