@@ -43,7 +43,7 @@ public class Game {
     }
 
 
-    void createObstacles() {
+    private void createObstacles() {
         for (int i = 0; i < 2; i++) {
             obstacles.add(new Square("square", 1, 1, 1));
             obstacles.add(new Circle("circle", 1, 1, 1));
@@ -54,7 +54,7 @@ public class Game {
         }
     }
 
-    void addObstacles(AnchorPane root) {
+    private void addObstacles(AnchorPane root) {
         obstacles.get(0).appear(root);
         obstacles.get(1).appear(root);
         obstacles.get(2).appear(root);
@@ -63,18 +63,18 @@ public class Game {
     }
 
 
-    void addBall(AnchorPane root) {
+    private void addBall(AnchorPane root) {
         ball.appear(root);
     }
 
 
-    void createStars() {
+    private void createStars() {
         for (int i = 0; i < N; i++) {
             stars.add(new Star(1, 1, 1));
         }
     }
 
-    void addStars(AnchorPane root) {
+    private void addStars(AnchorPane root) {
         stars.get(0).appear(root);
         stars.get(1).appear(root);
         stars.get(2).appear(root);
@@ -82,13 +82,13 @@ public class Game {
         stars.get(2).setLayoutY(-800);
     }
 
-    void createColorSwitchers() {
+    private void createColorSwitchers() {
         for (int i = 0; i < N; i++) {
             colorSwitchers.add(new ColorSwitcher(1, 1));
         }
     }
 
-    void addColorSwitchers(AnchorPane root) {
+    private void addColorSwitchers(AnchorPane root) {
         colorSwitchers.get(0).appear(root);
         colorSwitchers.get(1).appear(root);
         colorSwitchers.get(2).appear(root);
@@ -266,7 +266,7 @@ public class Game {
         return flag.intValue();
     }
 
-    int hitObstacle() {
+    private int hitObstacle() {
         /*check if collision*/
         int collisionDetected1 = obstacles.get(i % N).checkCollision(ball.getShape());
         int collisionDetected2 = obstacles.get((i + 1) % N).checkCollision(ball.getShape());
@@ -279,7 +279,7 @@ public class Game {
         return 0;
     }
 
-    int collectStars(AnchorPane root, Label score) {
+    private int collectStars(AnchorPane root, Label score) {
 
         /* check if star collected*/
         int starCollected1 = stars.get(i % N).checkCollision(ball.getShape());
@@ -302,7 +302,7 @@ public class Game {
         return 0;
     }
 
-    String collectColorSwitcher(AnchorPane root) {
+    private String collectColorSwitcher(AnchorPane root) {
 
         /*check if color switcher collected*/
         int csCollected1 = colorSwitchers.get(i % N).checkCollision(ball.getShape());
