@@ -27,9 +27,18 @@ public class Square extends Obstacle {
         cyan = new Rectangle(200, 15, Color.CYAN);
         purple = new Rectangle(15, 200, Color.PURPLE);
 
+        yellow.setArcWidth(15.0);
+        yellow.setArcHeight(15.0);
+        pink.setArcWidth(15.0);
+        pink.setArcHeight(15.0);
+        cyan.setArcWidth(15.0);
+        cyan.setArcHeight(15.0);
+        purple.setArcWidth(15.0);
+        purple.setArcHeight(15.0);
+
         yellow.relocate(200, 200);
-        pink.relocate(200, 215);
-        cyan.relocate(200, 400);
+        pink.relocate(200, 200);
+        cyan.relocate(200, 385);
         purple.relocate(385, 200);
 
         g = new Group();

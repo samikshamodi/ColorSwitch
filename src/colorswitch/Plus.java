@@ -27,6 +27,15 @@ public class Plus extends Obstacle {
         cyan = new Rectangle(100, 15, Color.CYAN);
         purple = new Rectangle(15, 100, Color.PURPLE);
 
+        yellow.setArcWidth(15.0);
+        yellow.setArcHeight(15.0);
+        pink.setArcWidth(15.0);
+        pink.setArcHeight(15.0);
+        cyan.setArcWidth(15.0);
+        cyan.setArcHeight(15.0);
+        purple.setArcWidth(15.0);
+        purple.setArcHeight(15.0);
+
         yellow.relocate(215, 300);
         pink.relocate(200, 200);
         cyan.relocate(100, 300);
