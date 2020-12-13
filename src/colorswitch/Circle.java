@@ -93,6 +93,7 @@ public class Circle extends Obstacle {
         shapeList.add(purple);
 
         super.setGroup(g);
+        super.setShapeList(shapeList);
     }
 
     @Override
@@ -106,27 +107,6 @@ public class Circle extends Obstacle {
         rotater1.setByAngle(360);
         rotater1.play();
         root.getChildren().add(g);
-    }
-
-    @Override
-    public int checkCollision(Shape ball) {
-        for(Shape s:shapeList)
-        {
-            Shape shapeIntersect=Shape.intersect(ball,s);
-            //Collision happened
-            if (shapeIntersect.getBoundsInLocal().getWidth() != -1) {
-                if (s.getStroke().equals(ball.getFill())) {
-                    return 0;
-                }
-                else
-                {
-                    System.out.println("Collision detected "+s.getStroke());
-                    return 1;
-                }
-            }
-
-        }
-        return 0;
     }
 
     public Group getGroup()

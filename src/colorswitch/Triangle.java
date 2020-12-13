@@ -58,6 +58,7 @@ public class Triangle extends Obstacle{
         shapeList.add(purple);
 
         super.setGroup(g);
+        super.setShapeList(shapeList);
     }
 
     @Override
@@ -72,26 +73,4 @@ public class Triangle extends Obstacle{
         rotater1.play();
         root.getChildren().add(g);
     }
-
-    @Override
-    public int checkCollision(Shape ball) {
-        for(Shape s:shapeList)
-        {
-            Shape shapeIntersect=Shape.intersect(ball,s);
-            //Collision happened
-            if (shapeIntersect.getBoundsInLocal().getWidth() != -1) {
-                if (s.getFill().equals(ball.getFill())) {
-                    return 0;
-                }
-                else
-                {
-                    System.out.println("Collision detected "+s.getFill());
-                    return 1;
-                }
-            }
-
-        }
-        return 0;
-    }
-
 }
