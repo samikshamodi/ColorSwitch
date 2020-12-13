@@ -4,20 +4,14 @@ import javafx.animation.RotateTransition;
 import javafx.scene.Group;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.paint.Color;
-import javafx.scene.shape.Arc;
-import javafx.scene.shape.ArcType;
-import javafx.scene.shape.Rectangle;
 import javafx.scene.shape.Shape;
 import javafx.util.Duration;
-
-import java.util.ArrayList;
-import java.util.Collection;
 
 public class SpecialCircle extends Obstacle {
     double radius;
     Circle left, right;
     Group g, g1, g2;
-    RotateTransition rotater, rotaterLeft, rotaterRight;
+    RotateTransition rotaterLeft, rotaterRight;
 
     public SpecialCircle(String ty, int x, int y, double r) {
         super(ty, x, y);

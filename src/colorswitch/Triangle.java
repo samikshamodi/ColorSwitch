@@ -3,10 +3,8 @@ package colorswitch;
 import javafx.animation.RotateTransition;
 import javafx.scene.Group;
 import javafx.scene.layout.AnchorPane;
-import javafx.scene.layout.GridPane;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Polygon;
-import javafx.scene.shape.Rectangle;
 import javafx.scene.shape.Shape;
 import javafx.util.Duration;
 
@@ -25,19 +23,19 @@ public class Triangle extends Obstacle{
         shapeList=new ArrayList<>();
 
         yellow = new Polygon();
-        yellow.getPoints().addAll(new Double[]{0.0,50.0,50.0,0.0,50.0,100.0});
+        yellow.getPoints().addAll(0.0,50.0,50.0,0.0,50.0,100.0);
         yellow.setFill(Color.YELLOW);
 
         pink = new Polygon();
-        pink.getPoints().addAll(new Double[]{0.0,0.0,50.0,50.0,0.0,100.0});
+        pink.getPoints().addAll(0.0,0.0,50.0,50.0,0.0,100.0);
         pink.setFill(Color.DEEPPINK);
 
         cyan = new Polygon();
-        cyan.getPoints().addAll(new Double[]{0.0,0.0,100.0,0.0,50.0,50.0});
+        cyan.getPoints().addAll(0.0,0.0,100.0,0.0,50.0,50.0);
         cyan.setFill(Color.CYAN);
 
         purple = new Polygon();
-        purple.getPoints().addAll(new Double[]{50.0,0.0,0.0,50.0,100.0,50.0});
+        purple.getPoints().addAll(50.0,0.0,0.0,50.0,100.0,50.0);
         purple.setFill(Color.PURPLE);
 
         yellow.relocate(320, 200);

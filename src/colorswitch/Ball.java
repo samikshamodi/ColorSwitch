@@ -1,19 +1,9 @@
 package colorswitch;
-import javafx.event.ActionEvent;
-import javafx.event.EventHandler;
-import javafx.geometry.Bounds;
+
+import javafx.animation.AnimationTimer;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.paint.Color;
-import javafx.scene.paint.Paint;
-import javafx.scene.shape.Circle;
 import javafx.scene.shape.Shape;
-import javafx.animation.AnimationTimer;
-import javafx.util.Duration;
-
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.Collections;
-import java.util.Random;
 
 public class Ball extends GameElements {
     javafx.scene.shape.Circle ball;

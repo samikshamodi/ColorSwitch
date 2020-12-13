@@ -1,6 +1,5 @@
 package colorswitch;
 
-import javafx.animation.AnimationTimer;
 import javafx.scene.Group;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.shape.Shape;

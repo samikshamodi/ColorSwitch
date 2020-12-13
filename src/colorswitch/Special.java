@@ -4,16 +4,13 @@ import javafx.animation.RotateTransition;
 import javafx.scene.Group;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.paint.Color;
-import javafx.scene.shape.Rectangle;
 import javafx.scene.shape.Shape;
 import javafx.util.Duration;
-
-import java.util.ArrayList;
 
 public class Special extends Obstacle{
     Plus left, right;
     Group g, g1, g2;
-    RotateTransition rotater, rotaterLeft, rotaterRight;
+    RotateTransition rotaterLeft, rotaterRight;
     Special(String ty,int x,int y){
         super(ty,x,y);
 

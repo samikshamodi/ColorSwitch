@@ -1,9 +1,6 @@
 package colorswitch;
 
 import javafx.animation.AnimationTimer;
-import javafx.animation.KeyFrame;
-import javafx.animation.Timeline;
-import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXMLLoader;
 import javafx.geometry.Bounds;
@@ -16,10 +13,10 @@ import javafx.scene.layout.*;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
 import javafx.stage.Stage;
-import javafx.util.Duration;
 
 import java.io.IOException;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Collections;
 import java.util.concurrent.atomic.AtomicInteger;
 
 public class Game {
@@ -140,7 +137,7 @@ public class Game {
     }
 
     public void playGame(Stage stage, AnchorPane root) {
-        root.addEventFilter(MouseEvent.MOUSE_PRESSED, new EventHandler<MouseEvent>() {
+        root.addEventFilter(MouseEvent.MOUSE_PRESSED, new EventHandler<>() {
             int flag = 0;
 
             @Override
@@ -238,9 +235,7 @@ public class Game {
         resume.setPrefWidth(200);
         resume.setTranslateX(225);
         resume.setTranslateY(150);
-        resume.setOnAction(e -> {
-            flag.set(1);
-        });
+        resume.setOnAction(e -> flag.set(1));
 
         //restart game
         Button restart = new Button("Restart Game");
@@ -251,9 +246,7 @@ public class Game {
         restart.setFont(new Font("Courier New Bold", 40));
         restart.setTextFill(Color.WHITE);
         restart.setStyle("-fx-background-color: black");
-        restart.setOnAction(e -> {
-            flag.set(2);
-        });
+        restart.setOnAction(e -> flag.set(2));
 
         //save game
         Button save = new Button("Save Game");
@@ -264,9 +257,7 @@ public class Game {
         save.setFont(new Font("Courier New Bold", 40));
         save.setTextFill(Color.WHITE);
         save.setStyle("-fx-background-color: black");
-        save.setOnAction(e -> {
-            flag.set(3);
-        });
+        save.setOnAction(e -> flag.set(3));
 
         root.getChildren().addAll(resume, restart, save);
         stage.setTitle("Color Switch");

@@ -29,7 +29,7 @@ public class Circle extends Obstacle {
         yellow.setCenterY(0);
         yellow.setRadiusX(100);
         yellow.setRadiusY(100);
-        yellow.setStartAngle(0+45);
+        yellow.setStartAngle(45);
         yellow.setLength(88);
         yellow.setStroke(Color.YELLOW);
         yellow.setType(ArcType.OPEN);

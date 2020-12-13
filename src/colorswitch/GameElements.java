@@ -4,7 +4,7 @@ import javafx.scene.layout.AnchorPane;
 import javafx.scene.shape.Shape;
 
 public abstract class GameElements {
-    int position[];
+    int[] position;
     GameElements(int x, int y){
         position=new int[2];
         position[0]=x;
