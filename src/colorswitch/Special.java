@@ -40,6 +40,8 @@ public class Special extends Obstacle{
 
         g = new Group();
         g.getChildren().addAll(g1, g2);
+
+        super.setGroup(g);
     }
 
     @Override
@@ -73,20 +75,4 @@ public class Special extends Obstacle{
         return 0;
     }
 
-    @Override
-    public void moveDown() {
-        g.setLayoutY(g.getLayoutY() + 55); //3 is step or velocity
-    }
-
-
-
-    public double getLayoutY()
-    {
-        return g.getLayoutY();
-    }
-
-    @Override
-    public void setLayoutY(double dy) {
-        g.setLayoutY(dy);
-    }
 }
