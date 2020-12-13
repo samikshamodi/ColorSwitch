@@ -7,11 +7,11 @@ import javafx.scene.shape.Shape;
 import java.util.ArrayList;
 
 public abstract class Obstacle extends GameElements{
-    double speed;
-    int direction;
-    String type;
+    private double speed;
+    private int direction;
+    private String type;
     private Group group;
-    ArrayList<Shape> shapeList;
+    private ArrayList<Shape> shapeList;
     Obstacle(String ty,int x, int y){
         super(x,y);
         speed=0;

@@ -11,11 +11,11 @@ import javafx.util.Duration;
 import java.util.ArrayList;
 
 public class Triangle extends Obstacle{
-    double side;
-    Polygon yellow, pink, cyan, purple;
-    Group g;
-    RotateTransition rotater1;
-    ArrayList<Shape> shapeList;
+    private double side;
+    private Polygon yellow, pink, cyan, purple;
+    private Group g;
+    private RotateTransition rotater1;
+    private ArrayList<Shape> shapeList;
 
     Triangle(String ty, int x, int y, double s){
         super(ty,x,y);

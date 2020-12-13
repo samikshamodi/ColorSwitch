@@ -5,9 +5,9 @@ import javafx.scene.layout.AnchorPane;
 import javafx.scene.shape.Shape;
 
 public class Star extends GameElements{
-    String color;
-    int value;
-    ImageView img;
+    private String color;
+    private int value;
+    private ImageView img;
     Star(int v,int x, int y){
         super(x,y);
         value = v;

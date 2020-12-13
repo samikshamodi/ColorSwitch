@@ -12,16 +12,16 @@ import javafx.util.Duration;
 import java.util.ArrayList;
 
 public class Circle extends Obstacle {
-    double radius;
-    Arc yellow, pink, cyan, purple;
-    Group g;
-    RotateTransition rotater1;
-    ArrayList<Shape> shapeList;
+    private double radius;
+    private Arc yellow, pink, cyan, purple;
+    private Group g;
+    private RotateTransition rotater1;
+    private ArrayList<Shape> shapeList;
 
     public Circle(String ty, int x, int y, double r) {
         super(ty, x, y);
         radius = r;
-        shapeList=new ArrayList<>();
+        shapeList = new ArrayList<>();
 
         /*setting properties of all the shapes*/
         yellow = new Arc();
@@ -42,7 +42,7 @@ public class Circle extends Obstacle {
         pink.setCenterY(0);
         pink.setRadiusX(100);
         pink.setRadiusY(100);
-        pink.setStartAngle(90+45);
+        pink.setStartAngle(90 + 45);
         pink.setLength(88);
         pink.setStroke(Color.DEEPPINK);
         pink.setType(ArcType.OPEN);
@@ -54,7 +54,7 @@ public class Circle extends Obstacle {
         cyan.setCenterY(0);
         cyan.setRadiusX(100);
         cyan.setRadiusY(100);
-        cyan.setStartAngle(180+45);
+        cyan.setStartAngle(180 + 45);
         cyan.setLength(88);
         cyan.setStroke(Color.CYAN);
         cyan.setType(ArcType.OPEN);
@@ -66,7 +66,7 @@ public class Circle extends Obstacle {
         purple.setCenterY(0);
         purple.setRadiusX(100);
         purple.setRadiusY(100);
-        purple.setStartAngle(270+45);
+        purple.setStartAngle(270 + 45);
         purple.setLength(88);
         purple.setStroke(Color.PURPLE);
         purple.setType(ArcType.OPEN);
@@ -104,34 +104,28 @@ public class Circle extends Obstacle {
         root.getChildren().add(g);
     }
 
-    public Group getGroup()
-    {
+    protected Group getGroup() {
         return g;
     }
 
-    public void setPink(Color color)
-    {
+    protected void setPink(Color color) {
         pink.setStroke(color);
     }
 
-    public void setPurple(Color color)
-    {
+    protected void setPurple(Color color) {
         purple.setStroke(color);
     }
 
     @Override
     public int checkCollision(Shape ball) {
-        for(Shape s:shapeList)
-        {
-            Shape shapeIntersect=Shape.intersect(ball,s);
+        for (Shape s : shapeList) {
+            Shape shapeIntersect = Shape.intersect(ball, s);
             //Collision happened
             if (shapeIntersect.getBoundsInLocal().getWidth() != -1) {
                 if (s.getStroke().equals(ball.getFill())) {
                     return 0;
-                }
-                else
-                {
-                    System.out.println("Collision detected "+s.getStroke());
+                } else {
+                    System.out.println("Collision detected " + s.getStroke());
                     return 1;
                 }
             }

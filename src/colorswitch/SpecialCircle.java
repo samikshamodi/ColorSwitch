@@ -8,10 +8,10 @@ import javafx.scene.shape.Shape;
 import javafx.util.Duration;
 
 public class SpecialCircle extends Obstacle {
-    double radius;
-    Circle left, right;
-    Group g, g1, g2;
-    RotateTransition rotaterLeft, rotaterRight;
+    private double radius;
+    private Circle left, right;
+    private Group g, g1, g2;
+    private RotateTransition rotaterLeft, rotaterRight;
 
     public SpecialCircle(String ty, int x, int y, double r) {
         super(ty, x, y);
@@ -59,12 +59,10 @@ public class SpecialCircle extends Obstacle {
 
     @Override
     public int checkCollision(Shape ball) {
-        int c1 = left.checkCollision(ball);
-        if(c1==1)
+        if(left.checkCollision(ball)==1)
             return 1;
 
-        int c2 = left.checkCollision(ball);
-        if(c2==1)
+        if(left.checkCollision(ball)==1)
             return 1;
 
         return 0;

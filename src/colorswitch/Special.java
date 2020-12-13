@@ -8,9 +8,9 @@ import javafx.scene.shape.Shape;
 import javafx.util.Duration;
 
 public class Special extends Obstacle{
-    Plus left, right;
-    Group g, g1, g2;
-    RotateTransition rotaterLeft, rotaterRight;
+    private Plus left, right;
+    private Group g, g1, g2;
+    private RotateTransition rotaterLeft, rotaterRight;
     Special(String ty,int x,int y){
         super(ty,x,y);
 
@@ -55,12 +55,10 @@ public class Special extends Obstacle{
 
     @Override
     public int checkCollision(Shape ball) {
-        int c1 = left.checkCollision(ball);
-        if(c1==1)
+        if(left.checkCollision(ball)==1)
             return 1;
 
-        int c2 = left.checkCollision(ball);
-        if(c2==1)
+        if(left.checkCollision(ball)==1)
             return 1;
 
         return 0;

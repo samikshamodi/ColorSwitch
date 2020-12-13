@@ -11,11 +11,11 @@ import javafx.util.Duration;
 import java.util.ArrayList;
 
 public class Plus extends Obstacle {
-    double side;
-    Rectangle yellow, pink, cyan, purple;
-    Group g;
-    RotateTransition rotater1;
-    ArrayList<Shape> shapeList;
+    private double side;
+    private Rectangle yellow, pink, cyan, purple;
+    private Group g;
+    private RotateTransition rotater1;
+    private ArrayList<Shape> shapeList;
 
     Plus(String ty, int x, int y, double s) {
         super(ty, x, y);
@@ -55,17 +55,17 @@ public class Plus extends Obstacle {
         root.getChildren().add(g);
     }
 
-    public Group getGroup()
+    protected Group getGroup()
     {
         return g;
     }
 
-    public void setCyan(Color color)
+    protected void setCyan(Color color)
     {
         cyan.setFill(color);
     }
 
-    public void setYellow(Color color)
+    protected void setYellow(Color color)
     {
         yellow.setFill(color);
     }

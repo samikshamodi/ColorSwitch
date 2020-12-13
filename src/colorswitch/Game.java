@@ -20,16 +20,16 @@ import java.util.Collections;
 import java.util.concurrent.atomic.AtomicInteger;
 
 public class Game {
-    ArrayList<Obstacle> obstacles;
-    ArrayList<Star> stars;
-    ArrayList<ColorSwitcher> colorSwitchers;
-    Ball ball;
-    static int currentScore;
-    int i = 0;
-    int N = 8;
-    Label score;
-    Button pause;
-    AnimationTimer animationTimer;
+    private ArrayList<Obstacle> obstacles;
+    private ArrayList<Star> stars;
+    private ArrayList<ColorSwitcher> colorSwitchers;
+    private Ball ball;
+    static int currentScore;    //TODO make private??
+    private int i = 0;
+    private int N = 8;
+    private Label score;
+    private Button pause;
+    private AnimationTimer animationTimer;
 
     Game() {
         currentScore = 0;
