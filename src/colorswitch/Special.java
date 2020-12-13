@@ -9,8 +9,8 @@ import javafx.util.Duration;
 
 public class Special extends Obstacle{
     private Plus left, right;
-    private Group g, g1, g2;
-    private RotateTransition rotaterLeft, rotaterRight;
+    private transient Group g, g1, g2;
+    private transient RotateTransition rotaterLeft, rotaterRight;
     Special(String ty,int x,int y){
         super(ty,x,y);
 

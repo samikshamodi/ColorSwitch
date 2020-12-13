@@ -11,8 +11,8 @@ import java.util.Random;
 
 public class ColorSwitcher extends GameElements {
     private Random rand;
-    private ImageView img;
-    private ArrayList<Color> list;
+    private transient ImageView img;
+    private transient ArrayList<Color> list;
 
 
     ColorSwitcher(int x, int y) {

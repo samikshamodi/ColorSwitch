@@ -6,7 +6,7 @@ import javafx.scene.paint.Color;
 import javafx.scene.shape.Shape;
 
 public class Ball extends GameElements {
-    private javafx.scene.shape.Circle ball;
+    private transient javafx.scene.shape.Circle ball;
 
     public Ball(int x, int y) {
         super(x, y);

@@ -13,10 +13,10 @@ import java.util.ArrayList;
 
 public class Circle extends Obstacle {
     private double radius;
-    private Arc yellow, pink, cyan, purple;
-    private Group g;
-    private RotateTransition rotater1;
-    private ArrayList<Shape> shapeList;
+    private transient Arc yellow, pink, cyan, purple;
+    private transient Group g;
+    private transient RotateTransition rotater1;
+    private transient ArrayList<Shape> shapeList;
 
     public Circle(String ty, int x, int y, double r) {
         super(ty, x, y);

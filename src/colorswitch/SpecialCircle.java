@@ -10,8 +10,8 @@ import javafx.util.Duration;
 public class SpecialCircle extends Obstacle {
     private double radius;
     private Circle left, right;
-    private Group g, g1, g2;
-    private RotateTransition rotaterLeft, rotaterRight;
+    private transient Group g, g1, g2;
+    private transient RotateTransition rotaterLeft, rotaterRight;
 
     public SpecialCircle(String ty, int x, int y, double r) {
         super(ty, x, y);

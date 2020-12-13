@@ -11,6 +11,7 @@ import javafx.stage.Stage;
 import java.io.IOException;
 
 public class MainControl {
+    Main m = new Main();
     private void show(ActionEvent actionEvent, String s) throws IOException {
         Parent root = FXMLLoader.load(getClass().getResource(s));
         Scene scene = new Scene(root);
@@ -35,17 +36,8 @@ public class MainControl {
     public void mainMenuS(ActionEvent actionEvent) throws IOException {
         //This line gets stage information
         Stage window = (Stage) ((Node) actionEvent.getSource()).getScene().getWindow();
-        Main m = new Main();
         m.start(window);
     }
-
-    /*public void startGameS(ActionEvent actionEvent) throws IOException {
-
-        Stage window = (Stage) ((Node) actionEvent.getSource()).getScene().getWindow();
-
-        //Game g = new Game();
-        //g.startGame(window);
-    }*/
 
     public void selectGameS(ActionEvent actionEvent) throws IOException {
         String s = "/gui/SelectGameScene.fxml";

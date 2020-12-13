@@ -7,7 +7,7 @@ import javafx.scene.shape.Shape;
 public class Star extends GameElements{
     private String color;
     private int value;
-    private ImageView img;
+    private transient ImageView img;
     Star(int v,int x, int y){
         super(x,y);
         value = v;

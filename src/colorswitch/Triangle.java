@@ -12,10 +12,10 @@ import java.util.ArrayList;
 
 public class Triangle extends Obstacle{
     private double side;
-    private Polygon yellow, pink, cyan, purple;
-    private Group g;
-    private RotateTransition rotater1;
-    private ArrayList<Shape> shapeList;
+    private transient Polygon yellow, pink, cyan, purple;
+    private transient Group g;
+    private transient RotateTransition rotater1;
+    private transient ArrayList<Shape> shapeList;
 
     Triangle(String ty, int x, int y, double s){
         super(ty,x,y);

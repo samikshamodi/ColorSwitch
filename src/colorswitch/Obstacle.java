@@ -8,10 +8,10 @@ import java.util.ArrayList;
 
 public abstract class Obstacle extends GameElements{
     private double speed;
-    private int direction;
-    private String type;
-    private Group group;
-    private ArrayList<Shape> shapeList;
+    private final int direction;
+    private final String type;
+    private transient Group group;
+    private transient ArrayList<Shape> shapeList;
     Obstacle(String ty,int x, int y){
         super(x,y);
         speed=0;

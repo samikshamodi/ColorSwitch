@@ -3,7 +3,9 @@ package colorswitch;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.shape.Shape;
 
-public abstract class GameElements {
+import java.io.Serializable;
+
+public abstract class GameElements implements Serializable {
     private int[] position;
     GameElements(int x, int y){
         position=new int[2];
