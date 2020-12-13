@@ -148,18 +148,13 @@ public class Game {
                 if (flag == 1) {
                     ball.jump();
                 } else {
-                    if (flag == 0) {
-                        ball.jump();
-                        flag = 1;
-                    }
-                    System.out.println("---------");
+                    ball.jump();
+                    flag = 1;
+
                     animationTimer = new AnimationTimer() {
                         @Override
                         public void handle(long l) {
-                            //move the ball
                             ball.moveDown();
-
-
                             Bounds bounds = root.getBoundsInLocal();
 
                             //TODO handling crash condition and game over menu
@@ -167,63 +162,65 @@ public class Game {
                                 System.out.println("Crashed :(");
                             }
 
-                            //to not allow the ball to go above a certain height on screen.
+                            /*to not allow the ball to go above a certain height on screen.*/
                             if (ball.getLayoutY() <= 300) {
                                 ball.stay();
-
-                                //now move the obstacle down to give the illusion of screen moving down
-                                //TODO add generic programming??
-                                colorSwitchers.get(i % N).moveDown();
-                                colorSwitchers.get((i + 1) % N).moveDown();
-                                colorSwitchers.get((i + 2) % N).moveDown();
-
-                                stars.get(i % N).moveDown();
-                                stars.get((i + 1) % N).moveDown();
-                                stars.get((i + 2) % N).moveDown();
-
-                                obstacles.get(i % N).moveDown();
-                                obstacles.get((i + 1) % N).moveDown();
-                                obstacles.get((i + 2) % N).moveDown();
-
-                                /* if obstacles are not on screen anymore then remove them from root and add the top screen element*/
-                                if (obstacles.get(i % N).getLayoutY() >= 800) {
-                                    obstacles.get(i % N).disappear(root);
-                                    i++;
-                                    obstacles.get((i + 2) % N).appear(root);
-                                    stars.get((i + 2) % N).appear(root);
-                                    colorSwitchers.get((i + 2) % N).appear(root);
-                                }
-
+                                moveElementsDown(root);
                             }
 
+                            /*check for all collisions*/
                             hitObstacle();
                             collectColorSwitcher(root);
                             collectStars(root, score);
 
-                            //ensures obstacles are infinite and randomised
+                            /*ensures obstacles are infinite and randomised*/
                             if (i == 4) {
                                 Collections.shuffle(obstacles.subList(0, 4));
                             }
                         }
                     };
 
-                    //TODO move up before ball jump
-                    pause.setOnAction(e -> {
-                        try {
-                            animationTimer.stop();
-                            int ans = pauseGame(stage);
-                            System.out.println("Received: " + ans);//TODO check this condition
-                            if (ans ==1) {
-                                animationTimer.start();
-                            }
-                        } catch (IOException ioException) {
-                            ioException.printStackTrace();
-                        }
-                    });
                     animationTimer.start();
                 }
+
+                pause.setOnAction(e -> {
+                    try {
+                        animationTimer.stop();
+                        int ans = pauseGame(stage);
+                        System.out.println("Received: " + ans);//TODO check this condition
+                        if (ans == 1) {
+                            animationTimer.start();
+                        }
+                    } catch (IOException ioException) {
+                        ioException.printStackTrace();
+                    }
+                });
             }
         });
+    }
+
+    private void moveElementsDown(AnchorPane root) {
+        //now move the obstacle down to give the illusion of screen moving down
+        colorSwitchers.get(i % N).moveDown();
+        colorSwitchers.get((i + 1) % N).moveDown();
+        colorSwitchers.get((i + 2) % N).moveDown();
+
+        stars.get(i % N).moveDown();
+        stars.get((i + 1) % N).moveDown();
+        stars.get((i + 2) % N).moveDown();
+
+        obstacles.get(i % N).moveDown();
+        obstacles.get((i + 1) % N).moveDown();
+        obstacles.get((i + 2) % N).moveDown();
+
+        /* if obstacles are not on screen anymore then remove them from root and add the top screen element*/
+        if (obstacles.get(i % N).getLayoutY() >= 800) {
+            obstacles.get(i % N).disappear(root);
+            i++;
+            obstacles.get((i + 2) % N).appear(root);
+            stars.get((i + 2) % N).appear(root);
+            colorSwitchers.get((i + 2) % N).appear(root);
+        }
     }
 
     int pauseGame(Stage stage) throws IOException {

@@ -124,4 +124,25 @@ public class Circle extends Obstacle {
         purple.setStroke(color);
     }
 
+    @Override
+    public int checkCollision(Shape ball) {
+        for(Shape s:shapeList)
+        {
+            Shape shapeIntersect=Shape.intersect(ball,s);
+            //Collision happened
+            if (shapeIntersect.getBoundsInLocal().getWidth() != -1) {
+                if (s.getStroke().equals(ball.getFill())) {
+                    return 0;
+                }
+                else
+                {
+                    System.out.println("Collision detected "+s.getStroke());
+                    return 1;
+                }
+            }
+
+        }
+        return 0;
+    }
+
 }
