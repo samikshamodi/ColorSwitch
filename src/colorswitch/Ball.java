@@ -1,7 +1,4 @@
 package colorswitch;
-import javafx.animation.KeyFrame;
-import javafx.animation.RotateTransition;
-import javafx.animation.Timeline;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.geometry.Bounds;
@@ -10,6 +7,7 @@ import javafx.scene.paint.Color;
 import javafx.scene.paint.Paint;
 import javafx.scene.shape.Circle;
 import javafx.scene.shape.Shape;
+import javafx.animation.AnimationTimer;
 import javafx.util.Duration;
 
 import java.util.ArrayList;
@@ -36,21 +34,19 @@ public class Ball extends GameElements {
     }
 
     public void jump() {
-        Timeline timeline = new Timeline(new KeyFrame(Duration.millis(17), new EventHandler<ActionEvent>() {
-            int x = 0;
-
+        AnimationTimer animationTimer = new AnimationTimer() {
+            int x=0;
             @Override
-            public void handle(ActionEvent t) {
-                if (x > 5)
-                    return;
-
-                ball.setLayoutY(ball.getLayoutY() - 10);
-                x++;
-
+            public void handle(long l) {
+                if(x>=55)
+                {
+                    stop();
+                }
+                ball.setLayoutY(ball.getLayoutY()-10);
+                x+=10;
             }
-        }));
-        timeline.setCycleCount(Timeline.INDEFINITE);
-        timeline.play();
+        };
+        animationTimer.start();
     }
 
     @Override

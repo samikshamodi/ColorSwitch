@@ -1,5 +1,6 @@
 package colorswitch;
 
+import javafx.animation.AnimationTimer;
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
 import javafx.event.ActionEvent;
@@ -31,6 +32,7 @@ public class Game {
     int N = 8;
     Label score;
     Button pause;
+    AnimationTimer animationTimer;
 
     Game() {
         currentScore = 0;
@@ -150,9 +152,10 @@ public class Game {
                         ball.jump();
                         flag = 1;
                     }
-                    Timeline timeline = new Timeline(new KeyFrame(Duration.millis(17), new EventHandler<ActionEvent>() {
+                    System.out.println("---------");
+                    animationTimer = new AnimationTimer() {
                         @Override
-                        public void handle(ActionEvent t) {
+                        public void handle(long l) {
                             //move the ball
                             ball.moveDown();
 
@@ -202,23 +205,22 @@ public class Game {
                                 Collections.shuffle(obstacles.subList(0, 4));
                             }
                         }
-                    }));
+                    };
 
                     //TODO move up before ball jump
                     pause.setOnAction(e -> {
                         try {
-                            timeline.pause();
+                            animationTimer.stop();
                             int ans = pauseGame(stage);
-                            System.out.println("Received: " + ans);
-                            if (ans == 1) {
-                                timeline.play();
+                            System.out.println("Received: " + ans);//TODO check this condition
+                            if (ans ==1) {
+                                animationTimer.start();
                             }
                         } catch (IOException ioException) {
                             ioException.printStackTrace();
                         }
                     });
-                    timeline.setCycleCount(Timeline.INDEFINITE);
-                    timeline.play();
+                    animationTimer.start();
                 }
             }
         });
