@@ -57,9 +57,9 @@ public class Main extends Application {
         play.setTranslateY(253);
         play.setOnAction(e -> {
             //  System.out.println("new game");
-            g = new Game();
+            n = new GameModel();
             try {
-                g.startGame(primaryStage);
+                n.setUp(primaryStage);
             } catch (IOException ioException) {
                 ioException.printStackTrace();
             }
@@ -134,7 +134,7 @@ public class Main extends Application {
 
 
     public static void main(String[] args) {
-        launch(args);
+          launch(args);
 //        Main m=new Main();
 //        GameModel newk = new GameModel();
 //        try{

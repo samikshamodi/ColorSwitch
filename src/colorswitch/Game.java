@@ -20,80 +20,43 @@ import java.util.Collections;
 import java.util.concurrent.atomic.AtomicInteger;
 
 public class Game {
-    private ArrayList<Obstacle> obstacles;
-    private ArrayList<Star> stars;
-    private ArrayList<ColorSwitcher> colorSwitchers;
-    private Ball ball;
-    static int currentScore;    //TODO make private??
-    private int i = 0;
-    private int N = 8;
+    private GameModel newG;
     private Label score;
     private Button pause;
     private AnimationTimer animationTimer;
 
-    Game() {
-        currentScore = 0;
-        ball = new Ball(10);
-        obstacles = new ArrayList<>();
-        createObstacles();
-        stars = new ArrayList<>();
-        createStars();
-        colorSwitchers = new ArrayList<>();
-        createColorSwitchers();
-    }
-
-
-    private void createObstacles() {
-        for (int i = 0; i < 2; i++) {
-            obstacles.add(new Square(1));
-            obstacles.add(new Circle(1));
-            obstacles.add(new SpecialCircle(1));
-            obstacles.add(new Triangle(1));
-            obstacles.add(new Plus(1));
-            obstacles.add(new Special(1));
-        }
+    Game(GameModel G) {
+        newG=G;
     }
 
     private void addObstacles(AnchorPane root) {
-        obstacles.get(0).appear(root);
-        obstacles.get(1).appear(root);
-        obstacles.get(2).appear(root);
-        obstacles.get(0).setLayoutY(0);
-        obstacles.get(2).setLayoutY(-800);
+        newG.obstacles.get(0).appear(root);
+        newG.obstacles.get(1).appear(root);
+        newG.obstacles.get(2).appear(root);
+        newG.obstacles.get(0).setLayoutY(0);
+        newG.obstacles.get(2).setLayoutY(-800);
     }
 
 
     private void addBall(AnchorPane root) {
-        ball.appear(root);
+        newG.ball.appear(root);
     }
 
-
-    private void createStars() {
-        for (int i = 0; i < N; i++) {
-            stars.add(new Star(1, 1));
-        }
-    }
 
     private void addStars(AnchorPane root) {
-        stars.get(0).appear(root);
-        stars.get(1).appear(root);
-        stars.get(2).appear(root);
-        stars.get(0).setLayoutY(0);
-        stars.get(2).setLayoutY(-800);
-    }
-
-    private void createColorSwitchers() {
-        for (int i = 0; i < N; i++) {
-            colorSwitchers.add(new ColorSwitcher(1));
-        }
+        newG.stars.get(0).appear(root);
+        newG.stars.get(1).appear(root);
+        newG.stars.get(2).appear(root);
+        newG.stars.get(0).setLayoutY(0);
+        newG.stars.get(2).setLayoutY(-800);
     }
 
     private void addColorSwitchers(AnchorPane root) {
-        colorSwitchers.get(0).appear(root);
-        colorSwitchers.get(1).appear(root);
-        colorSwitchers.get(2).appear(root);
-        colorSwitchers.get(0).setLayoutY(50);
-        colorSwitchers.get(2).setLayoutY(-3 * 700);
+        newG.colorSwitchers.get(0).appear(root);
+        newG.colorSwitchers.get(1).appear(root);
+        newG.colorSwitchers.get(2).appear(root);
+        newG.colorSwitchers.get(0).setLayoutY(50);
+        newG.colorSwitchers.get(2).setLayoutY(-3 * 700);
     }
 
 
@@ -143,25 +106,25 @@ public class Game {
             @Override
             public void handle(MouseEvent mouseEvent) {
                 if (flag == 1) {
-                    ball.jump();
+                    newG.ball.jump();
                 } else {
-                    ball.jump();
+                    newG.ball.jump();
                     flag = 1;
 
                     animationTimer = new AnimationTimer() {
                         @Override
                         public void handle(long l) {
-                            ball.moveDown();
+                            newG.ball.moveDown();
                             Bounds bounds = root.getBoundsInLocal();
 
                             //TODO handling crash condition and game over menu
-                            if (ball.getLayoutY() >= (bounds.getMaxY() - ball.getRadius())) {
+                            if (newG.ball.getLayoutY() >= (bounds.getMaxY() - newG.ball.getRadius())) {
                                 System.out.println("Crashed :(");
                             }
 
                             /*to not allow the ball to go above a certain height on screen.*/
-                            if (ball.getLayoutY() <= 300) {
-                                ball.stay();
+                            if (newG.ball.getLayoutY() <= 300) {
+                                newG.ball.stay();
                                 moveElementsDown(root);
                             }
 
@@ -171,8 +134,8 @@ public class Game {
                             collectStars(root, score);
 
                             /*ensures obstacles are infinite and randomised*/
-                            if (i == 4) {
-                                Collections.shuffle(obstacles.subList(0, 4));
+                            if (newG.i == 4) {
+                                Collections.shuffle(newG.obstacles.subList(0, 4));
                             }
                         }
                     };
@@ -198,25 +161,25 @@ public class Game {
 
     private void moveElementsDown(AnchorPane root) {
         //now move the obstacle down to give the illusion of screen moving down
-        colorSwitchers.get(i % N).moveDown();
-        colorSwitchers.get((i + 1) % N).moveDown();
-        colorSwitchers.get((i + 2) % N).moveDown();
+        newG.colorSwitchers.get(newG.i % newG.N).moveDown();
+        newG.colorSwitchers.get((newG.i + 1) % newG.N).moveDown();
+        newG.colorSwitchers.get((newG.i + 2) % newG.N).moveDown();
 
-        stars.get(i % N).moveDown();
-        stars.get((i + 1) % N).moveDown();
-        stars.get((i + 2) % N).moveDown();
+        newG.stars.get(newG.i % newG.N).moveDown();
+        newG.stars.get((newG.i + 1) % newG.N).moveDown();
+        newG.stars.get((newG.i + 2) % newG.N).moveDown();
 
-        obstacles.get(i % N).moveDown();
-        obstacles.get((i + 1) % N).moveDown();
-        obstacles.get((i + 2) % N).moveDown();
+        newG.obstacles.get(newG.i % newG.N).moveDown();
+        newG.obstacles.get((newG.i + 1) % newG.N).moveDown();
+        newG.obstacles.get((newG.i + 2) % newG.N).moveDown();
 
         /* if obstacles are not on screen anymore then remove them from root and add the top screen element*/
-        if (obstacles.get(i % N).getLayoutY() >= 800) {
-            obstacles.get(i % N).disappear(root);
-            i++;
-            obstacles.get((i + 2) % N).appear(root);
-            stars.get((i + 2) % N).appear(root);
-            colorSwitchers.get((i + 2) % N).appear(root);
+        if (newG.obstacles.get(newG.i % newG.N).getLayoutY() >= 800) {
+            newG.obstacles.get(newG.i % newG.N).disappear(root);
+            newG.i++;
+            newG.obstacles.get((newG.i + 2) % newG.N).appear(root);
+            newG.stars.get((newG.i + 2) % newG.N).appear(root);
+            newG.colorSwitchers.get((newG.i + 2) % newG.N).appear(root);
         }
     }
 
@@ -268,9 +231,10 @@ public class Game {
 
     private int hitObstacle() {
         /*check if collision*/
-        int collisionDetected1 = obstacles.get(i % N).checkCollision(ball.getShape());
-        int collisionDetected2 = obstacles.get((i + 1) % N).checkCollision(ball.getShape());
-        int collisionDetected3 = obstacles.get((i + 2) % N).checkCollision(ball.getShape());
+
+        int collisionDetected1 = newG.obstacles.get(newG.i % newG.N).checkCollision(newG.ball.getShape());
+        int collisionDetected2 = newG.obstacles.get((newG.i + 1) % newG.N).checkCollision(newG.ball.getShape());
+        int collisionDetected3 = newG.obstacles.get((newG.i + 2) % newG.N).checkCollision(newG.ball.getShape());
         if (collisionDetected1 == 1 || collisionDetected2 == 1 || collisionDetected3 == 1) {
             System.out.println("Collision detected");
             System.out.println("Game Over");
@@ -280,23 +244,22 @@ public class Game {
     }
 
     private int collectStars(AnchorPane root, Label score) {
-
         /* check if star collected*/
-        int starCollected1 = stars.get(i % N).checkCollision(ball.getShape());
-        int starCollected2 = stars.get((i + 1) % N).checkCollision(ball.getShape());
-        int starCollected3 = stars.get((i + 2) % N).checkCollision(ball.getShape());
+        int starCollected1 = newG.stars.get(newG.i % newG.N).checkCollision(newG.ball.getShape());
+        int starCollected2 = newG.stars.get((newG.i + 1) % newG.N).checkCollision(newG.ball.getShape());
+        int starCollected3 = newG.stars.get((newG.i + 2) % newG.N).checkCollision(newG.ball.getShape());
         if (starCollected1 == 1)
-            stars.get(i % N).disappear(root);
+            newG.stars.get(newG.i % newG.N).disappear(root);
         else if (starCollected2 == 1)
-            stars.get((i + 1) % N).disappear(root);
+            newG.stars.get((newG.i + 1) % newG.N).disappear(root);
         else if (starCollected3 == 1)
-            stars.get((i + 2) % N).disappear(root);
+            newG.stars.get((newG.i + 2) % newG.N).disappear(root);
 
         /*if star was hit then update score*/
         if (starCollected1 == 1 || starCollected2 == 1 || starCollected3 == 1) {
             root.getChildren().remove(score);
-            currentScore += 1;
-            score.setText("" + currentScore);
+            newG.currentScore += 1;
+            score.setText("" + newG.currentScore);
             root.getChildren().add(score);
         }
         return 0;
@@ -305,22 +268,22 @@ public class Game {
     private String collectColorSwitcher(AnchorPane root) {
 
         /*check if color switcher collected*/
-        int csCollected1 = colorSwitchers.get(i % N).checkCollision(ball.getShape());
-        int csCollected2 = colorSwitchers.get((i + 1) % N).checkCollision(ball.getShape());
-        int csCollected3 = colorSwitchers.get((i + 2) % N).checkCollision(ball.getShape());
+        int csCollected1 = newG.colorSwitchers.get(newG.i % newG.N).checkCollision(newG.ball.getShape());
+        int csCollected2 = newG.colorSwitchers.get((newG.i + 1) % newG.N).checkCollision(newG.ball.getShape());
+        int csCollected3 = newG.colorSwitchers.get((newG.i + 2) % newG.N).checkCollision(newG.ball.getShape());
 
         //if colorswitcher collected
         if (csCollected1 == 1 || csCollected2 == 1 || csCollected3 == 1) {
             System.out.println("Color Switcher Collected");
             if (csCollected1 == 1) {
-                ball.setColor(colorSwitchers.get(i % N).generateColor(ball.getColor()));
-                colorSwitchers.get(i % N).disappear(root);
+                newG.ball.setColor(newG.colorSwitchers.get(newG.i % newG.N).generateColor(newG.ball.getColor()));
+                newG.colorSwitchers.get(newG.i % newG.N).disappear(root);
             } else if (csCollected2 == 1) {
-                ball.setColor(colorSwitchers.get(i % N).generateColor(ball.getColor()));
-                colorSwitchers.get((i + 1) % N).disappear(root);
+                newG.ball.setColor(newG.colorSwitchers.get(newG.i % newG.N).generateColor(newG.ball.getColor()));
+                newG.colorSwitchers.get((newG.i + 1) % newG.N).disappear(root);
             } else if (csCollected3 == 1) {
-                ball.setColor(colorSwitchers.get(i % N).generateColor(ball.getColor()));
-                colorSwitchers.get((i + 2) % N).disappear(root);
+                newG.ball.setColor(newG.colorSwitchers.get(newG.i % newG.N).generateColor(newG.ball.getColor()));
+                newG.colorSwitchers.get((newG.i + 2) % newG.N).disappear(root);
             }
         }
         return " ";

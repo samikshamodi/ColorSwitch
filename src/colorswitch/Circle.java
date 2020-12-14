@@ -12,12 +12,10 @@ import javafx.util.Duration;
 import java.util.ArrayList;
 
 public class Circle extends Obstacle {
-    private double angle;
     private transient Arc yellow, pink, cyan, purple;
 
-    public Circle(int y) {
-        super(y);
-        angle = 360;
+    public Circle(int y,double a) {
+        super(y,a);
 
 
         /*setting properties of all the shapes*/
@@ -92,8 +90,8 @@ public class Circle extends Obstacle {
 
     @Override
     public void appear(AnchorPane root) {
-        g.setLayoutY(-400);
-        rotater1.setByAngle(360);
+        g.setLayoutY(positionY);
+        rotater1.setByAngle(angle);
         rotater1.play();
         root.getChildren().add(g);
     }

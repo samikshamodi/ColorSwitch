@@ -11,12 +11,10 @@ import javafx.util.Duration;
 import java.util.ArrayList;
 
 public class Triangle extends Obstacle{
-    private double angle;
     private transient Polygon yellow, pink, cyan, purple;
 
-    Triangle(int y){
-        super(y);
-        angle=360;
+    Triangle(int y,double a){
+        super(y,a);
 
         yellow = new Polygon();
         yellow.getPoints().addAll(0.0,50.0,50.0,0.0,50.0,100.0);
@@ -54,8 +52,8 @@ public class Triangle extends Obstacle{
 
     @Override
     public void appear(AnchorPane root) {
-        g.setLayoutY(-400);
-        rotater1.setByAngle(360);
+        g.setLayoutY(positionY);
+        rotater1.setByAngle(angle);
         rotater1.play();
         root.getChildren().add(g);
     }

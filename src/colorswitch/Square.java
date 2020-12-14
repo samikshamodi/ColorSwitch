@@ -11,13 +11,9 @@ import javafx.util.Duration;
 import java.util.ArrayList;
 
 public class Square extends Obstacle {
-    private double angle;
     private transient Rectangle yellow, pink, cyan, purple;
-
-
-    Square(int y) {
-        super(y);
-        angle = 360;
+    Square(int y,double a) {
+        super(y,a);
 
         yellow = new Rectangle(200, 15, Color.YELLOW);
         pink = new Rectangle(15, 200, Color.DEEPPINK);
@@ -54,8 +50,8 @@ public class Square extends Obstacle {
 
     @Override
     public void appear(AnchorPane root) {
-        g.setLayoutY(-400);
-        rotater1.setByAngle(360);
+        g.setLayoutY(positionY);
+        rotater1.setByAngle(angle);
         rotater1.play();
         root.getChildren().add(g);
     }

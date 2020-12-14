@@ -8,16 +8,14 @@ import javafx.scene.shape.Shape;
 import javafx.util.Duration;
 
 public class SpecialCircle extends Obstacle {
-    private double angle;
     private Circle left, right;
     private transient Group g1, g2;
     private transient RotateTransition rotaterRight;
 
-    public SpecialCircle(int y) {
-        super(y);
-        angle = 360;
-        left = new Circle(1);
-        right = new Circle(1);
+    public SpecialCircle(int y,double a) {
+        super(y,a);
+        left = new Circle(-400,1);
+        right = new Circle(-400,-1);
 
         //Exchanging pink and purple arcs in the riht circle to maintain sync
         right.setPink(Color.PURPLE);
@@ -44,13 +42,13 @@ public class SpecialCircle extends Obstacle {
     @Override
     public void appear(AnchorPane root) {
 
-        rotater1.setByAngle(360);
+        rotater1.setByAngle(left.getAngle());
         rotater1.play();
 
-        rotaterRight.setByAngle(-360);
+        rotaterRight.setByAngle(right.getAngle());
         rotaterRight.play();
 
-        g.setLayoutY(-400);
+        g.setLayoutY(positionY);
         root.getChildren().add(g);
     }
 

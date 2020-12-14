@@ -11,11 +11,11 @@ public class Special extends Obstacle{
     private Plus left, right;
     private transient Group g1, g2;
     private transient RotateTransition rotaterRight;
-    Special(int y){
-        super(y);
+    Special(int y,double a){
+        super(y,a);
 
-        left = new Plus(1);
-        right = new Plus( 1);
+        left = new Plus(-400,1);
+        right = new Plus( -400,-1);
 
         //Exchanging cyan and yellow rectangle in the right plus to maintain sync
         right.setCyan(Color.YELLOW);
@@ -41,13 +41,13 @@ public class Special extends Obstacle{
 
     @Override
     public void appear(AnchorPane root) {
-        rotater1.setByAngle(360);
+        rotater1.setByAngle(left.getAngle());
         rotater1.play();
 
-        rotaterRight.setByAngle(-360);
+        rotaterRight.setByAngle(right.getAngle());
         rotaterRight.play();
 
-        g.setLayoutY(-400);
+        g.setLayoutY(positionY);
         root.getChildren().add(g);
     }
 

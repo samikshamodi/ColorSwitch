@@ -11,13 +11,11 @@ import javafx.util.Duration;
 import java.util.ArrayList;
 
 public class Plus extends Obstacle {
-    private double angle;
     private transient Rectangle yellow, pink, cyan, purple;
 
 
-    Plus(int y) {
-        super(y);
-        angle = 360;
+    Plus(int y,double a) {
+        super(y,a);
 
         yellow = new Rectangle(100, 15, Color.YELLOW);
         pink = new Rectangle(15, 100, Color.DEEPPINK);
@@ -54,8 +52,8 @@ public class Plus extends Obstacle {
 
     @Override
     public void appear(AnchorPane root) {
-        g.setLayoutY(-400);
-        rotater1.setByAngle(360);
+        g.setLayoutY(positionY);
+        rotater1.setByAngle(angle);
         rotater1.play();
         root.getChildren().add(g);
     }

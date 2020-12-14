@@ -6,18 +6,15 @@ import javafx.scene.shape.Shape;
 import java.io.Serializable;
 
 public abstract class GameElements implements Serializable {
-    private int position;
-    GameElements(int y){
-        position=y;
-
+    protected double positionY;
+    protected double positionX;
+    GameElements(double y){
+        positionY=y;
     }
 
-    public int getPosition() {
-        return position;
-    }
 
-    public void setPosition(int position) {
-        this.position = position;
+    public double getPosition() {
+        return positionY;
     }
     public abstract void disappear(AnchorPane root);
     public abstract void appear(AnchorPane root);

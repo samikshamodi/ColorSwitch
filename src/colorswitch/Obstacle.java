@@ -8,64 +8,32 @@ import javafx.scene.shape.Shape;
 import java.util.ArrayList;
 
 public abstract class Obstacle extends GameElements{
-    private double speed;
-    private final int direction;
+    protected double angle;
     protected transient Group g;
     protected transient ArrayList<Shape> shapeList;
     protected transient RotateTransition rotater1;
-    Obstacle(int y){
+    Obstacle(int y,double a){
         super(y);
-        speed=0;
-        direction=1;
+        angle=a*360;
         g =new Group();
         shapeList=new ArrayList<>();
     }
 
-
-    public int getDirection() {
-        return direction;
-    }
-
-    public double getSpeed() {
-        return speed;
-    }
     int rotate(){
         return 0;
     }
 
-    public void setGroup(Group g)
-    {
-        this.g=g;
+    public double getAngle() {
+        return angle;
     }
 
-    public void setShapeList(ArrayList<Shape> list)
-    {
-        this.shapeList=list;
-    }
-
-
-   @Override
-    public void moveDown()
-    {
-        /*AnimationTimer animationTimer = new AnimationTimer() {
-            int x=0;
-            @Override
-            public void handle(long l) {
-                if(x>=55)
-                {
-                    stop();
-                }
-                group.setLayoutY(group.getLayoutY()+5);
-                x+=5;
-            }
-        };
-        animationTimer.start();*/
+    @Override
+    public void moveDown(){
         g.setLayoutY(g.getLayoutY()+55);
     }
 
     @Override
-    public double getLayoutY()
-    {
+    public double getLayoutY() {
         return g.getLayoutY();
     }
 
