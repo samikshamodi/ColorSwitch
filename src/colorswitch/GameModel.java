@@ -13,7 +13,7 @@ public class GameModel implements Serializable {
     int N = 8;
     GameModel(){
         currentScore = 0;
-        ball = new Ball(10, 0);
+        ball = new Ball(10);
         obstacles = new ArrayList<>();
         createObstacles();
         stars = new ArrayList<>();
@@ -24,25 +24,26 @@ public class GameModel implements Serializable {
 
     void createObstacles() {
         for (int i = 0; i < 2; i++) {
-            obstacles.add(new Square("square", 1, 1, 1));
-            obstacles.add(new Circle("circle", 1, 1, 1));
-            obstacles.add(new SpecialCircle("doubleCircle", 1, 1, 1));
-            obstacles.add(new Triangle("triangle", 1, 1, 1));
-            obstacles.add(new Plus("doublePlus", 1, 1, 1));
-            obstacles.add(new Special("plus", 1, 1));
+            obstacles.add(new Square(1));
+            obstacles.add(new Circle(1));
+            obstacles.add(new SpecialCircle(1));
+            obstacles.add(new Triangle(1));
+            obstacles.add(new Plus(1));
+            obstacles.add(new Special(1));
         }
     }
 
     void createStars() {
         for (int i = 0; i < N; i++) {
-            stars.add(new Star(1, 1, 1));
+            stars.add(new Star(1, 1));
         }
     }
 
     void createColorSwitchers() {
         for (int i = 0; i < N; i++) {
-            colorSwitchers.add(new ColorSwitcher(1, 1));
+            colorSwitchers.add(new ColorSwitcher(1));
         }
     }
+
 
 }

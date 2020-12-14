@@ -11,16 +11,13 @@ import javafx.util.Duration;
 import java.util.ArrayList;
 
 public class Plus extends Obstacle {
-    private double side;
+    private double angle;
     private transient Rectangle yellow, pink, cyan, purple;
-    private transient Group g;
-    private transient RotateTransition rotater1;
-    private transient ArrayList<Shape> shapeList;
 
-    Plus(String ty, int x, int y, double s) {
-        super(ty, x, y);
-        side = s;
-        shapeList=new ArrayList<>();
+
+    Plus(int y) {
+        super(y);
+        angle = 360;
 
         yellow = new Rectangle(100, 15, Color.YELLOW);
         pink = new Rectangle(15, 100, Color.DEEPPINK);
@@ -41,7 +38,7 @@ public class Plus extends Obstacle {
         cyan.relocate(100, 300);
         purple.relocate(200, 315);
 
-        g = new Group();
+
         g.getChildren().addAll(yellow, pink, cyan, purple);
 
         rotater1 = new RotateTransition(Duration.seconds(4), g);
@@ -52,8 +49,7 @@ public class Plus extends Obstacle {
         shapeList.add(cyan);
         shapeList.add(purple);
 
-        super.setGroup(g);
-        super.setShapeList(shapeList);
+
     }
 
     @Override

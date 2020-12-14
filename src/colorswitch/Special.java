@@ -9,13 +9,13 @@ import javafx.util.Duration;
 
 public class Special extends Obstacle{
     private Plus left, right;
-    private transient Group g, g1, g2;
-    private transient RotateTransition rotaterLeft, rotaterRight;
-    Special(String ty,int x,int y){
-        super(ty,x,y);
+    private transient Group g1, g2;
+    private transient RotateTransition rotaterRight;
+    Special(int y){
+        super(y);
 
-        left = new Plus("ty", 1, 1, 1);
-        right = new Plus("ty", 1, 1, 1);
+        left = new Plus(1);
+        right = new Plus( 1);
 
         //Exchanging cyan and yellow rectangle in the right plus to maintain sync
         right.setCyan(Color.YELLOW);
@@ -30,21 +30,19 @@ public class Special extends Obstacle{
         g1.setLayoutX(-10);
         g2.setLayoutX(205);
 
-        rotaterLeft = new RotateTransition(Duration.seconds(5), g1);
+        rotater1 = new RotateTransition(Duration.seconds(5), g1);
         rotaterRight = new RotateTransition(Duration.seconds(5), g2);
-        rotaterLeft.setCycleCount(1500);
+        rotater1.setCycleCount(1500);
         rotaterRight.setCycleCount(1500);
 
-        g = new Group();
         g.getChildren().addAll(g1, g2);
 
-        super.setGroup(g);
     }
 
     @Override
     public void appear(AnchorPane root) {
-        rotaterLeft.setByAngle(360);
-        rotaterLeft.play();
+        rotater1.setByAngle(360);
+        rotater1.play();
 
         rotaterRight.setByAngle(-360);
         rotaterRight.play();

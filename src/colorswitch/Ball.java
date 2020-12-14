@@ -8,8 +8,8 @@ import javafx.scene.shape.Shape;
 public class Ball extends GameElements {
     private transient javafx.scene.shape.Circle ball;
 
-    public Ball(int x, int y) {
-        super(x, y);
+    public Ball(int y) {
+        super(y);
         ball = new javafx.scene.shape.Circle(10, Color.YELLOW);
         ball.relocate(295, 600);
     }

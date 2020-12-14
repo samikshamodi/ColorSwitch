@@ -134,20 +134,20 @@ public class Main extends Application {
 
 
     public static void main(String[] args) {
-        //launch(args);
-        Main m=new Main();
-        GameModel newk = new GameModel();
-        try{
-            m.saveGame(newk);
-            m.loadGame();
-        }
-        catch (IOException e){
-            System.out.println("IO Error");
-            e.printStackTrace();
-        }
-        catch (ClassNotFoundException e){
-            System.out.println("CNF Error");
-            e.printStackTrace();
-        }
+        launch(args);
+//        Main m=new Main();
+//        GameModel newk = new GameModel();
+//        try{
+//            m.saveGame(newk);
+//            m.loadGame();
+//        }
+//        catch (IOException e){
+//            System.out.println("IO Error");
+//            e.printStackTrace();
+//        }
+//        catch (ClassNotFoundException e){
+//            System.out.println("CNF Error");
+//            e.printStackTrace();
+//        }
     }
 }

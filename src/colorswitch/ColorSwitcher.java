@@ -15,8 +15,8 @@ public class ColorSwitcher extends GameElements {
     private transient ArrayList<Color> list;
 
 
-    ColorSwitcher(int x, int y) {
-        super(x, y);
+    ColorSwitcher(int y) {
+        super(y);
         rand = new Random();
 
         list=new ArrayList<>();

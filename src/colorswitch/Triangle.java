@@ -11,16 +11,12 @@ import javafx.util.Duration;
 import java.util.ArrayList;
 
 public class Triangle extends Obstacle{
-    private double side;
+    private double angle;
     private transient Polygon yellow, pink, cyan, purple;
-    private transient Group g;
-    private transient RotateTransition rotater1;
-    private transient ArrayList<Shape> shapeList;
 
-    Triangle(String ty, int x, int y, double s){
-        super(ty,x,y);
-        side=s;
-        shapeList=new ArrayList<>();
+    Triangle(int y){
+        super(y);
+        angle=360;
 
         yellow = new Polygon();
         yellow.getPoints().addAll(0.0,50.0,50.0,0.0,50.0,100.0);
@@ -44,7 +40,6 @@ public class Triangle extends Obstacle{
         purple.relocate(375, 250);
 
 
-        g = new Group();
         g.getChildren().addAll(yellow, pink, cyan, purple);
 
         rotater1 = new RotateTransition(Duration.seconds(4), g);
@@ -55,8 +50,6 @@ public class Triangle extends Obstacle{
         shapeList.add(cyan);
         shapeList.add(purple);
 
-        super.setGroup(g);
-        super.setShapeList(shapeList);
     }
 
     @Override

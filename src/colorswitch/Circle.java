@@ -12,16 +12,13 @@ import javafx.util.Duration;
 import java.util.ArrayList;
 
 public class Circle extends Obstacle {
-    private double radius;
+    private double angle;
     private transient Arc yellow, pink, cyan, purple;
-    private transient Group g;
-    private transient RotateTransition rotater1;
-    private transient ArrayList<Shape> shapeList;
 
-    public Circle(String ty, int x, int y, double r) {
-        super(ty, x, y);
-        radius = r;
-        shapeList = new ArrayList<>();
+    public Circle(int y) {
+        super(y);
+        angle = 360;
+
 
         /*setting properties of all the shapes*/
         yellow = new Arc();
@@ -79,7 +76,6 @@ public class Circle extends Obstacle {
         purple.relocate(363, 220);
 
         /*Putting all the shapes in 1 group*/
-        g = new Group();
         g.getChildren().addAll(yellow, pink, cyan, purple);
 
         /*Rotating the group*/
@@ -92,8 +88,6 @@ public class Circle extends Obstacle {
         shapeList.add(cyan);
         shapeList.add(purple);
 
-        super.setGroup(g);
-        super.setShapeList(shapeList);
     }
 
     @Override

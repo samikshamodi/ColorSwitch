@@ -8,8 +8,8 @@ public class Star extends GameElements{
     private String color;
     private int value;
     private transient ImageView img;
-    Star(int v,int x, int y){
-        super(x,y);
+    Star(int v, int y){
+        super(y);
         value = v;
         if(value == 1)
             color="White";

@@ -1,5 +1,6 @@
 package colorswitch;
 
+import javafx.animation.RotateTransition;
 import javafx.scene.Group;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.shape.Shape;
@@ -9,21 +10,17 @@ import java.util.ArrayList;
 public abstract class Obstacle extends GameElements{
     private double speed;
     private final int direction;
-    private final String type;
-    private transient Group group;
-    private transient ArrayList<Shape> shapeList;
-    Obstacle(String ty,int x, int y){
-        super(x,y);
+    protected transient Group g;
+    protected transient ArrayList<Shape> shapeList;
+    protected transient RotateTransition rotater1;
+    Obstacle(int y){
+        super(y);
         speed=0;
         direction=1;
-        type=ty;
-        group =new Group();
+        g =new Group();
         shapeList=new ArrayList<>();
     }
 
-    public String getType() {
-        return type;
-    }
 
     public int getDirection() {
         return direction;
@@ -38,7 +35,7 @@ public abstract class Obstacle extends GameElements{
 
     public void setGroup(Group g)
     {
-        this.group=g;
+        this.g=g;
     }
 
     public void setShapeList(ArrayList<Shape> list)
@@ -63,23 +60,23 @@ public abstract class Obstacle extends GameElements{
             }
         };
         animationTimer.start();*/
-        group.setLayoutY(group.getLayoutY()+55);
+        g.setLayoutY(g.getLayoutY()+55);
     }
 
     @Override
     public double getLayoutY()
     {
-        return group.getLayoutY();
+        return g.getLayoutY();
     }
 
     @Override
     public void setLayoutY(double dy) {
-        group.setLayoutY(dy);
+        g.setLayoutY(dy);
 
     }
 
     public void disappear(AnchorPane root) {
-        root.getChildren().remove(group);
+        root.getChildren().remove(g);
     }
 
     @Override
