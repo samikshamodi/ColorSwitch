@@ -4,17 +4,18 @@ import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.shape.Shape;
 
-public class Star extends GameElements{
+public class Star extends GameElements {
     private String color;
     private int value;
     private transient ImageView img;
-    Star(int v, int y){
+
+    Star(int v, int y) {
         super(y);
         value = v;
-        if(value == 1)
-            color="White";
+        if (value == 1)
+            color = "White";
         else
-            color="Green";
+            color = "Green";
 
         //ImageView img = new ImageView("/assets/star.png");
     }
@@ -29,7 +30,10 @@ public class Star extends GameElements{
 
     @Override
     public void appear(AnchorPane root) {
-        img = new ImageView("/assets/star.png");
+        if (value == 1)
+            img = new ImageView("/assets/star.png");
+        else
+            img = new ImageView("/assets/greenStar.png");
         img.setFitHeight(50);
         img.setFitWidth(50);
         img.setX(275);
@@ -42,8 +46,7 @@ public class Star extends GameElements{
     @Override
     public int checkCollision(Shape ball) {
         //if ball collides with star return 1 else return 0;
-        if((img.getBoundsInParent().intersects(ball.getBoundsInParent())))
-        {
+        if ((img.getBoundsInParent().intersects(ball.getBoundsInParent()))) {
             return 1;
         }
         return 0;

@@ -39,8 +39,11 @@ public class GameModel implements Serializable {
     }
 
     void createStars() {
-        for (int i = 0; i < N; i++) {
+        for (int i = 0; i < 2; i++) {
             stars.add(new Star(1, 1));
+            stars.add(new Star(1, 1));
+            stars.add(new Star(1, 1));
+            stars.add(new Star(2, 1));
         }
     }
 

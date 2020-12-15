@@ -8,14 +8,14 @@ import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.image.Image;
-import javafx.scene.input.MouseEvent;
+import javafx.scene.input.KeyCode;
+import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.*;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
 import javafx.stage.Stage;
 
 import java.io.IOException;
-import java.util.ArrayList;
 import java.util.Collections;
 import java.util.concurrent.atomic.AtomicInteger;
 
@@ -26,7 +26,7 @@ public class Game {
     private AnimationTimer animationTimer;
 
     Game(GameModel G) {
-        newG=G;
+        newG = G;
     }
 
     private void addObstacles(AnchorPane root) {
@@ -100,61 +100,62 @@ public class Game {
     }
 
     public void playGame(Stage stage, AnchorPane root) {
-        root.addEventFilter(MouseEvent.MOUSE_PRESSED, new EventHandler<>() {
+        animationTimer = new AnimationTimer() {
+            @Override
+            public void handle(long l) {
+                newG.ball.moveDown();
+                Bounds bounds = root.getBoundsInLocal();
+
+                //TODO handling crash condition and game over menu
+                if (newG.ball.getLayoutY() >= (bounds.getMaxY() - newG.ball.getRadius())) {
+                    System.out.println("Crashed :(");
+                }
+
+                /*to not allow the ball to go above a certain height on screen.*/
+                if (newG.ball.getLayoutY() <= 300) {
+                    newG.ball.stay();
+                    moveElementsDown(root);
+                }
+
+                /*check for all collisions*/
+                hitObstacle();
+                collectColorSwitcher(root);
+                collectStars(root, score);
+
+                /*ensures obstacles are infinite and randomised*/
+                if (newG.i == 4) {
+                    Collections.shuffle(newG.obstacles.subList(0, 4));
+                }
+            }
+        };
+
+        pause.setOnAction(e -> {
+            try {
+                animationTimer.stop();
+                int ans = pauseGame(stage);
+                System.out.println("Received: " + ans);//TODO check this condition
+                if (ans == 1) {
+                    animationTimer.start();
+                }
+            } catch (IOException ioException) {
+                ioException.printStackTrace();
+            }
+        });
+
+        root.addEventFilter(KeyEvent.KEY_PRESSED, new EventHandler<>() {
             int flag = 0;
 
             @Override
-            public void handle(MouseEvent mouseEvent) {
-                if (flag == 1) {
-                    newG.ball.jump();
-                } else {
-                    newG.ball.jump();
-                    flag = 1;
-
-                    animationTimer = new AnimationTimer() {
-                        @Override
-                        public void handle(long l) {
-                            newG.ball.moveDown();
-                            Bounds bounds = root.getBoundsInLocal();
-
-                            //TODO handling crash condition and game over menu
-                            if (newG.ball.getLayoutY() >= (bounds.getMaxY() - newG.ball.getRadius())) {
-                                System.out.println("Crashed :(");
-                            }
-
-                            /*to not allow the ball to go above a certain height on screen.*/
-                            if (newG.ball.getLayoutY() <= 300) {
-                                newG.ball.stay();
-                                moveElementsDown(root);
-                            }
-
-                            /*check for all collisions*/
-                            hitObstacle();
-                            collectColorSwitcher(root);
-                            collectStars(root, score);
-
-                            /*ensures obstacles are infinite and randomised*/
-                            if (newG.i == 4) {
-                                Collections.shuffle(newG.obstacles.subList(0, 4));
-                            }
-                        }
-                    };
-
-                    animationTimer.start();
-                }
-
-                pause.setOnAction(e -> {
-                    try {
-                        animationTimer.stop();
-                        int ans = pauseGame(stage);
-                        System.out.println("Received: " + ans);//TODO check this condition
-                        if (ans == 1) {
-                            animationTimer.start();
-                        }
-                    } catch (IOException ioException) {
-                        ioException.printStackTrace();
+            public void handle(KeyEvent keyEvent) {
+                if (keyEvent.getCode() == KeyCode.UP) {
+                    if (flag == 1) {
+                        newG.ball.jump();
+                    } else {
+                        newG.ball.jump();
+                        flag = 1;
+                        animationTimer.start();
                     }
-                });
+                }
             }
         });
     }
@@ -243,29 +244,33 @@ public class Game {
         return 0;
     }
 
-    private int collectStars(AnchorPane root, Label score) {
+    private void collectStars(AnchorPane root, Label score) {
+        int value = 0;
         /* check if star collected*/
         int starCollected1 = newG.stars.get(newG.i % newG.N).checkCollision(newG.ball.getShape());
         int starCollected2 = newG.stars.get((newG.i + 1) % newG.N).checkCollision(newG.ball.getShape());
         int starCollected3 = newG.stars.get((newG.i + 2) % newG.N).checkCollision(newG.ball.getShape());
-        if (starCollected1 == 1)
+        if (starCollected1 == 1) {
             newG.stars.get(newG.i % newG.N).disappear(root);
-        else if (starCollected2 == 1)
+            value=newG.stars.get(newG.i % newG.N).getValue();
+        } else if (starCollected2 == 1) {
             newG.stars.get((newG.i + 1) % newG.N).disappear(root);
-        else if (starCollected3 == 1)
+            value=newG.stars.get((newG.i + 1) % newG.N).getValue();
+        } else if (starCollected3 == 1) {
             newG.stars.get((newG.i + 2) % newG.N).disappear(root);
+            value=newG.stars.get((newG.i + 2) % newG.N).getValue();
+        }
 
         /*if star was hit then update score*/
         if (starCollected1 == 1 || starCollected2 == 1 || starCollected3 == 1) {
             root.getChildren().remove(score);
-            newG.currentScore += 1;
+            newG.currentScore += value;
             score.setText("" + newG.currentScore);
             root.getChildren().add(score);
         }
-        return 0;
     }
 
-    private String collectColorSwitcher(AnchorPane root) {
+    private void collectColorSwitcher(AnchorPane root) {
 
         /*check if color switcher collected*/
         int csCollected1 = newG.colorSwitchers.get(newG.i % newG.N).checkCollision(newG.ball.getShape());
@@ -281,12 +286,11 @@ public class Game {
             } else if (csCollected2 == 1) {
                 newG.ball.setColor(newG.colorSwitchers.get(newG.i % newG.N).generateColor(newG.ball.getColor()));
                 newG.colorSwitchers.get((newG.i + 1) % newG.N).disappear(root);
-            } else if (csCollected3 == 1) {
+            } else {
                 newG.ball.setColor(newG.colorSwitchers.get(newG.i % newG.N).generateColor(newG.ball.getColor()));
                 newG.colorSwitchers.get((newG.i + 2) % newG.N).disappear(root);
             }
         }
-        return " ";
     }
 
     int fall() {
