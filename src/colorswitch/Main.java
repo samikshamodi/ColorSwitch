@@ -2,44 +2,43 @@ package colorswitch;
 
 import javafx.animation.RotateTransition;
 import javafx.application.Application;
-import javafx.event.EventHandler;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
-import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.*;
+import javafx.scene.media.Media;
+import javafx.scene.media.MediaPlayer;
 import javafx.stage.Stage;
 import javafx.util.Duration;
 
 import java.io.*;
 
 public class Main extends Application {
-    ObjectInputStream in;
+    ObjectInputStream in; //TODO make private??
     Game g;
     GameModel n;
+    static MediaPlayer mediaGameTrack;
 
-    public void saveGame(GameModel s) throws IOException{
+    public void saveGame(GameModel s) throws IOException {
         ObjectOutputStream out = null;
-        try{
+        try {
             out = new ObjectOutputStream(new FileOutputStream("saves.txt"));
             out.writeObject(s);
-        }
-        finally{
-            if(out!=null)
+        } finally {
+            if (out != null)
                 out.close();
         }
         System.out.println("Game saved");
     }
 
-    public void loadGame() throws IOException,ClassNotFoundException{
-        try{
+    public void loadGame() throws IOException, ClassNotFoundException {
+        try {
             in = new ObjectInputStream(new FileInputStream("saves.txt"));
-            n=(GameModel) in.readObject();
-        }
-        finally{
-            if(in!=null)
+            n = (GameModel) in.readObject();
+        } finally {
+            if (in != null)
                 in.close();
         }
         System.out.println("Game loaded");
@@ -48,6 +47,23 @@ public class Main extends Application {
     @Override
     public void start(Stage primaryStage) throws IOException {
         AnchorPane root = FXMLLoader.load(getClass().getResource("/gui/MainMenu.fxml"));
+        addResources(primaryStage,root);
+        addSound();
+        Scene scene = new Scene(root);
+        primaryStage.setTitle("Color Switch");
+        primaryStage.setScene(scene);
+        primaryStage.show();
+    }
+
+    private void addSound() {
+        mediaGameTrack = new MediaPlayer(new Media(getClass().getResource("/assets/gameTrack.mp3").toString()));
+        mediaGameTrack.setAutoPlay(true);
+        mediaGameTrack.setCycleCount(MediaPlayer.INDEFINITE);
+        mediaGameTrack.play();
+    }
+
+
+    private void addResources(Stage primaryStage, AnchorPane root) {
         BackgroundImage myBI1 = new BackgroundImage(new Image("/assets/newGameButton.png", 120, 123, true, true), BackgroundRepeat.NO_REPEAT, BackgroundRepeat.NO_REPEAT, BackgroundPosition.DEFAULT, BackgroundSize.DEFAULT);
         Button play = new Button("");
         play.setBackground(new Background(myBI1));
@@ -76,7 +92,7 @@ public class Main extends Application {
         rotateTransition.setCycleCount(1500);
         rotateTransition.play();
 
-        ImageView img2 = new ImageView("/assets/c1.png");
+        ImageView img2 = new ImageView("/assets/c2.png");
         img2.setFitHeight(190);
         img2.setFitWidth(190);
         img2.setX(205);
@@ -87,7 +103,7 @@ public class Main extends Application {
         rotateTransition2.setCycleCount(1500);
         rotateTransition2.play();
 
-        ImageView img3 = new ImageView("/assets/c1.png");
+        ImageView img3 = new ImageView("/assets/c3.png");
         img3.setFitHeight(240);
         img3.setFitWidth(240);
         img3.setX(180);
@@ -124,17 +140,11 @@ public class Main extends Application {
         });
 
         root.getChildren().addAll(img1, img2, img3, leaderboard, play);
-        Scene scene = new Scene(root);
-
-        primaryStage.setTitle("Color Switch");
-        primaryStage.setScene(scene);
-        primaryStage.show();
-
     }
 
 
     public static void main(String[] args) {
-          launch(args);
+        launch(args);
 //        Main m=new Main();
 //        GameModel newk = new GameModel();
 //        try{
