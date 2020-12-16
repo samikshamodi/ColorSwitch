@@ -8,6 +8,8 @@ import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.image.Image;
+import javafx.scene.input.KeyCode;
+import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.*;
 import javafx.scene.paint.Color;
@@ -99,66 +101,67 @@ public class Game {
         return 0;
     }
 
+
     public void playGame(Stage stage, AnchorPane root) {
-        root.addEventFilter(MouseEvent.MOUSE_PRESSED, new EventHandler<>() {
+        animationTimer = new AnimationTimer() {
+            @Override
+            public void handle(long l) {
+                newG.ball.moveDown();
+                Bounds bounds = root.getBoundsInLocal();
+
+                //TODO handling crash condition and game over menu
+                if (newG.ball.getLayoutY() >= (bounds.getMaxY() - newG.ball.getRadius())) {
+                    System.out.println("Crashed :(");
+                }
+
+                /*to not allow the ball to go above a certain height on screen.*/
+                if (newG.ball.getLayoutY() <= 300) {
+                    newG.ball.stay();
+                    moveElementsDown(root);
+                }
+
+                /*check for all collisions*/
+                hitObstacle();
+                collectColorSwitcher(root);
+                collectStars(root, score);
+
+                /*ensures obstacles are infinite and randomised*/
+                if (newG.i == 4) {
+                    Collections.shuffle(newG.obstacles.subList(0, 4));
+                }
+            }
+        };
+
+        pause.setOnAction(e -> {
+            try {
+                animationTimer.stop();
+                int ans = pauseGame(stage);
+                System.out.println("Received: " + ans);//TODO check this condition
+                if (ans == 1) {
+                    animationTimer.start();
+                }
+            } catch (IOException ioException) {
+                ioException.printStackTrace();
+            }
+        });
+
+        root.addEventFilter(KeyEvent.KEY_PRESSED, new EventHandler<>() {
             int flag = 0;
 
             @Override
-            public void handle(MouseEvent mouseEvent) {
-                if (flag == 1) {
-                    newG.ball.jump();
-                } else {
-                    newG.ball.jump();
-                    flag = 1;
-
-                    animationTimer = new AnimationTimer() {
-                        @Override
-                        public void handle(long l) {
-                            newG.ball.moveDown();
-                            Bounds bounds = root.getBoundsInLocal();
-
-                            //TODO handling crash condition and game over menu
-                            if (newG.ball.getLayoutY() >= (bounds.getMaxY() - newG.ball.getRadius())) {
-                                System.out.println("Crashed :(");
-                            }
-
-                            /*to not allow the ball to go above a certain height on screen.*/
-                            if (newG.ball.getLayoutY() <= 300) {
-                                newG.ball.stay();
-                                moveElementsDown(root);
-                            }
-
-                            /*check for all collisions*/
-                            hitObstacle();
-                            collectColorSwitcher(root);
-                            collectStars(root, score);
-
-                            /*ensures obstacles are infinite and randomised*/
-                            if (newG.i%newG.N == 4) {
-                                Collections.shuffle(newG.obstacles.subList(0, 4));
-                            }
-                        }
-                    };
-
-                    animationTimer.start();
-                }
-
-                pause.setOnAction(e -> {
-                    try {
-                        animationTimer.stop();
-                        int ans = pauseGame(stage);
-                        System.out.println("Received: " + ans);//TODO check this condition
-                        if (ans == 1) {
-                            animationTimer.start();
-                        }
-                    } catch (IOException ioException) {
-                        ioException.printStackTrace();
+            public void handle(KeyEvent keyEvent) {
+                if (keyEvent.getCode() == KeyCode.UP) {
+                    if (flag == 1) {
+                        newG.ball.jump();
+                    } else {
+                        newG.ball.jump();
+                        flag = 1;
+                        animationTimer.start();
                     }
-                });
+                }
             }
         });
     }
-
     private void moveElementsDown(AnchorPane root) {
         //now move the obstacle down to give the illusion of screen moving down
         newG.colorSwitchers.get(newG.i % newG.N).moveDown();
