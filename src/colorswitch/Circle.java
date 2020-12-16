@@ -16,9 +16,12 @@ public class Circle extends Obstacle {
 
     public Circle(int y,double a) {
         super(y,a);
-
-
+        create();
+    }
+    public void create(){
         /*setting properties of all the shapes*/
+        g=new Group();
+        shapeList=new ArrayList<>();
         yellow = new Arc();
         yellow.setCenterX(0);
         yellow.setCenterY(0);
@@ -85,7 +88,6 @@ public class Circle extends Obstacle {
         shapeList.add(pink);
         shapeList.add(cyan);
         shapeList.add(purple);
-
     }
 
     @Override
@@ -117,7 +119,7 @@ public class Circle extends Obstacle {
                 if (s.getStroke().equals(ball.getFill())) {
                     return 0;
                 } else {
-                    System.out.println("Collision detected " + s.getStroke());
+                    //System.out.println("Collision detected " + s.getStroke());
                     return 1;
                 }
             }

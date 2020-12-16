@@ -7,13 +7,19 @@ import javafx.scene.paint.Color;
 import javafx.scene.shape.Shape;
 import javafx.util.Duration;
 
+import java.util.ArrayList;
+
 public class Special extends Obstacle{
     private Plus left, right;
     private transient Group g1, g2;
     private transient RotateTransition rotaterRight;
     Special(int y,double a){
         super(y,a);
-
+        create();
+    }
+    public void create(){
+        g=new Group();
+        shapeList=new ArrayList<>();
         left = new Plus(-400,1);
         right = new Plus( -400,-1);
 
@@ -36,9 +42,7 @@ public class Special extends Obstacle{
         rotaterRight.setCycleCount(1500);
 
         g.getChildren().addAll(g1, g2);
-
     }
-
     @Override
     public void appear(AnchorPane root) {
         rotater1.setByAngle(left.getAngle());

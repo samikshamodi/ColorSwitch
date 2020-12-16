@@ -40,8 +40,8 @@ public class MainControl {
     }
 
     public void selectGameS(ActionEvent actionEvent) throws IOException {
-        String s = "/gui/SelectGameScene.fxml";
-        show(actionEvent, s);
+        //String s = "/gui/SelectGameScene.fxml";
+        //show(actionEvent, s);
     }
 
     public void instructionS(ActionEvent actionEvent) throws IOException {

@@ -11,6 +11,7 @@ import java.util.Random;
 
 public class ColorSwitcher extends GameElements {
     private Random rand;
+    private boolean visible;
     private transient ImageView img;
     private transient ArrayList<Color> list;
 
@@ -18,12 +19,15 @@ public class ColorSwitcher extends GameElements {
     ColorSwitcher(int y) {
         super(y);
         rand = new Random();
-
+        create();
+    }
+    public void create(){
         list=new ArrayList<>();
         list.add(Color.YELLOW);
         list.add(Color.DEEPPINK);
         list.add(Color.CYAN);
         list.add(Color.PURPLE);
+        img = new ImageView("/assets/colorSwitcher.png");
     }
 
     public Color generateColor(Color ballColor)
@@ -37,13 +41,13 @@ public class ColorSwitcher extends GameElements {
 
     @Override
     public void appear(AnchorPane root) {
-        img = new ImageView("/assets/colorSwitcher.png");
+        visible=true;
         img.setFitHeight(30);
         img.setFitWidth(30);
         img.setX(290);
         img.setY(50);
         img.setPreserveRatio(true);
-        img.setLayoutY(-350);
+        img.setLayoutY(positionY);
         root.getChildren().add(img);
     }
 
@@ -75,7 +79,12 @@ public class ColorSwitcher extends GameElements {
     public void disappear(AnchorPane root) {
         //root.getChildren().remove(img);
         //img.setImage(null);
+        visible=false;
         img.setLayoutY(1000);
         root.getChildren().remove(img);
+    }
+    public void save(){
+        positionX= img.getLayoutX();
+        positionY= img.getLayoutY();
     }
 }

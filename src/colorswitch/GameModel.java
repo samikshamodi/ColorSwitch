@@ -7,6 +7,8 @@ import java.io.Serializable;
 import java.util.ArrayList;
 
 public class GameModel implements Serializable {
+    transient Stage stage;
+    transient Main m;
     ArrayList<Obstacle> obstacles;
     ArrayList<Star> stars;
     ArrayList<ColorSwitcher> colorSwitchers;
@@ -14,10 +16,10 @@ public class GameModel implements Serializable {
     int currentScore;
     int i = 0;
     int N = 8;
-    Game g;
+    transient Game g;
     GameModel(){
         currentScore = 0;
-        ball = new Ball(10);
+        ball = new Ball(600);
         obstacles = new ArrayList<>();
         createObstacles();
         stars = new ArrayList<>();
@@ -40,19 +42,47 @@ public class GameModel implements Serializable {
 
     void createStars() {
         for (int i = 0; i < N; i++) {
-            stars.add(new Star(1, 1));
+            stars.add(new Star(1, -400));
         }
     }
 
     void createColorSwitchers() {
         for (int i = 0; i < N; i++) {
-            colorSwitchers.add(new ColorSwitcher(1));
+            colorSwitchers.add(new ColorSwitcher(-350));
         }
     }
 
-    void setUp(Stage stage) throws IOException {
+    void setUp(Stage stage,Main main) throws IOException {
+        this.stage = stage;
+        this.m=main;
         g.startGame(stage);
     }
 
+    void loadGame(Stage stage,Main main) throws IOException {
+
+        g=new Game(this);
+        this.stage=stage;
+        this.m=main;
+        for (int i = 0; i < 12; i++) {
+            obstacles.get(i).create();
+            System.out.println(obstacles.get(i).positionY+" "+i);
+        }
+        for(int i=0;i<N;i++){
+            stars.get(i).create();
+            colorSwitchers.get(i).create();
+            System.out.println(colorSwitchers.get(i).positionY+" "+stars.get(i).positionY+" "+i);
+        }
+        ball.create();
+        System.out.println("Loaded "+i);
+        g.startGame(stage);
+    }
+
+    void save(){
+        try{
+            m.saveGame(this);
+        }catch(IOException e){
+            e.printStackTrace();
+        }
+    }
 
 }

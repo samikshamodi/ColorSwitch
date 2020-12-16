@@ -14,7 +14,11 @@ public class Square extends Obstacle {
     private transient Rectangle yellow, pink, cyan, purple;
     Square(int y,double a) {
         super(y,a);
-
+        create();
+    }
+    public void create(){
+        g=new Group();
+        shapeList=new ArrayList<>();
         yellow = new Rectangle(200, 15, Color.YELLOW);
         pink = new Rectangle(15, 200, Color.DEEPPINK);
         cyan = new Rectangle(200, 15, Color.CYAN);
@@ -44,8 +48,6 @@ public class Square extends Obstacle {
         shapeList.add(pink);
         shapeList.add(cyan);
         shapeList.add(purple);
-
-
     }
 
     @Override
@@ -54,5 +56,10 @@ public class Square extends Obstacle {
         rotater1.setByAngle(angle);
         rotater1.play();
         root.getChildren().add(g);
+    }
+    @Override
+    public void moveDown(){
+        super.moveDown();
+        System.out.println("Hello");
     }
 }

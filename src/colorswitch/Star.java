@@ -7,6 +7,7 @@ import javafx.scene.shape.Shape;
 public class Star extends GameElements{
     private String color;
     private int value;
+    private boolean visible;
     private transient ImageView img;
     Star(int v, int y){
         super(y);
@@ -15,10 +16,13 @@ public class Star extends GameElements{
             color="White";
         else
             color="Green";
+        create();
 
         //ImageView img = new ImageView("/assets/star.png");
     }
-
+    public void create(){
+        img = new ImageView("/assets/star.png");
+    }
     public int getValue() {
         return value;
     }
@@ -29,14 +33,14 @@ public class Star extends GameElements{
 
     @Override
     public void appear(AnchorPane root) {
-        img = new ImageView("/assets/star.png");
         img.setFitHeight(50);
         img.setFitWidth(50);
         img.setX(275);
         img.setY(275);
         img.setPreserveRatio(true);
-        img.setLayoutY(-400);
+        img.setLayoutY(positionY);
         root.getChildren().add(img);
+        visible=true;
     }
 
     @Override
@@ -70,6 +74,11 @@ public class Star extends GameElements{
         //img.setImage(null);
         img.setLayoutY(1000);
         root.getChildren().remove(img);
+        visible=false;
+    }
+    public void save(){
+        positionX= img.getLayoutX();
+        positionY=img.getLayoutY();
     }
 }
 

@@ -7,6 +7,8 @@ import javafx.scene.paint.Color;
 import javafx.scene.shape.Shape;
 import javafx.util.Duration;
 
+import java.util.ArrayList;
+
 public class SpecialCircle extends Obstacle {
     private Circle left, right;
     private transient Group g1, g2;
@@ -14,6 +16,11 @@ public class SpecialCircle extends Obstacle {
 
     public SpecialCircle(int y,double a) {
         super(y,a);
+        create();
+    }
+    public void create(){
+        g=new Group();
+        shapeList=new ArrayList<>();
         left = new Circle(-400,1);
         right = new Circle(-400,-1);
 
@@ -36,9 +43,7 @@ public class SpecialCircle extends Obstacle {
         rotaterRight.setCycleCount(1500);
 
         g.getChildren().addAll(g1, g2);
-
     }
-
     @Override
     public void appear(AnchorPane root) {
 

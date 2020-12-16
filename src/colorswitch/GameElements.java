@@ -16,6 +16,8 @@ public abstract class GameElements implements Serializable {
     public double getPosition() {
         return positionY;
     }
+    public abstract void save();
+    public abstract void create();
     public abstract void disappear(AnchorPane root);
     public abstract void appear(AnchorPane root);
 

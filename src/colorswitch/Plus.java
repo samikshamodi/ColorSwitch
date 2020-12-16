@@ -16,7 +16,11 @@ public class Plus extends Obstacle {
 
     Plus(int y,double a) {
         super(y,a);
-
+        create();
+    }
+    public void create(){
+        g=new Group();
+        shapeList=new ArrayList<>();
         yellow = new Rectangle(100, 15, Color.YELLOW);
         pink = new Rectangle(15, 100, Color.DEEPPINK);
         cyan = new Rectangle(100, 15, Color.CYAN);
@@ -46,10 +50,7 @@ public class Plus extends Obstacle {
         shapeList.add(pink);
         shapeList.add(cyan);
         shapeList.add(purple);
-
-
     }
-
     @Override
     public void appear(AnchorPane root) {
         g.setLayoutY(positionY);

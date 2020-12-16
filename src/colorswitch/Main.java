@@ -17,7 +17,6 @@ import java.io.*;
 
 public class Main extends Application {
     ObjectInputStream in;
-    Game g;
     GameModel n;
 
     public void saveGame(GameModel s) throws IOException{
@@ -57,11 +56,16 @@ public class Main extends Application {
         play.setTranslateY(253);
         play.setOnAction(e -> {
             //  System.out.println("new game");
-            n = new GameModel();
+            n=new GameModel();
             try {
-                n.setUp(primaryStage);
+                loadGame();
+                n.loadGame(primaryStage,this);
+                //n.setUp(primaryStage,this);
             } catch (IOException ioException) {
                 ioException.printStackTrace();
+            }catch(ClassNotFoundException en){
+                System.out.println("H");
+                en.printStackTrace();
             }
         });
 
@@ -113,7 +117,7 @@ public class Main extends Application {
         rotateTransition4.play();
 
         leaderboard.setOnAction(e -> {
-            AnchorPane r = null;
+            AnchorPane r=null;
             try {
                 r = FXMLLoader.load(getClass().getResource("/gui/ViewLeaderboardScene.fxml"));
             } catch (IOException ioException) {
@@ -134,12 +138,13 @@ public class Main extends Application {
 
 
     public static void main(String[] args) {
-          launch(args);
+        launch(args);
 //        Main m=new Main();
-//        GameModel newk = new GameModel();
+//        //GameModel newk = new GameModel();
 //        try{
-//            m.saveGame(newk);
+//            //m.saveGame(newk);
 //            m.loadGame();
+//            m.n.loadGame();
 //        }
 //        catch (IOException e){
 //            System.out.println("IO Error");
@@ -149,5 +154,6 @@ public class Main extends Application {
 //            System.out.println("CNF Error");
 //            e.printStackTrace();
 //        }
+
     }
 }

@@ -30,11 +30,11 @@ public class Game {
     }
 
     private void addObstacles(AnchorPane root) {
-        newG.obstacles.get(0).appear(root);
-        newG.obstacles.get(1).appear(root);
-        newG.obstacles.get(2).appear(root);
-        newG.obstacles.get(0).setLayoutY(0);
-        newG.obstacles.get(2).setLayoutY(-800);
+        newG.obstacles.get((newG.i)%12).appear(root);
+        newG.obstacles.get((newG.i+1)%12).appear(root);
+        newG.obstacles.get((newG.i+2)%12).appear(root);
+        newG.obstacles.get((newG.i)%12).setLayoutY(0);
+        newG.obstacles.get((newG.i+2)%12).setLayoutY(-800);
     }
 
 
@@ -44,19 +44,19 @@ public class Game {
 
 
     private void addStars(AnchorPane root) {
-        newG.stars.get(0).appear(root);
-        newG.stars.get(1).appear(root);
-        newG.stars.get(2).appear(root);
-        newG.stars.get(0).setLayoutY(0);
-        newG.stars.get(2).setLayoutY(-800);
+        newG.stars.get((newG.i)%8).appear(root);
+        newG.stars.get((newG.i+1)%8).appear(root);
+        newG.stars.get((newG.i+2)%8).appear(root);
+        newG.stars.get((newG.i)%8).setLayoutY(0);
+        newG.stars.get((newG.i+2)%8).setLayoutY(-800);
     }
 
     private void addColorSwitchers(AnchorPane root) {
-        newG.colorSwitchers.get(0).appear(root);
-        newG.colorSwitchers.get(1).appear(root);
-        newG.colorSwitchers.get(2).appear(root);
-        newG.colorSwitchers.get(0).setLayoutY(50);
-        newG.colorSwitchers.get(2).setLayoutY(-3 * 700);
+        newG.colorSwitchers.get((newG.i)%8).appear(root);
+        newG.colorSwitchers.get((newG.i+1)%8).appear(root);
+        newG.colorSwitchers.get((newG.i+2)%8).appear(root);
+        newG.colorSwitchers.get((newG.i)%8).setLayoutY(50);
+        newG.colorSwitchers.get((newG.i+2)%8).setLayoutY(-3 * 700);
     }
 
 
@@ -95,7 +95,7 @@ public class Game {
         stage.setTitle("Color Switch");
         stage.setScene(scene);
         stage.show();
-
+        System.out.println("Screen Loaded"+newG.i);
         return 0;
     }
 
@@ -134,7 +134,7 @@ public class Game {
                             collectStars(root, score);
 
                             /*ensures obstacles are infinite and randomised*/
-                            if (newG.i == 4) {
+                            if (newG.i%newG.N == 4) {
                                 Collections.shuffle(newG.obstacles.subList(0, 4));
                             }
                         }
@@ -220,7 +220,11 @@ public class Game {
         save.setFont(new Font("Courier New Bold", 40));
         save.setTextFill(Color.WHITE);
         save.setStyle("-fx-background-color: black");
-        save.setOnAction(e -> flag.set(3));
+        save.setOnAction(e -> {
+            saveState();
+            stage.close();
+            newG.save();
+        });
 
         root.getChildren().addAll(resume, restart, save);
         stage.setTitle("Color Switch");
@@ -236,8 +240,8 @@ public class Game {
         int collisionDetected2 = newG.obstacles.get((newG.i + 1) % newG.N).checkCollision(newG.ball.getShape());
         int collisionDetected3 = newG.obstacles.get((newG.i + 2) % newG.N).checkCollision(newG.ball.getShape());
         if (collisionDetected1 == 1 || collisionDetected2 == 1 || collisionDetected3 == 1) {
-            System.out.println("Collision detected");
-            System.out.println("Game Over");
+            //System.out.println("Collision detected");
+            //System.out.println("Game Over");
             //TODO add the game over menu
         }
         return 0;
@@ -272,7 +276,7 @@ public class Game {
         int csCollected2 = newG.colorSwitchers.get((newG.i + 1) % newG.N).checkCollision(newG.ball.getShape());
         int csCollected3 = newG.colorSwitchers.get((newG.i + 2) % newG.N).checkCollision(newG.ball.getShape());
 
-        //if colorswitcher collected
+        //if color switcher collected
         if (csCollected1 == 1 || csCollected2 == 1 || csCollected3 == 1) {
             System.out.println("Color Switcher Collected");
             if (csCollected1 == 1) {
@@ -289,8 +293,16 @@ public class Game {
         return " ";
     }
 
-    int fall() {
-        return 2;
+    public void saveState(){
+        System.out.println(newG.i);
+        for(int j=0;j< 12;j++){
+            newG.obstacles.get(j).save();
+            if(j<8){
+                newG.stars.get(j).save();
+                newG.colorSwitchers.get(j).save();
+            }
+        }
+        newG.ball.save();
     }
 
 }

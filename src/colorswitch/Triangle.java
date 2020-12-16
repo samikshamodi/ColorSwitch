@@ -15,7 +15,11 @@ public class Triangle extends Obstacle{
 
     Triangle(int y,double a){
         super(y,a);
-
+        create();
+    }
+    public void create(){
+        g=new Group();
+        shapeList=new ArrayList<>();
         yellow = new Polygon();
         yellow.getPoints().addAll(0.0,50.0,50.0,0.0,50.0,100.0);
         yellow.setFill(Color.YELLOW);
@@ -47,7 +51,6 @@ public class Triangle extends Obstacle{
         shapeList.add(pink);
         shapeList.add(cyan);
         shapeList.add(purple);
-
     }
 
     @Override

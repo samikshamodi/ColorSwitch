@@ -15,7 +15,7 @@ public abstract class Obstacle extends GameElements{
     Obstacle(int y,double a){
         super(y);
         angle=a*360;
-        g =new Group();
+        g=new Group();
         shapeList=new ArrayList<>();
     }
 
@@ -39,8 +39,8 @@ public abstract class Obstacle extends GameElements{
 
     @Override
     public void setLayoutY(double dy) {
-        g.setLayoutY(dy);
-
+        if(positionY == -400)
+            g.setLayoutY(dy);
     }
 
     public void disappear(AnchorPane root) {
@@ -59,7 +59,7 @@ public abstract class Obstacle extends GameElements{
                 }
                 else
                 {
-                    System.out.println("Collision detected "+s.getFill());
+                    //System.out.println("Collision detected "+s.getFill());
                     return 1;
                 }
             }
@@ -68,4 +68,9 @@ public abstract class Obstacle extends GameElements{
         return 0;
     }
 
+    public void save() {
+        angle=rotater1.getByAngle();
+        positionX=g.getLayoutX();
+        positionY=g.getLayoutY();
+    }
 }

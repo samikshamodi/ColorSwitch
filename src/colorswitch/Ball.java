@@ -10,10 +10,12 @@ public class Ball extends GameElements {
 
     public Ball(int y) {
         super(y);
-        ball = new javafx.scene.shape.Circle(10, Color.YELLOW);
-        ball.relocate(295, 600);
+        create();
     }
-
+    public void create(){
+        ball = new javafx.scene.shape.Circle(10, Color.YELLOW);
+        ball.relocate(295, positionY);
+    }
     public Color getColor()
     {
         return (Color) ball.getFill();
@@ -82,4 +84,8 @@ public class Ball extends GameElements {
 
     }
 
+    public void save(){
+        positionX=ball.getLayoutX();
+        positionY=ball.getLayoutY();
+    }
 }
