@@ -160,6 +160,13 @@ public class Game {
                 if (newG.i % newG.N == 8) {
                     Collections.shuffle(newG.obstacles.subList(0, 8));
                 }
+
+                if(newG.currentScore%10==0 && newG.currentScore>0)
+                {
+                    increaseDifficulty();
+                }
+
+
             }
         };
 
@@ -192,6 +199,13 @@ public class Game {
                 }
             }
         });
+    }
+
+    private void increaseDifficulty() {
+        for(int j=0;j<newG.N;j++)
+        {
+            newG.obstacles.get(j).increaseSpeed();
+        }
     }
 
     private void gameOver(Stage stage) throws IOException {

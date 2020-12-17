@@ -80,7 +80,7 @@ public class Circle extends Obstacle {
         g.getChildren().addAll(yellow, pink, cyan, purple);
 
         /*Rotating the group*/
-        rotater1 = new RotateTransition(Duration.seconds(4), g);
+        rotater1 = new RotateTransition(Duration.seconds(speed), g);
         rotater1.setCycleCount(1500);
 
         /*adding all the javafx shapes to shapeList to letter traverse it and check for collision*/

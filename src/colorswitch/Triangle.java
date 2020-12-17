@@ -44,7 +44,7 @@ public class Triangle extends Obstacle{
 
         g.getChildren().addAll(yellow, pink, cyan, purple);
 
-        rotater1 = new RotateTransition(Duration.seconds(4), g);
+        rotater1 = new RotateTransition(Duration.seconds(speed), g);
         rotater1.setCycleCount(1500);
 
         shapeList.add(yellow);

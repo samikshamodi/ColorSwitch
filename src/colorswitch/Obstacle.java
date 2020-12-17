@@ -4,24 +4,27 @@ import javafx.animation.RotateTransition;
 import javafx.scene.Group;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.shape.Shape;
+import javafx.util.Duration;
 
 import java.util.ArrayList;
 
-public abstract class Obstacle extends GameElements{
+public abstract class Obstacle extends GameElements {
     protected double angle;
     protected transient Group g;
     protected boolean visible;
     protected transient ArrayList<Shape> shapeList;
     protected transient RotateTransition rotater1;
+    protected transient double speed;
 
-    Obstacle(int y,double a){
+    Obstacle(int y, double a) {
         super(y);
-        angle=a*360;
-        g=new Group();
-        shapeList=new ArrayList<>();
+        angle = a * 360;
+        g = new Group();
+        shapeList = new ArrayList<>();
+        speed = 4;
     }
 
-    int rotate(){
+    int rotate() {
         return 0;
     }
 
@@ -30,8 +33,8 @@ public abstract class Obstacle extends GameElements{
     }
 
     @Override
-    public void moveDown(){
-        g.setLayoutY(g.getLayoutY()+55);
+    public void moveDown() {
+        g.setLayoutY(g.getLayoutY() + 55);
     }
 
     @Override
@@ -45,24 +48,21 @@ public abstract class Obstacle extends GameElements{
     }
 
     public void disappear(AnchorPane root) {
-        positionY=-400;
-        positionX=g.getLayoutX();
+        positionY = -400;
+        positionX = g.getLayoutX();
         root.getChildren().remove(g);
-        visible=false;
+        visible = false;
     }
 
     @Override
     public int checkCollision(Shape ball) {
-        for(Shape s:shapeList)
-        {
-            Shape shapeIntersect=Shape.intersect(ball,s);
+        for (Shape s : shapeList) {
+            Shape shapeIntersect = Shape.intersect(ball, s);
             //Collision happened
             if (shapeIntersect.getBoundsInLocal().getWidth() != -1) {
                 if (s.getFill().equals(ball.getFill())) {
                     return 0;
-                }
-                else
-                {
+                } else {
                     //System.out.println("Collision detected "+s.getFill());
                     return 1;
                 }
@@ -73,10 +73,18 @@ public abstract class Obstacle extends GameElements{
     }
 
     public void save() {
-        if(visible){
+        if (visible) {
             positionX = g.getLayoutX();
             positionY = g.getLayoutY();
         }
-      //  System.out.println(positionY+" ");
+        //  System.out.println(positionY+" ");
+    }
+
+    public void increaseSpeed() {
+        if (!visible) {
+            rotater1.stop();
+            if (speed - 0.005 > 0)
+                speed -= 0.005;
+        }
     }
 }

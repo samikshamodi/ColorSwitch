@@ -51,8 +51,8 @@ public class GameModel implements Serializable {
             obstacles.add(new Plus(-400,1));
             obstacles.add(new Special(-400,1));
         }
-        for(int i=0;i<12;i++)
-            System.out.println(obstacles.get(i).positionY);
+        //for(int i=0;i<12;i++)
+          //  System.out.println(obstacles.get(i).positionY);
     }
 
     void createStars() {

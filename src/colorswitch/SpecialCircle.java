@@ -37,8 +37,8 @@ public class SpecialCircle extends Obstacle {
         g1.setLayoutX(-110);
         g2.setLayoutX(119);
 
-        rotater1 = new RotateTransition(Duration.seconds(10), g1);
-        rotaterRight = new RotateTransition(Duration.seconds(10), g2);
+        rotater1 = new RotateTransition(Duration.seconds(speed+6), g1);
+        rotaterRight = new RotateTransition(Duration.seconds(speed+6), g2);
         rotater1.setCycleCount(1500);
         rotaterRight.setCycleCount(1500);
 

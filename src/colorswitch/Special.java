@@ -36,8 +36,8 @@ public class Special extends Obstacle{
         g1.setLayoutX(-10);
         g2.setLayoutX(205);
 
-        rotater1 = new RotateTransition(Duration.seconds(5), g1);
-        rotaterRight = new RotateTransition(Duration.seconds(5), g2);
+        rotater1 = new RotateTransition(Duration.seconds(speed), g1);
+        rotaterRight = new RotateTransition(Duration.seconds(speed), g2);
         rotater1.setCycleCount(1500);
         rotaterRight.setCycleCount(1500);
 

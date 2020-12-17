@@ -44,9 +44,21 @@ public class Main extends Application {
         System.out.println("Game loaded");
     }
 
+
+
     @Override
     public void start(Stage primaryStage) throws IOException {
         AnchorPane root = FXMLLoader.load(getClass().getResource("/gui/MainMenu.fxml"));
+        addResources(primaryStage,root);
+        Scene scene = new Scene(root);
+
+        primaryStage.setTitle("Color Switch");
+        primaryStage.setScene(scene);
+        primaryStage.show();
+
+    }
+
+    private void addResources(Stage primaryStage,AnchorPane root) {
         BackgroundImage myBI1 = new BackgroundImage(new Image("/assets/newGameButton.png", 120, 123, true, true), BackgroundRepeat.NO_REPEAT, BackgroundRepeat.NO_REPEAT, BackgroundPosition.DEFAULT, BackgroundSize.DEFAULT);
         Button play = new Button("");
         play.setBackground(new Background(myBI1));
@@ -58,9 +70,9 @@ public class Main extends Application {
             //  System.out.println("new game");
             n=new GameModel();
             try {
-               loadGame();
-              n.loadGame(primaryStage,this);
-              //  n.setUp(primaryStage,this);
+              //  loadGame();
+                //n.loadGame(primaryStage,this);
+                  n.setUp(primaryStage,this);
             } catch (Exception ioException) {
                 ioException.printStackTrace();
             }/*catch(ClassNotFoundException en){
@@ -128,12 +140,6 @@ public class Main extends Application {
         });
 
         root.getChildren().addAll(img1, img2, img3, leaderboard, play);
-        Scene scene = new Scene(root);
-
-        primaryStage.setTitle("Color Switch");
-        primaryStage.setScene(scene);
-        primaryStage.show();
-
     }
 
 
