@@ -4,25 +4,28 @@ import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.shape.Shape;
 
-public class Star extends GameElements{
+public class Star extends GameElements {
     private String color;
     private int value;
     private boolean visible;
     private transient ImageView img;
-    Star(int v, int y){
+
+    Star(int v, int y) {
         super(y);
         value = v;
-        if(value == 1)
-            color="White";
+        if (value == 1)
+            color = "White";
         else
-            color="Green";
+            color = "Green";
         create();
 
         //ImageView img = new ImageView("/assets/star.png");
     }
-    public void create(){
+
+    public void create() {
 
     }
+
     public int getValue() {
         return value;
     }
@@ -34,6 +37,7 @@ public class Star extends GameElements{
     @Override
     public void appear(AnchorPane root) {
         img = new ImageView("/assets/star.png");
+        visible = true;
         img.setFitHeight(50);
         img.setFitWidth(50);
         img.setX(275);
@@ -41,26 +45,30 @@ public class Star extends GameElements{
         img.setPreserveRatio(true);
         img.setLayoutY(positionY);
         root.getChildren().add(img);
-        visible=true;
     }
 
     @Override
     public int checkCollision(Shape ball) {
         //if ball collides with star return 1 else return 0;
-        if((img.getBoundsInParent().intersects(ball.getBoundsInParent())))
-        {
+    if (img==null)
+        return 0;
+        if ((img.getBoundsInParent().intersects(ball.getBoundsInParent()))) {
             return 1;
         }
+
         return 0;
     }
 
     @Override
     public void moveDown() {
+        if(img!=null)
         img.setLayoutY(img.getLayoutY() + 55); //3 is step or velocity
     }
 
     @Override
     public double getLayoutY() {
+        if(img==null)
+            return -400;
         return img.getLayoutY();
     }
 
@@ -73,17 +81,22 @@ public class Star extends GameElements{
     public void disappear(AnchorPane root) {
         //root.getChildren().remove(img);
         //img.setImage(null);
+        visible = false;
         img.setLayoutY(1000);
-        positionX=275;
-        positionY=-400;
+        positionX = 275;
+        positionY = -400;
         root.getChildren().remove(img);
-        visible=false;
     }
-    public void save(){
-        if(visible){
-            positionX= img.getLayoutX();
-            positionY=img.getLayoutY();
+
+    public void save() {
+        if (visible) {
+            positionX = img.getLayoutX();
+            positionY = img.getLayoutY();
         }
+    }
+
+    public boolean getVisible() {
+        return visible;
     }
 }
 

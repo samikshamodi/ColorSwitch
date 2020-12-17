@@ -58,9 +58,9 @@ public class Main extends Application {
             //  System.out.println("new game");
             n=new GameModel();
             try {
-                loadGame();
-                n.loadGame(primaryStage,this);
-                //n.setUp(primaryStage,this);
+               loadGame();
+              n.loadGame(primaryStage,this);
+              //  n.setUp(primaryStage,this);
             } catch (Exception ioException) {
                 ioException.printStackTrace();
             }/*catch(ClassNotFoundException en){

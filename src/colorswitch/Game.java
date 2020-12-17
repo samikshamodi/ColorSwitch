@@ -28,16 +28,19 @@ public class Game {
     private AnimationTimer animationTimer;
 
     Game(GameModel G) {
-        newG=G;
+        newG = G;
     }
 
-    private void addObstacles(AnchorPane root,boolean loaded) {
-        newG.obstacles.get((newG.i)%12).appear(root);
-        newG.obstacles.get((newG.i+1)%12).appear(root);
-        newG.obstacles.get((newG.i+2)%12).appear(root);
-        if(!loaded){
-            newG.obstacles.get((newG.i)%12).setLayoutY(0);
-            newG.obstacles.get((newG.i+2)%12).setLayoutY(-800);
+    private void addObstacles(AnchorPane root, boolean loaded) {
+        newG.obstacles.get(newG.i % newG.N).create();
+        newG.obstacles.get((newG.i + 1) % newG.N).create();
+        newG.obstacles.get((newG.i + 2) % newG.N).create();
+        newG.obstacles.get((newG.i) % newG.N).appear(root);
+        newG.obstacles.get((newG.i + 1) % newG.N).appear(root);
+        newG.obstacles.get((newG.i + 2) % newG.N).appear(root);
+        if (!loaded) {
+            newG.obstacles.get((newG.i) % newG.N).setLayoutY(0);
+            newG.obstacles.get((newG.i + 2) % newG.N).setLayoutY(-800);
         }
     }
 
@@ -47,28 +50,47 @@ public class Game {
     }
 
 
-    private void addStars(AnchorPane root,boolean loaded) {
-        newG.stars.get((newG.i)%8).appear(root);
-        newG.stars.get((newG.i+1)%8).appear(root);
-        newG.stars.get((newG.i+2)%8).appear(root);
-        if(!loaded){
-            newG.stars.get((newG.i) % 8).setLayoutY(0);
-            newG.stars.get((newG.i + 2) % 8).setLayoutY(-800);
+    private void addStars(AnchorPane root, boolean loaded) {
+        newG.stars.get(newG.i % newG.N).create();
+        newG.stars.get((newG.i + 1) % newG.N).create();
+        newG.stars.get((newG.i + 2) % newG.N).create();
+        if ((loaded && newG.stars.get((newG.i) % newG.N).getVisible()) || !loaded) {
+            newG.stars.get((newG.i) % newG.N).appear(root);
+        }
+        if ((loaded && newG.stars.get((newG.i + 1) % newG.N).getVisible()) || !loaded) {
+            newG.stars.get((newG.i + 1) % newG.N).appear(root);
+        }
+        if ((loaded && newG.stars.get((newG.i + 2) % newG.N).getVisible()) || !loaded) {
+            newG.stars.get((newG.i + 2) % newG.N).appear(root);
+        }
+        if (!loaded) {
+            newG.stars.get((newG.i) % newG.N).setLayoutY(0);
+            newG.stars.get((newG.i + 2) % newG.N).setLayoutY(-800);
         }
     }
 
-    private void addColorSwitchers(AnchorPane root,boolean loaded) {
-        newG.colorSwitchers.get((newG.i)%8).appear(root);
-        newG.colorSwitchers.get((newG.i+1)%8).appear(root);
-        newG.colorSwitchers.get((newG.i+2)%8).appear(root);
-        if(!loaded){
-            newG.colorSwitchers.get((newG.i)%8).setLayoutY(50);
-            newG.colorSwitchers.get((newG.i+2)%8).setLayoutY(-3 * 700);
+    private void addColorSwitchers(AnchorPane root, boolean loaded) {
+        newG.colorSwitchers.get(newG.i % newG.N).create();
+        newG.colorSwitchers.get((newG.i + 1) % newG.N).create();
+        newG.colorSwitchers.get((newG.i + 2) % newG.N).create();
+
+        if ((loaded && newG.colorSwitchers.get((newG.i) % newG.N).getVisible()) || !loaded) {
+            newG.colorSwitchers.get((newG.i) % newG.N).appear(root);
+        }
+        if ((loaded && newG.colorSwitchers.get((newG.i) % newG.N).getVisible()) || !loaded) {
+            newG.colorSwitchers.get((newG.i + 1) % newG.N).appear(root);
+        }
+        if ((loaded && newG.colorSwitchers.get((newG.i) % newG.N).getVisible()) || !loaded) {
+            newG.colorSwitchers.get((newG.i + 2) % newG.N).appear(root);
+        }
+        if (!loaded) {
+            newG.colorSwitchers.get((newG.i) % newG.N).setLayoutY(50);
+            newG.colorSwitchers.get((newG.i + 2) % newG.N).setLayoutY(-700);
         }
     }
 
 
-    public int startGame(Stage stage,boolean loaded) throws IOException {
+    public int startGame(Stage stage, boolean loaded) throws IOException {
         //Setting the game scene
         FXMLLoader loader = new FXMLLoader();
         loader.setLocation(Main.class.getResource("/gui/StartGameScene.fxml"));
@@ -82,7 +104,7 @@ public class Game {
         pause.setTranslateX(500);
         pause.setTranslateY(20);
 
-        score = new Label("0");
+        score = new Label("" + newG.currentScore);
         score.setFont(new Font("Comic Sans", 74));
         score.setTextFill(Color.WHITE);
         score.prefWidth(140);
@@ -92,10 +114,10 @@ public class Game {
         root.getChildren().addAll(pause, score);
 
         //changing objects in scene
-        addObstacles(root,loaded);
+        addObstacles(root, loaded);
         addBall(root);
-        addStars(root,loaded);
-        addColorSwitchers(root,loaded);
+        addStars(root, loaded);
+        addColorSwitchers(root, loaded);
 
         playGame(stage, root);
 
@@ -103,7 +125,7 @@ public class Game {
         stage.setTitle("Color Switch");
         stage.setScene(scene);
         stage.show();
-        System.out.println("Screen Loaded"+newG.i);
+        System.out.println("Screen Loaded" + newG.i);
         return 0;
     }
 
@@ -132,7 +154,7 @@ public class Game {
                 collectStars(root, score);
 
                 /*ensures obstacles are infinite and randomised*/
-                if (newG.i % 12 == 8) {
+                if (newG.i % newG.N == 8) {
                     Collections.shuffle(newG.obstacles.subList(0, 8));
                 }
             }
@@ -168,6 +190,7 @@ public class Game {
             }
         });
     }
+
     public void moveElementsDown(AnchorPane root) {
         //now move the obstacle down to give the illusion of screen moving down
         newG.colorSwitchers.get(newG.i % newG.N).moveDown();
@@ -178,16 +201,19 @@ public class Game {
         newG.stars.get((newG.i + 1) % newG.N).moveDown();
         newG.stars.get((newG.i + 2) % newG.N).moveDown();
 
-        newG.obstacles.get(newG.i % 12).moveDown();
-        newG.obstacles.get((newG.i + 1) % 12).moveDown();
-        newG.obstacles.get((newG.i + 2) % 12).moveDown();
+        newG.obstacles.get(newG.i % newG.N).moveDown();
+        newG.obstacles.get((newG.i + 1) % newG.N).moveDown();
+        newG.obstacles.get((newG.i + 2) % newG.N).moveDown();
 
         /* if obstacles are not on screen anymore then remove them from root and add the top screen element*/
-        if (newG.obstacles.get(newG.i % 12).getLayoutY() >= 750) {
-            newG.obstacles.get(newG.i % 12).disappear(root);
-            System.out.println("Dis "+newG.i);
+        if (newG.obstacles.get(newG.i % newG.N).getLayoutY() >= 800) {
+            newG.obstacles.get(newG.i % newG.N).disappear(root);
+            System.out.println("Dis " + newG.i);
             newG.i++;
-            newG.obstacles.get((newG.i + 2) % 12).appear(root);
+            newG.obstacles.get((newG.i + 2) % newG.N).create();
+            newG.stars.get((newG.i + 2) % newG.N).create();
+            newG.colorSwitchers.get((newG.i + 2) % newG.N).create();
+            newG.obstacles.get((newG.i + 2) % newG.N).appear(root);
             newG.stars.get((newG.i + 2) % newG.N).appear(root);
             newG.colorSwitchers.get((newG.i + 2) % newG.N).appear(root);
         }
@@ -250,7 +276,7 @@ public class Game {
         int collisionDetected2 = newG.obstacles.get((newG.i + 1) % newG.N).checkCollision(newG.ball.getShape());
         int collisionDetected3 = newG.obstacles.get((newG.i + 2) % newG.N).checkCollision(newG.ball.getShape());
         if (collisionDetected1 == 1 || collisionDetected2 == 1 || collisionDetected3 == 1) {
-            //System.out.println("Collision detected");
+            // System.out.println("Collision detected");
             //System.out.println("Game Over");
             //TODO add the game over menu
         }
@@ -303,16 +329,14 @@ public class Game {
         return " ";
     }
 
-    public void saveState(){
+    public void saveState() {
         System.out.println(newG.i);
-        for(int j=0;j< 12;j++){
+        for (int j = 0; j < newG.N; j++) {
             newG.obstacles.get(j).save();
-            if(j<8){
-                newG.stars.get(j).save();
-                newG.colorSwitchers.get(j).save();
-                //System.out.println(newG.colorSwitchers.get(j).positionY+" "+newG.stars.get(j).positionY);
-            }
-            System.out.println(newG.obstacles.get(j).positionY+" "+j);
+            newG.stars.get(j).save();
+            newG.colorSwitchers.get(j).save();
+            System.out.println(newG.colorSwitchers.get(j).positionY + " " + newG.stars.get(j).positionY);
+            //   System.out.println(newG.obstacles.get(j).positionY + " " + j);
         }
         newG.ball.save();
     }

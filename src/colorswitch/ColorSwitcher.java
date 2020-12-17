@@ -53,6 +53,8 @@ public class ColorSwitcher extends GameElements {
     @Override
     public int checkCollision(Shape ball) {
         //if ball collides with color switcher return 1 else return 0;
+        if(img==null)
+            return 0;
         if ((img.getBoundsInParent().intersects(ball.getBoundsInParent()))) {
             return 1;
         }
@@ -61,11 +63,14 @@ public class ColorSwitcher extends GameElements {
 
     @Override
     public void moveDown() {
+        if(img!=null)
         img.setLayoutY(img.getLayoutY() + 55); //3 is step or velocity
     }
 
     @Override
     public double getLayoutY() {
+        if(img==null)
+            return -350;
         return img.getLayoutY();
     }
 
@@ -89,5 +94,10 @@ public class ColorSwitcher extends GameElements {
             positionX= img.getLayoutX();
             positionY= img.getLayoutY();
         }
+    }
+
+    public boolean getVisible()
+    {
+        return visible;
     }
 }

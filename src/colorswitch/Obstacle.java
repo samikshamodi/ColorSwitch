@@ -77,6 +77,6 @@ public abstract class Obstacle extends GameElements{
             positionX = g.getLayoutX();
             positionY = g.getLayoutY();
         }
-        System.out.println(positionY+" ");
+      //  System.out.println(positionY+" ");
     }
 }

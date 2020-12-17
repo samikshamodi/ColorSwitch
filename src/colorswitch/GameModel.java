@@ -28,7 +28,7 @@ public class GameModel implements Serializable {
     Ball ball;
     int currentScore;
     int i = 0;
-    int N = 8;
+    int N = 12;
     transient Game g;
     GameModel(){
         currentScore = 0;
@@ -56,13 +56,13 @@ public class GameModel implements Serializable {
     }
 
     void createStars() {
-        for (int i = 0; i < N; i++) {
+        for (int i = 0; i < 12; i++) {
             stars.add(new Star(1, -400));
         }
     }
 
     void createColorSwitchers() {
-        for (int i = 0; i < N; i++) {
+        for (int i = 0; i < 12; i++) {
             colorSwitchers.add(new ColorSwitcher(-350));
         }
     }
@@ -78,13 +78,13 @@ public class GameModel implements Serializable {
         g=new Game(this);
         this.stage=stage;
         this.m=main;
-        for (int i = 0; i < 12; i++) {
+       /* for (int i = 0; i < 12; i++) {
             obstacles.get(i).create();
             System.out.println(obstacles.get(i).positionY+" "+i);
-        }
+        }*/
         for(int i=0;i<N;i++){
-            stars.get(i).create();
-            colorSwitchers.get(i).create();
+           // stars.get(i).create();
+            //colorSwitchers.get(i).create();
             System.out.println(colorSwitchers.get(i).positionY+" "+stars.get(i).positionY+" "+i);
         }
         ball.create();
