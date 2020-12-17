@@ -137,9 +137,13 @@ public class Game {
                 newG.ball.moveDown();
                 Bounds bounds = root.getBoundsInLocal();
 
-                //TODO handling crash condition and game over menu
-                if (newG.ball.getLayoutY() >= (bounds.getMaxY() - newG.ball.getRadius())) {
-                    System.out.println("Crashed :(");
+                if (newG.ball.getLayoutY() >= (bounds.getMaxY() - newG.ball.getRadius())||hitObstacle()==1) {
+                    try {
+                       animationTimer.stop();
+                        gameOver(stage);
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    }
                 }
 
                 /*to not allow the ball to go above a certain height on screen.*/
@@ -148,8 +152,7 @@ public class Game {
                     moveElementsDown(root);
                 }
 
-                /*check for all collisions*/
-                hitObstacle();
+                /*check for collection*/
                 collectColorSwitcher(root);
                 collectStars(root, score);
 
@@ -164,7 +167,7 @@ public class Game {
             try {
                 animationTimer.stop();
                 int ans = pauseGame(stage);
-                System.out.println("Received: " + ans);//TODO check this condition
+                System.out.println("Received: " + ans);
                 if (ans == 1) {
                     animationTimer.start();
                 }
@@ -189,6 +192,16 @@ public class Game {
                 }
             }
         });
+    }
+
+    private void gameOver(Stage stage) throws IOException {
+        FXMLLoader loader = new FXMLLoader();
+        loader.setLocation(getClass().getResource("/gui/EndGame.fxml")); //TODO fix controller class
+        AnchorPane root = loader.load();
+        Scene scene = new Scene(root);
+        stage.setScene(scene);
+        stage.show();
+
     }
 
     public void moveElementsDown(AnchorPane root) {
@@ -276,9 +289,7 @@ public class Game {
         int collisionDetected2 = newG.obstacles.get((newG.i + 1) % newG.N).checkCollision(newG.ball.getShape());
         int collisionDetected3 = newG.obstacles.get((newG.i + 2) % newG.N).checkCollision(newG.ball.getShape());
         if (collisionDetected1 == 1 || collisionDetected2 == 1 || collisionDetected3 == 1) {
-            // System.out.println("Collision detected");
-            //System.out.println("Game Over");
-            //TODO add the game over menu
+            return 1;
         }
         return 0;
     }
