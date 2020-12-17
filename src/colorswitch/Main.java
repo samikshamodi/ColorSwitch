@@ -10,6 +10,8 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.control.Label;
 import javafx.scene.layout.*;
+import javafx.scene.media.Media;
+import javafx.scene.media.MediaPlayer;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
 import javafx.stage.Stage;
@@ -25,6 +27,7 @@ public class Main extends Application {
     ObjectInputStream in;
     GameModel n;
     ArrayList<Integer> leaderboard;
+    static MediaPlayer mediaGameTrack;
 
     public void saveGame(GameModel s) throws IOException{
         ObjectOutputStream out = null;
@@ -66,6 +69,7 @@ public class Main extends Application {
     }
 
     private void addResources(Stage primaryStage,AnchorPane root) {
+        addMusic();
         BackgroundImage myBI1 = new BackgroundImage(new Image("/assets/newGameButton.png", 120, 123, true, true), BackgroundRepeat.NO_REPEAT, BackgroundRepeat.NO_REPEAT, BackgroundPosition.DEFAULT, BackgroundSize.DEFAULT);
         Button play = new Button("");
         play.setBackground(new Background(myBI1));
@@ -192,6 +196,12 @@ public class Main extends Application {
             if(out!=null)
                 out.close();
         }
+    }
+    private void addMusic() {
+        mediaGameTrack = new MediaPlayer(new Media(getClass().getResource("/assets/gameTrack.mp3").toString()));
+        mediaGameTrack.setAutoPlay(true);
+        mediaGameTrack.setCycleCount(MediaPlayer.INDEFINITE);
+        mediaGameTrack.play();
     }
 
     public static void main(String[] args) throws IOException {
