@@ -2,7 +2,6 @@ package colorswitch;
 
 import javafx.animation.RotateTransition;
 import javafx.application.Application;
-import javafx.event.EventHandler;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
@@ -20,38 +19,34 @@ import javafx.util.Duration;
 import java.io.*;
 import java.util.ArrayList;
 import java.util.Collections;
-import java.util.HashSet;
-import java.util.SortedSet;
 
 public class Main extends Application {
     ObjectInputStream in;
-    GameModel n;
-    ArrayList<Integer> leaderboard;
+    DataBase db;
+    ArrayList<Integer> leader;
     static MediaPlayer mediaGameTrack;
 
-    public void saveGame(GameModel s) throws IOException{
+    public void saveGame(DataBase db) throws IOException{
         ObjectOutputStream out = null;
         try{
             out = new ObjectOutputStream(new FileOutputStream("saves.txt"));
-            out.writeObject(s);
+            out.writeObject(db);
         }
         finally{
             if(out!=null)
                 out.close();
         }
-        System.out.println("Game saved");
     }
 
     public void loadGame() throws IOException,ClassNotFoundException{
         try{
             in = new ObjectInputStream(new FileInputStream("saves.txt"));
-            n=(GameModel) in.readObject();
+            db=(DataBase) in.readObject();
         }
         finally{
             if(in!=null)
                 in.close();
         }
-        System.out.println("Game loaded");
     }
 
 
@@ -69,7 +64,13 @@ public class Main extends Application {
     }
 
     private void addResources(Stage primaryStage,AnchorPane root) {
-        addMusic();
+        //addMusic();
+        try {
+            loadGame();
+        } catch (IOException | ClassNotFoundException e) {
+            e.printStackTrace();
+        }
+        //db = new DataBase();
         BackgroundImage myBI1 = new BackgroundImage(new Image("/assets/newGameButton.png", 120, 123, true, true), BackgroundRepeat.NO_REPEAT, BackgroundRepeat.NO_REPEAT, BackgroundPosition.DEFAULT, BackgroundSize.DEFAULT);
         Button play = new Button("");
         play.setBackground(new Background(myBI1));
@@ -78,18 +79,7 @@ public class Main extends Application {
         play.setTranslateX(240);
         play.setTranslateY(253);
         play.setOnAction(e -> {
-            //  System.out.println("new game");
-            n=new GameModel();
-            try {
-                //loadGame();
-                //n.loadGame(primaryStage,this);
-                  n.setUp(primaryStage,this);
-            } catch (Exception ioException) {
-                ioException.printStackTrace();
-            }/*catch(ClassNotFoundException en){
-                System.out.println("H");
-                en.printStackTrace();
-            }*/
+            db.newGame(primaryStage,this);
         });
 
         ImageView img1 = new ImageView("/assets/c1.png");
@@ -148,7 +138,24 @@ public class Main extends Application {
             }
         });
 
-        root.getChildren().addAll(img1, img2, img3, leaderboard, play);
+        Button resume = new Button("Resume Game");
+        resume.setMinWidth(400);
+        resume.setMinHeight(50);
+        resume.setLayoutX(100);
+        resume.setLayoutY(472);
+        resume.setFont(new Font("Courier New Bold", 40));
+        resume.setTextFill(Color.WHITE);
+        resume.setStyle("-fx-background-color: black");
+        resume.setOnAction(e -> {
+            try {
+                db.printSavedGames(primaryStage,this);
+            } catch (IOException ioException) {
+                ioException.printStackTrace();
+            }
+        });
+
+
+        root.getChildren().addAll(img1, img2, img3, leaderboard, play,resume);
     }
 
     public void viewLeaderBoard(Stage stage,AnchorPane root,int score) throws IOException{
@@ -156,22 +163,22 @@ public class Main extends Application {
         root = FXMLLoader.load(Main.class.getResource("/gui/ViewLeaderboardScene.fxml"));
         try{
             in = new ObjectInputStream(new FileInputStream("leaderBoard.txt"));
-            leaderboard=(ArrayList<Integer>) in.readObject();
+            leader =(ArrayList<Integer>) in.readObject();
         } catch (ClassNotFoundException e) {
             e.printStackTrace();
         } finally{
             if(in!=null)
                 in.close();
         }
-        if(leaderboard == null){
+        if(leader == null){
             System.out.println("Hello");
-            leaderboard=new ArrayList<>();
+            leader =new ArrayList<>();
         }
-        leaderboard.add(score);
-        leaderboard.sort(Collections.reverseOrder());
-        for(int i =0 ; i<leaderboard.size();i++){
+        leader.add(score);
+        leader.sort(Collections.reverseOrder());
+        for(int i = 0; i< leader.size(); i++){
             if(i<5){
-                Label sc = new Label(i+1+") "+leaderboard.get(i));
+                Label sc = new Label(i+1+") "+ leader.get(i));
                 sc.setFont(new Font("Courier New Italic", 30));
                 sc.setTextFill(Color.WHITE);
                 sc.prefWidth(400);
@@ -190,7 +197,7 @@ public class Main extends Application {
         ObjectOutputStream out = null;
         try{
             out = new ObjectOutputStream(new FileOutputStream("leaderBoard.txt"));
-            out.writeObject(leaderboard);
+            out.writeObject(leader);
         }
         finally{
             if(out!=null)

@@ -123,7 +123,6 @@ public class Game {
         stage.setTitle("Color Switch");
         stage.setScene(scene);
         stage.show();
-        System.out.println("Screen Loaded" + newG.i);
     }
 
 
@@ -208,6 +207,7 @@ public class Game {
         FXMLLoader loader = new FXMLLoader();
         loader.setLocation(getClass().getResource("/gui/EndGame.fxml")); //TODO fix controller class
         AnchorPane root = loader.load();
+
         Button continueB = new Button("Continue");
         continueB.setMinWidth(400);
         continueB.setMinHeight(50);
@@ -218,13 +218,30 @@ public class Game {
         continueB.setStyle("-fx-background-color: black");
         continueB.setOnAction(e -> {
             saveState();
-            try{
-                startGame(stage,true);
-            }catch(IOException exc){
-                exc.printStackTrace();
-            }
+            newG.resurrect(root);
         });
-        root.getChildren().add(continueB);
+
+        Button quit = new Button("End Game");
+        quit.setMinWidth(400);
+        quit.setMinHeight(50);
+        quit.setLayoutX(100);
+        quit.setLayoutY(600);
+        quit.setFont(new Font("Courier New Bold", 48));
+        quit.setTextFill(Color.WHITE);
+        quit.setStyle("-fx-background-color: black");
+        quit.setOnAction(e -> {
+            newG.Endgame(root);
+        });
+
+        Label totStars = new Label("Available: "+newG.Total());
+        totStars.setFont(new Font("Courier New", 30));
+        totStars.setTextFill(Color.WHITE);
+        totStars.prefWidth(200);
+        totStars.prefHeight(90);
+        totStars.setLayoutX(350);
+        totStars.setLayoutY(37);
+
+        root.getChildren().addAll(continueB,score,quit,totStars);
         Scene scene = new Scene(root);
         stage.setScene(scene);
         stage.show();
@@ -305,7 +322,7 @@ public class Game {
         });
 
         //save game
-        Button save = new Button("Save Game");
+        Button save = new Button("Save & Exit Game");
         save.setMinWidth(400);
         save.setMinHeight(50);
         save.setLayoutX(100);
@@ -390,7 +407,7 @@ public class Game {
             newG.obstacles.get(j).save();
             newG.stars.get(j).save();
             newG.colorSwitchers.get(j).save();
-            System.out.println(newG.colorSwitchers.get(j).positionY + " " + newG.stars.get(j).positionY);
+            //System.out.println(newG.colorSwitchers.get(j).positionY + " " + newG.stars.get(j).positionY);
             //   System.out.println(newG.obstacles.get(j).positionY + " " + j);
         }
         newG.ball.save();

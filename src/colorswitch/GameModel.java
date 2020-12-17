@@ -1,5 +1,11 @@
 package colorswitch;
 
+import java.time.LocalDateTime;
+
+import javafx.scene.control.Label;
+import javafx.scene.layout.AnchorPane;
+import javafx.scene.paint.Color;
+import javafx.scene.text.Font;
 import javafx.stage.Stage;
 
 import java.io.IOException;
@@ -8,12 +14,13 @@ import java.util.ArrayList;
 
 public class GameModel implements Serializable {
     transient Stage stage;
-    transient Main m;
+    DataBase db;
     ArrayList<Obstacle> obstacles;
     ArrayList<Star> stars;
     ArrayList<ColorSwitcher> colorSwitchers;
     Ball ball;
     int currentScore;
+    String dT;
     int i = 0;
     int N = 12;
     transient Game g;
@@ -54,36 +61,55 @@ public class GameModel implements Serializable {
         }
     }
 
-    void setUp(Stage stage,Main main) throws IOException {
+    void setUp(Stage stage,DataBase db) throws IOException {
         this.stage = stage;
-        this.m=main;
+        this.db=db;
         g.startGame(stage,false);
     }
 
-    void loadGame(Stage stage,Main main) throws IOException {
-
+    void loadGame(Stage stage,DataBase db) throws IOException {
         g=new Game(this);
+        this.db=db;
         this.stage=stage;
-        this.m=main;
-       /* for (int i = 0; i < 12; i++) {
-            obstacles.get(i).create();
-            System.out.println(obstacles.get(i).positionY+" "+i);
-        }*/
-        for(int i=0;i<N;i++){
-           // stars.get(i).create();
-            //colorSwitchers.get(i).create();
-            System.out.println(colorSwitchers.get(i).positionY+" "+stars.get(i).positionY+" "+i);
-        }
         ball.create();
         g.startGame(stage,true);
     }
 
     void save(){
-        try{
-            m.saveGame(this);
-        }catch(IOException e){
-            e.printStackTrace();
+        LocalDateTime dateTime = LocalDateTime.now();
+        dT = dateTime.toString();
+        db.saveGameModel(this);
+    }
+    void resurrect(AnchorPane root){
+        if(db.getStars() >= 100) {
+            db.setStars();
+            try{
+                g.startGame(stage,true);
+            }catch(IOException e){
+                e.printStackTrace();
+            }
+        }
+        else{
+            Label errMessage = new Label("Sorry! Need more stars");
+            errMessage.setFont(new Font("Courier New",30));
+            errMessage.setMinWidth(400);
+            errMessage.setMinHeight(50);
+            errMessage.setLayoutX(100);
+            errMessage.setLayoutY(500);
+            errMessage.setTextFill(Color.WHITE);
+            errMessage.setStyle("-fx-background-color: black");
+            root.getChildren().add(errMessage);
         }
     }
+    void Endgame(AnchorPane root){
+        db.end(root,this);
+    }
+    int Total(){
+        return db.getStars();
+    }
 
+    @Override
+    public String toString(){
+        return currentScore+" "+dT;
+    }
 }
