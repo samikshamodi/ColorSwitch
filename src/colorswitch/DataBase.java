@@ -144,7 +144,6 @@ public class DataBase implements Serializable {
     public int getStars() {
         return Stars;
     }
-
     public void setStars() {
         Stars -= 10;
     }

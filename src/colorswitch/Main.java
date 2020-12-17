@@ -21,10 +21,9 @@ import java.util.ArrayList;
 import java.util.Collections;
 
 public class Main extends Application {
-    ObjectInputStream in;
-    DataBase db;
-    ArrayList<Integer> leader;
-    static MediaPlayer mediaGameTrack;
+    private ObjectInputStream in;
+    private DataBase db;
+    private ArrayList<Integer> leader;
 
     public void saveGame(DataBase db) throws IOException{
         ObjectOutputStream out = null;
