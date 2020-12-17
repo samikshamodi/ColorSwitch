@@ -9,7 +9,7 @@
    <children>
       <Pane prefHeight="800.0" prefWidth="600.0" style="-fx-background-color: black;">
          <children>
-            <Label layoutX="200.0" layoutY="300.0" prefHeight="50.0" prefWidth="200.0" style="-fx-background-color: black;" text="100" textAlignment="CENTER" textFill="WHITE">
+            <Label layoutX="200.0" layoutY="300.0" prefHeight="50.0" prefWidth="200.0" style="-fx-background-color: black;" text="10" textAlignment="CENTER" textFill="WHITE">
                <font>
                   <Font name="Courier New Bold" size="48.0" />
                </font>

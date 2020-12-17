@@ -18,8 +18,6 @@ public class Star extends GameElements {
         else
             color = "Green";
         create();
-
-        //ImageView img = new ImageView("/assets/star.png");
     }
 
     public void create() {
@@ -50,19 +48,18 @@ public class Star extends GameElements {
     @Override
     public int checkCollision(Shape ball) {
         //if ball collides with star return 1 else return 0;
-    if (img==null)
-        return 0;
+        if (img==null)
+            return 0;
         if ((img.getBoundsInParent().intersects(ball.getBoundsInParent()))) {
             return 1;
         }
-
         return 0;
     }
 
     @Override
     public void moveDown() {
         if(img!=null)
-        img.setLayoutY(img.getLayoutY() + 55); //3 is step or velocity
+            img.setLayoutY(img.getLayoutY() + 55); //3 is step or velocity
     }
 
     @Override
@@ -79,8 +76,6 @@ public class Star extends GameElements {
 
     @Override
     public void disappear(AnchorPane root) {
-        //root.getChildren().remove(img);
-        //img.setImage(null);
         visible = false;
         img.setLayoutY(1000);
         positionX = 275;

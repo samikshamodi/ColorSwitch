@@ -135,6 +135,7 @@ public class DataBase implements Serializable {
     void end(AnchorPane root,GameModel n){
         Stars+=n.currentScore;
         try {
+            m.saveGame(this);
             m.viewLeaderBoard(stage,root, n.currentScore);
         } catch (IOException e) {
             e.printStackTrace();
@@ -145,6 +146,6 @@ public class DataBase implements Serializable {
     }
 
     public void setStars() {
-        Stars -= 100;
+        Stars -= 10;
     }
 }

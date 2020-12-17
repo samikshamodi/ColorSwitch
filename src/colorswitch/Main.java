@@ -64,7 +64,6 @@ public class Main extends Application {
     }
 
     private void addResources(Stage primaryStage,AnchorPane root) {
-        //addMusic();
         try {
             loadGame();
         } catch (IOException | ClassNotFoundException e) {
@@ -204,30 +203,8 @@ public class Main extends Application {
                 out.close();
         }
     }
-    private void addMusic() {
-        mediaGameTrack = new MediaPlayer(new Media(getClass().getResource("/assets/gameTrack.mp3").toString()));
-        mediaGameTrack.setAutoPlay(true);
-        mediaGameTrack.setCycleCount(MediaPlayer.INDEFINITE);
-        mediaGameTrack.play();
-    }
 
     public static void main(String[] args) throws IOException {
         launch(args);
-//        Main m=new Main();
-//        //GameModel newk = new GameModel();
-//        try{
-//            //m.saveGame(newk);
-//            m.loadGame();
-//            m.n.loadGame();
-//        }
-//        catch (IOException e){
-//            System.out.println("IO Error");
-//            e.printStackTrace();
-//        }
-//        catch (ClassNotFoundException e){
-//            System.out.println("CNF Error");
-//            e.printStackTrace();
-//        }
-
     }
 }

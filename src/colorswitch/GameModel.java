@@ -81,7 +81,7 @@ public class GameModel implements Serializable {
         db.saveGameModel(this);
     }
     void resurrect(AnchorPane root){
-        if(db.getStars() >= 100) {
+        if(db.getStars() >= 10) {
             db.setStars();
             try{
                 g.startGame(stage,true);
