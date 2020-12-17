@@ -21,7 +21,7 @@ public class Star extends GameElements{
         //ImageView img = new ImageView("/assets/star.png");
     }
     public void create(){
-        img = new ImageView("/assets/star.png");
+
     }
     public int getValue() {
         return value;
@@ -33,6 +33,7 @@ public class Star extends GameElements{
 
     @Override
     public void appear(AnchorPane root) {
+        img = new ImageView("/assets/star.png");
         img.setFitHeight(50);
         img.setFitWidth(50);
         img.setX(275);
@@ -73,12 +74,16 @@ public class Star extends GameElements{
         //root.getChildren().remove(img);
         //img.setImage(null);
         img.setLayoutY(1000);
+        positionX=275;
+        positionY=-400;
         root.getChildren().remove(img);
         visible=false;
     }
     public void save(){
-        positionX= img.getLayoutX();
-        positionY=img.getLayoutY();
+        if(visible){
+            positionX= img.getLayoutX();
+            positionY=img.getLayoutY();
+        }
     }
 }
 

@@ -96,8 +96,8 @@ public class Circle extends Obstacle {
         rotater1.setByAngle(angle);
         rotater1.play();
         root.getChildren().add(g);
+        visible=true;
     }
-
     protected Group getGroup() {
         return g;
     }

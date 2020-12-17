@@ -61,12 +61,12 @@ public class Main extends Application {
                 loadGame();
                 n.loadGame(primaryStage,this);
                 //n.setUp(primaryStage,this);
-            } catch (IOException ioException) {
+            } catch (Exception ioException) {
                 ioException.printStackTrace();
-            }catch(ClassNotFoundException en){
+            }/*catch(ClassNotFoundException en){
                 System.out.println("H");
                 en.printStackTrace();
-            }
+            }*/
         });
 
         ImageView img1 = new ImageView("/assets/c1.png");

@@ -1,5 +1,18 @@
 package colorswitch;
 
+import javafx.animation.AnimationTimer;
+import javafx.event.EventHandler;
+import javafx.fxml.FXMLLoader;
+import javafx.geometry.Bounds;
+import javafx.scene.Scene;
+import javafx.scene.control.Button;
+import javafx.scene.control.Label;
+import javafx.scene.image.Image;
+import javafx.scene.input.KeyCode;
+import javafx.scene.input.KeyEvent;
+import javafx.scene.layout.*;
+import javafx.scene.paint.Color;
+import javafx.scene.text.Font;
 import javafx.stage.Stage;
 
 import java.io.IOException;
@@ -38,6 +51,8 @@ public class GameModel implements Serializable {
             obstacles.add(new Plus(-400,1));
             obstacles.add(new Special(-400,1));
         }
+        for(int i=0;i<12;i++)
+            System.out.println(obstacles.get(i).positionY);
     }
 
     void createStars() {
@@ -55,7 +70,7 @@ public class GameModel implements Serializable {
     void setUp(Stage stage,Main main) throws IOException {
         this.stage = stage;
         this.m=main;
-        g.startGame(stage);
+        g.startGame(stage,false);
     }
 
     void loadGame(Stage stage,Main main) throws IOException {
@@ -73,8 +88,7 @@ public class GameModel implements Serializable {
             System.out.println(colorSwitchers.get(i).positionY+" "+stars.get(i).positionY+" "+i);
         }
         ball.create();
-        System.out.println("Loaded "+i);
-        g.startGame(stage);
+        g.startGame(stage,true);
     }
 
     void save(){

@@ -10,8 +10,10 @@ import java.util.ArrayList;
 public abstract class Obstacle extends GameElements{
     protected double angle;
     protected transient Group g;
+    protected boolean visible;
     protected transient ArrayList<Shape> shapeList;
     protected transient RotateTransition rotater1;
+
     Obstacle(int y,double a){
         super(y);
         angle=a*360;
@@ -39,12 +41,14 @@ public abstract class Obstacle extends GameElements{
 
     @Override
     public void setLayoutY(double dy) {
-        if(positionY == -400)
-            g.setLayoutY(dy);
+        g.setLayoutY(dy);
     }
 
     public void disappear(AnchorPane root) {
+        positionY=-400;
+        positionX=g.getLayoutX();
         root.getChildren().remove(g);
+        visible=false;
     }
 
     @Override
@@ -69,8 +73,10 @@ public abstract class Obstacle extends GameElements{
     }
 
     public void save() {
-        angle=rotater1.getByAngle();
-        positionX=g.getLayoutX();
-        positionY=g.getLayoutY();
+        if(visible){
+            positionX = g.getLayoutX();
+            positionY = g.getLayoutY();
+        }
+        System.out.println(positionY+" ");
     }
 }

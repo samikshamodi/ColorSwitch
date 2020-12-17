@@ -56,10 +56,11 @@ public class Square extends Obstacle {
         rotater1.setByAngle(angle);
         rotater1.play();
         root.getChildren().add(g);
+        visible=true;
     }
     @Override
     public void moveDown(){
         super.moveDown();
-        System.out.println("Hello");
+        //System.out.println("Hello");
     }
 }

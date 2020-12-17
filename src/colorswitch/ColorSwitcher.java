@@ -27,11 +27,9 @@ public class ColorSwitcher extends GameElements {
         list.add(Color.DEEPPINK);
         list.add(Color.CYAN);
         list.add(Color.PURPLE);
-        img = new ImageView("/assets/colorSwitcher.png");
     }
 
-    public Color generateColor(Color ballColor)
-    {
+    public Color generateColor(Color ballColor){
         list.remove(ballColor);
         Collections.shuffle(list);
         Color newColor=list.get(0);
@@ -41,6 +39,7 @@ public class ColorSwitcher extends GameElements {
 
     @Override
     public void appear(AnchorPane root) {
+        img = new ImageView("/assets/colorSwitcher.png");
         visible=true;
         img.setFitHeight(30);
         img.setFitWidth(30);
@@ -81,10 +80,14 @@ public class ColorSwitcher extends GameElements {
         //img.setImage(null);
         visible=false;
         img.setLayoutY(1000);
+        positionX=290;
+        positionY=-350;
         root.getChildren().remove(img);
     }
     public void save(){
-        positionX= img.getLayoutX();
-        positionY= img.getLayoutY();
+        if(visible){
+            positionX= img.getLayoutX();
+            positionY= img.getLayoutY();
+        }
     }
 }

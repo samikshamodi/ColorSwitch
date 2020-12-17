@@ -53,6 +53,7 @@ public class Special extends Obstacle{
 
         g.setLayoutY(positionY);
         root.getChildren().add(g);
+        visible=true;
     }
 
     @Override
