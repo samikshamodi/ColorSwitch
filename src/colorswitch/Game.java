@@ -161,7 +161,7 @@ public class Game {
                     Collections.shuffle(newG.obstacles.subList(0, 8));
                 }
 
-                if(newG.currentScore%10==0 && newG.currentScore>0)
+                if(newG.currentScore%20==0 && newG.currentScore>0)
                 {
                     increaseDifficulty();
                 }
@@ -202,8 +202,7 @@ public class Game {
     }
 
     private void increaseDifficulty() {
-        for(int j=0;j<newG.N;j++)
-        {
+        for(int j=0;j<newG.N;j++) {
             newG.obstacles.get(j).increaseSpeed();
         }
     }
@@ -212,10 +211,26 @@ public class Game {
         FXMLLoader loader = new FXMLLoader();
         loader.setLocation(getClass().getResource("/gui/EndGame.fxml")); //TODO fix controller class
         AnchorPane root = loader.load();
+        Button continueB = new Button("Continue");
+        continueB.setMinWidth(400);
+        continueB.setMinHeight(50);
+        continueB.setLayoutX(100);
+        continueB.setLayoutY(150);
+        continueB.setFont(new Font("Courier New Bold", 48));
+        continueB.setTextFill(Color.WHITE);
+        continueB.setStyle("-fx-background-color: black");
+        continueB.setOnAction(e -> {
+            saveState();
+            try{
+                startGame(stage,true);
+            }catch(IOException exc){
+                exc.printStackTrace();
+            }
+        });
+        root.getChildren().add(continueB);
         Scene scene = new Scene(root);
         stage.setScene(scene);
         stage.show();
-
     }
 
     public void moveElementsDown(AnchorPane root) {
@@ -261,7 +276,14 @@ public class Game {
         resume.setPrefWidth(200);
         resume.setTranslateX(225);
         resume.setTranslateY(150);
-        resume.setOnAction(e -> flag.set(1));
+        resume.setOnAction(e ->{
+            saveState();
+            try{
+                startGame(stage,true);
+            }catch(IOException exc){
+                exc.printStackTrace();
+            }
+        });
 
         //restart game
         Button restart = new Button("Restart Game");
@@ -272,7 +294,18 @@ public class Game {
         restart.setFont(new Font("Courier New Bold", 40));
         restart.setTextFill(Color.WHITE);
         restart.setStyle("-fx-background-color: black");
-        restart.setOnAction(e -> flag.set(2));
+        restart.setOnAction(e -> {
+            newG.currentScore=0;
+            newG.i=0;
+            Collections.shuffle(newG.obstacles);
+            newG.ball.setLayoutY(600);
+            try{
+                startGame(stage,false);
+            }catch(IOException exc){
+                exc.printStackTrace();
+            }
+
+        });
 
         //save game
         Button save = new Button("Save Game");

@@ -14,7 +14,7 @@ public abstract class Obstacle extends GameElements {
     protected boolean visible;
     protected transient ArrayList<Shape> shapeList;
     protected transient RotateTransition rotater1;
-    protected transient double speed;
+    protected double speed;
 
     Obstacle(int y, double a) {
         super(y);
@@ -81,10 +81,11 @@ public abstract class Obstacle extends GameElements {
     }
 
     public void increaseSpeed() {
-        if (!visible) {
+        if (rotater1 != null && !visible) {
             rotater1.stop();
             if (speed - 0.005 > 0)
                 speed -= 0.005;
+            rotater1.play();
         }
     }
 }
