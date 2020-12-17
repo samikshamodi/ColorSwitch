@@ -8,16 +8,23 @@ import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
-import javafx.scene.input.MouseEvent;
+import javafx.scene.control.Label;
 import javafx.scene.layout.*;
+import javafx.scene.paint.Color;
+import javafx.scene.text.Font;
 import javafx.stage.Stage;
 import javafx.util.Duration;
 
 import java.io.*;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.HashSet;
+import java.util.SortedSet;
 
 public class Main extends Application {
     ObjectInputStream in;
     GameModel n;
+    ArrayList<Integer> leaderboard;
 
     public void saveGame(GameModel s) throws IOException{
         ObjectOutputStream out = null;
@@ -131,19 +138,63 @@ public class Main extends Application {
         leaderboard.setOnAction(e -> {
             AnchorPane r=null;
             try {
-                r = FXMLLoader.load(getClass().getResource("/gui/ViewLeaderboardScene.fxml"));
+                viewLeaderBoard(primaryStage,r,-1);
             } catch (IOException ioException) {
                 ioException.printStackTrace();
             }
-            Scene scene = new Scene(r);
-            primaryStage.setScene(scene);
         });
 
         root.getChildren().addAll(img1, img2, img3, leaderboard, play);
     }
 
+    public void viewLeaderBoard(Stage stage,AnchorPane root,int score) throws IOException{
 
-    public static void main(String[] args) {
+        root = FXMLLoader.load(Main.class.getResource("/gui/ViewLeaderboardScene.fxml"));
+        try{
+            in = new ObjectInputStream(new FileInputStream("leaderBoard.txt"));
+            leaderboard=(ArrayList<Integer>) in.readObject();
+        } catch (ClassNotFoundException e) {
+            e.printStackTrace();
+        } finally{
+            if(in!=null)
+                in.close();
+        }
+        if(leaderboard == null){
+            System.out.println("Hello");
+            leaderboard=new ArrayList<>();
+        }
+        leaderboard.add(score);
+        leaderboard.sort(Collections.reverseOrder());
+        for(int i =0 ; i<leaderboard.size();i++){
+            if(i<5){
+                Label sc = new Label(i+1+") "+leaderboard.get(i));
+                sc.setFont(new Font("Courier New Italic", 30));
+                sc.setTextFill(Color.WHITE);
+                sc.prefWidth(400);
+                sc.prefHeight(50);
+                sc.setLayoutX(80);
+                sc.setLayoutY(250+i*65);
+                root.getChildren().add(sc);
+            }
+            else{
+                break;
+            }
+        }
+        Scene scene = new Scene(root);
+        stage.setScene(scene);
+        stage.show();
+        ObjectOutputStream out = null;
+        try{
+            out = new ObjectOutputStream(new FileOutputStream("leaderBoard.txt"));
+            out.writeObject(leaderboard);
+        }
+        finally{
+            if(out!=null)
+                out.close();
+        }
+    }
+
+    public static void main(String[] args) throws IOException {
         launch(args);
 //        Main m=new Main();
 //        //GameModel newk = new GameModel();

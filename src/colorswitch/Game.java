@@ -10,19 +10,17 @@ import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
-import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.*;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
 import javafx.stage.Stage;
 
 import java.io.IOException;
-import java.util.ArrayList;
 import java.util.Collections;
 import java.util.concurrent.atomic.AtomicInteger;
 
 public class Game {
-    private GameModel newG;
+    private final GameModel newG;
     private Label score;
     private Button pause;
     private AnimationTimer animationTimer;
@@ -54,13 +52,13 @@ public class Game {
         newG.stars.get(newG.i % newG.N).create();
         newG.stars.get((newG.i + 1) % newG.N).create();
         newG.stars.get((newG.i + 2) % newG.N).create();
-        if ((loaded && newG.stars.get((newG.i) % newG.N).getVisible()) || !loaded) {
+        if (!loaded || newG.stars.get((newG.i) % newG.N).getVisible()) {
             newG.stars.get((newG.i) % newG.N).appear(root);
         }
-        if ((loaded && newG.stars.get((newG.i + 1) % newG.N).getVisible()) || !loaded) {
+        if (!loaded || newG.stars.get((newG.i + 1) % newG.N).getVisible()) {
             newG.stars.get((newG.i + 1) % newG.N).appear(root);
         }
-        if ((loaded && newG.stars.get((newG.i + 2) % newG.N).getVisible()) || !loaded) {
+        if (!loaded || newG.stars.get((newG.i + 2) % newG.N).getVisible()) {
             newG.stars.get((newG.i + 2) % newG.N).appear(root);
         }
         if (!loaded) {
@@ -74,13 +72,13 @@ public class Game {
         newG.colorSwitchers.get((newG.i + 1) % newG.N).create();
         newG.colorSwitchers.get((newG.i + 2) % newG.N).create();
 
-        if ((loaded && newG.colorSwitchers.get((newG.i) % newG.N).getVisible()) || !loaded) {
+        if (!loaded || newG.colorSwitchers.get((newG.i) % newG.N).getVisible()) {
             newG.colorSwitchers.get((newG.i) % newG.N).appear(root);
         }
-        if ((loaded && newG.colorSwitchers.get((newG.i) % newG.N).getVisible()) || !loaded) {
+        if (!loaded || newG.colorSwitchers.get((newG.i) % newG.N).getVisible()) {
             newG.colorSwitchers.get((newG.i + 1) % newG.N).appear(root);
         }
-        if ((loaded && newG.colorSwitchers.get((newG.i) % newG.N).getVisible()) || !loaded) {
+        if (!loaded || newG.colorSwitchers.get((newG.i) % newG.N).getVisible()) {
             newG.colorSwitchers.get((newG.i + 2) % newG.N).appear(root);
         }
         if (!loaded) {
@@ -90,7 +88,7 @@ public class Game {
     }
 
 
-    public int startGame(Stage stage, boolean loaded) throws IOException {
+    public void startGame(Stage stage, boolean loaded) throws IOException {
         //Setting the game scene
         FXMLLoader loader = new FXMLLoader();
         loader.setLocation(Main.class.getResource("/gui/StartGameScene.fxml"));
@@ -126,7 +124,6 @@ public class Game {
         stage.setScene(scene);
         stage.show();
         System.out.println("Screen Loaded" + newG.i);
-        return 0;
     }
 
 
