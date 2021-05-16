@@ -1,7 +1,7 @@
 # Color Switch
 We implemented the clone of the popular game - Color Switch using JavaFX for desktop. We used Object-Oriented Programming Concepts and Event-Driven Programming to implement the game. It has features like Leaderboard, Resume Game and Animations.
 
-This is the endless (inifinity) game mode of the classic gameplay. The objective of the game is to collect as many stars as possible by manouevering the obstacles. If you hit any obstacle, you can continue with your earned stars or the game ends and you have to start from the beginning. This is a high score game. 
+This is the endless (infinity) game mode of the classic gameplay. The objective of the game is to collect as many stars as possible by maneuvering the obstacles. If you hit any obstacle, you can continue with your earned stars or the game ends and you have to start from the beginning. This is a high score game. 
 
 ## Demo
 [![Watch the video](https://user-images.githubusercontent.com/55681233/118397168-57c43180-b670-11eb-8582-540f4055872f.png)](https://www.youtube.com/watch?v=4ckImZfuzFI)
